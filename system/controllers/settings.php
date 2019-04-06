@@ -4386,6 +4386,574 @@ _L[\'are_you_sure\'] = \''.$_L['are_you_sure'].'\';
         break;
 
 
+	case 'plugins':
+
+		is_super_admin($user);
+
+		$ui->assign('_application_menu', 'super_admin');
+
+		$Parsedown = new Parsedown();
+
+		$core_plugins = require 'system/data/core_plugins.php';
+
+		$ui->assign('content_inner',inner_contents($config['c_cache']));
+		$ui->assign('xheader', '
+<link rel="stylesheet" type="text/css" href="'.APP_URL.'/ui/lib/dropzone/dropzone.css"/>
+');
+		$ui->assign('xfooter', '
+<script type="text/javascript" src="'.APP_URL.'/ui/lib/dropzone/dropzone.js"></script>
+');
+
+		$pls = array_diff(scandir('apps'), array('..', '.','index.html'));
+		$pl_html = '';
+		foreach ($pls as $pl){
+			$pl_path = 'apps/'.$pl.'/';
+			$i = 0;
+			if(file_exists($pl_path.'/manifest.php')){
+				$i++;
+				//
+
+				$plugin = null;
+
+				require($pl_path.'/manifest.php');
+
+				$d = ORM::for_table('sys_pl')->where('c',$pl)->find_one();
+				$btn = '';
+				if($d){
+					//plugin was installed & active
+					$status = $d['status'];
+					if($status == '1'){
+						$btn .= ' <a href="'.U.'settings/plugin_deactivate/'.$pl.'/" class="btn btn-danger btn-sm cdelete"><i class="fa fa-minus-square-o"></i> Deactivate </a>';
+
+					}
+					else{
+						$btn .= ' <a href="'.U.'settings/plugin_activate/'.$pl.'/" class="btn btn-info btn-sm"><i class="fa fa-check"></i> Activate </a>';
+						$btn .= ' <a href="'.U.'settings/plugin_uninstall/'.$pl.'/" class="btn btn-danger btn-sm c_uninstall"><i class="fa fa-remove"></i> Uninstall </a>';
+					}
+
+					// check for update
+
+					$db_build = $d->build;
+
+					if(isset($plugin['build']) && ($plugin['build'] > $db_build)){
+
+						// add update button
+
+						$btn .= ' <a href="'.U.'settings/plugin_update/'.$pl.'/" class="btn btn-info btn-sm"><i class="fa fa-tasks"></i> Update </a>';
+
+
+					}
+
+
+				}
+				else{
+					//plugin need to be installed
+					$btn .= ' <a href="'.U.'settings/plugin_install/'.$pl.'/" class="btn btn-primary btn-sm cedit"><i class="fa fa-hdd-o"></i> Install </a>';
+					$btn .= ' <a href="'.U.'settings/plugin_delete/'.$pl.'/" class="btn btn-danger btn-sm cdelete"><i class="fa fa-trash"></i> Delete </a>';
+
+				}
+
+
+
+				$icon_url = APP_URL.'/storage/system/plug.png';
+
+				if(file_exists($pl_path.'/views/img/icon.png')){
+
+					$icon_url = APP_URL.'/'.$pl_path.'/views/img/icon.png';
+
+				}
+
+
+				// check for update
+
+
+
+				$pl_html .= ' <tr>
+ <td>
+ <img class="img-thumbnail" style="max-height: 64px;" src="'.$icon_url.'">
+</td>
+
+                <td class="project-title">
+                    <a href="'.$plugin['url'].'" class="cedit" target="_blank">'.$plugin['name'].'</a>
+                    <br>
+                    <small>'.$plugin['version'].'</small>
+                </td>
+                <td>
+
+                   '.$Parsedown->text($plugin['description']).'
+
+                </td>
+
+                <td class="project-actions">
+
+                  <span class="pull-right">'.$btn.'</span>
+
+                </td>
+            </tr>';
+
+			}
+		}
+
+		if($pl_html == ''){
+			$pl_html = '<h4 class="text-center">'.$_L['No Plugins Available'].'</h4>';
+		}
+
+		$ui->assign('pl_html',$pl_html);
+
+		view('pl-list',[
+			'core_plugins' => $core_plugins
+		]);
+
+		break;
+
+
+	case 'plugin_upload':
+
+		is_super_admin($user);
+
+		$ui->assign('_application_menu', 'super_admin');
+
+		$uploader   =   new Uploader();
+		$uploader->setDir('apps/');
+		$uploader->sameName(true);
+		$uploader->setExtensions(array('zip'));  //allowed extensions list//
+		if($uploader->uploadFile('file')){   //txtFile is the filebrowse element name //
+			$uploaded  =   $uploader->getUploadName(); //get uploaded file name, renames on upload//
+
+		}else{//upload failed
+			_msglog('e',$uploader->getMessage()); //get upload error message
+		}
+
+		break;
+
+
+	case 'plugin_unzip':
+
+		is_super_admin($user);
+
+		define('CLX_INTERNAL', true);
+
+		$ui->assign('_application_menu', 'super_admin');
+
+		$msg = '';
+		$name = _post('name');
+		if (class_exists('ZipArchive')) {
+			$zip = new ZipArchive;
+
+			$res = $zip->open('apps/'.$name);
+			if ($res === TRUE) {
+
+
+				if(APP_STAGE == 'Demo'){
+					$msg .= $name . ' - Plugin Unzipping is Disabled in the Demo Mode! <br>';
+				}
+
+				else{
+					$zip->extractTo('apps/');
+				}
+
+
+
+
+
+				if($zip->close()){
+					unlink('apps/'.$name);
+				}
+				//
+
+			} else {
+				$msg .= $name . ' - Invalid Plugin Package Or An error occured while unzipping the file! <br>';
+			}
+		}
+
+		else{
+			$msg .= 'PHP ZipArchive Class is not Available! <br>';
+		}
+
+		if($msg != ''){
+			_msglog('e',$msg);
+		}
+		else{
+			_msglog('s',$_L['Plugin Added']);
+		}
+
+
+		break;
+
+	case 'plugin_activate':
+
+		is_super_admin($user);
+		
+		define('CLX_INTERNAL', true);
+
+		$ui->assign('_application_menu', 'super_admin');
+
+		if(isset($routes['2']) AND $routes['2'] != ''){
+
+			$pl = $routes['2'];
+			$pl_path = 'apps/'.$pl.'/';
+
+			$msg = '';
+			$msg .= 'Activating Plugin...
+';
+
+			require($pl_path.'/manifest.php');
+
+			if(APP_STAGE == 'Demo'){
+				$msg .= 'Sorry, Activating Plugin is disabled in the demo mode...
+';
+			}
+			else{
+				if(file_exists($pl_path.'/activate.php')){
+
+					require($pl_path.'/activate.php');
+
+				}
+
+				$d = ORM::for_table('sys_pl')->where('c',$pl)->find_one();
+				if($d){
+					$d->status = '1';
+
+					if(isset($plugin['build'])){
+						$d->build = $plugin['build'];
+					}
+
+					$d->save();
+					$msg .= 'Plugin Activated...
+';
+
+				}
+			}
+
+
+			$ui->assign('plugin',$plugin);
+			$ui->assign('plugin_activity',$_L['Activating Plugin']);
+			$ui->assign('msg',$msg);
+
+			view('plugin-activity');
+
+
+		}
+
+		else{
+			echo 'Plugin not Found';
+		}
+
+		break;
+
+
+	case 'plugin_deactivate':
+
+		is_super_admin($user);
+
+		define('CLX_INTERNAL', true);
+
+		$ui->assign('_application_menu', 'super_admin');
+
+		if(isset($routes['2']) AND $routes['2'] != ''){
+
+			$pl = $routes['2'];
+			$pl_path = 'apps/'.$pl.'/';
+
+			$msg = '';
+			$msg .= 'Deactivating Plugin...
+';
+
+			require($pl_path.'/manifest.php');
+
+			if(APP_STAGE == 'Demo'){
+				$msg .= 'Sorry, Deactivating Plugin is disabled in the demo mode...
+';
+			}
+			else{
+
+				if(file_exists($pl_path.'/deactivate.php')){
+
+					require($pl_path.'/deactivate.php');
+
+				}
+
+				$d = ORM::for_table('sys_pl')->where('c',$pl)->find_one();
+				if($d){
+					$d->status = '0';
+					$d->save();
+					$msg .= 'Plugin Deactivated...
+';
+
+				}
+
+			}
+
+
+
+			$ui->assign('plugin',$plugin);
+			$ui->assign('plugin_activity',$_L['Deactivating Plugin']);
+			$ui->assign('msg',$msg);
+			view('plugin-activity');
+
+		}
+
+		else{
+			echo 'Plugin not Found';
+		}
+
+		break;
+
+
+	case 'plugin_install':
+
+		is_super_admin($user);
+
+		define('CLX_INTERNAL', true);
+
+		$ui->assign('_application_menu', 'super_admin');
+
+		if(isset($routes['2']) AND $routes['2'] != ''){
+
+			$pl = $routes['2'];
+
+			$pl_path = 'apps/'.$pl.'/';
+			$msg = '';
+			$msg .= 'Installing Plugin...
+';
+			require($pl_path.'/manifest.php');
+
+			if(APP_STAGE == 'Demo'){
+				$msg .= 'Sorry, Installing Plugin is disabled in the demo mode...
+';
+			}
+			else{
+				if(file_exists($pl_path.'/install.php')){
+
+
+					require($pl_path.'/install.php');
+
+				}
+
+
+
+				$msg .= 'Adding Plugin to the Plugin Database
+';
+
+				$c = ORM::for_table('sys_pl')->create();
+				$c->c = $pl;
+				$c->status = 1;
+
+				if(isset($plugin['priority'])){
+					$c->sorder = $plugin['priority'];
+				}
+
+				// check build is exist
+
+				if(isset($plugin['build'])){
+					$c->build = $plugin['build'];
+				}
+				else{
+					$c->build = 1;
+				}
+
+				//
+
+				$c->c1 = '';
+				$c->c2 = '';
+
+				$c->workspace_id = 1;
+
+				$c->save();
+
+				$msg .= 'Plugin Added
+';
+			}
+
+
+			$ui->assign('plugin',$plugin);
+			$ui->assign('plugin_activity',$_L['Installing Plugin']);
+			$ui->assign('msg',$msg);
+			view('plugin-activity');
+
+		}
+
+		else{
+			echo 'Install Script not Found';
+		}
+
+		break;
+
+
+	case 'plugin_uninstall':
+
+		is_super_admin($user);
+
+		define('CLX_INTERNAL', true);
+
+		if(isset($routes['2']) AND $routes['2'] != ''){
+
+			$pl = $routes['2'];
+			$pl_path = 'apps/'.$pl.'/';
+
+			$msg = '';
+			$msg .= 'Uninstalling Plugin...
+';
+
+
+			require($pl_path.'/manifest.php');
+
+			if(APP_STAGE == 'Demo'){
+				$msg .= 'Sorry, Uninstalling Plugin is disabled in the demo mode...
+';
+			}
+			else{
+				if(file_exists($pl_path.'/uninstall.php')){
+
+					require($pl_path.'/uninstall.php');
+
+				}
+
+				$msg .= 'Removing Plugin from Plugin Database...
+';
+
+				$d = ORM::for_table('sys_pl')->where('c',$pl)->find_one();
+				if($d){
+					$d->delete();
+					$msg .= 'Plugin Uninstalled...
+';
+
+				}
+			}
+
+
+
+			$ui->assign('plugin',$plugin);
+			$ui->assign('plugin_activity',$_L['Uninstalling Plugin']);
+			$ui->assign('msg',$msg);
+			view('plugin-activity');
+
+		}
+
+		else{
+			echo 'Uninstall script not found';
+		}
+
+		break;
+
+
+	case 'plugin_delete':
+
+		is_super_admin($user);
+
+		define('CLX_INTERNAL', true);
+
+		if(isset($routes['2']) AND $routes['2'] != ''){
+
+			$pl = $routes['2'];
+			$pl_path = 'apps/'.$pl.'/';
+
+			$msg = '';
+			$msg .= 'Deleting Plugin...
+';
+
+
+			require($pl_path.'/manifest.php');
+
+			if(APP_STAGE == 'Demo'){
+				$msg .= 'Sorry, Deleting Plugin is disabled in the demo mode...
+';
+			}
+			else{
+
+				if(Sysfile::deleteDir($pl_path)){
+					$msg .= 'Plugin Directory Deleted Successfully
+';
+				}
+				else{
+					$msg .= 'An Error Occurred while Deleting Plugin Directory. You may Delete this Plugin Manually - '.$pl_path.'
+';
+				}
+
+			}
+
+
+
+
+			$ui->assign('plugin',$plugin);
+			$ui->assign('plugin_activity','Delete Plugin');
+			$ui->assign('msg',$msg);
+			view('plugin-activity');
+
+		}
+
+		else{
+			echo 'Plugin not found';
+		}
+
+		break;
+
+
+	case 'plugin_update':
+
+		is_super_admin($user);
+
+		define('CLX_INTERNAL', true);
+
+		if(isset($routes[2]) AND $routes[2] != ''){
+
+			$pl = $routes['2'];
+
+			$pl_path = 'apps/'.$pl.'/';
+			$msg = '';
+			$msg .= 'Updating Plugin...
+';
+			require($pl_path.'/manifest.php');
+
+			if(APP_STAGE == 'Demo'){
+				$msg .= 'Sorry, Updating Plugin is disabled in the demo mode...
+';
+			}
+			else{
+				if(file_exists($pl_path.'/update.php')){
+
+
+					require($pl_path.'/update.php');
+
+				}
+
+
+
+				$msg .= 'Checking Build...
+';
+
+				$d = ORM::for_table('sys_pl')->where('c',$pl)->find_one();
+				if($d){
+
+					if(isset($plugin['build'])){
+
+						$d->build = $plugin['build'];
+						$d->save();
+						$msg .= 'Build Updated to '.$plugin['build'].'
+';
+					}
+
+				}
+
+
+				$msg .= 'done...
+';
+			}
+
+
+			$ui->assign('plugin',$plugin);
+			$ui->assign('plugin_activity',$_L['Installing Plugin']);
+			$ui->assign('msg',$msg);
+			view('plugin-activity');
+
+		}
+
+		else{
+			echo 'Install Script not Found';
+		}
+
+		break;
+
 
 
 //

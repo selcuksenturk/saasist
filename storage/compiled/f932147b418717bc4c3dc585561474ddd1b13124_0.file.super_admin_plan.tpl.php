@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-02-10 17:06:58
+/* Smarty version 3.1.33, created on 2019-04-03 04:02:36
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/super_admin_plan.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c60a082421661_67992550',
+  'unifunc' => 'content_5ca4689c9e4fe2_22918944',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f932147b418717bc4c3dc585561474ddd1b13124' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/super_admin_plan.tpl',
-      1 => 1549836416,
+      1 => 1554278553,
       2 => 'file',
     ),
   ),
@@ -20,28 +20,28 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5c60a082421661_67992550 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ca4689c9e4fe2_22918944 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12480497115c60a082416027_17555872', "content");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2498950635ca4689c9d9882_70304104', "content");
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11309183195c60a082420ae2_56481257', 'script');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10010819375ca4689c9e44d6_90237498', 'script');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, ((string)$_smarty_tpl->tpl_vars['layouts_admin']->value));
 }
 /* {block "content"} */
-class Block_12480497115c60a082416027_17555872 extends Smarty_Internal_Block
+class Block_2498950635ca4689c9d9882_70304104 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'content' => 
   array (
-    0 => 'Block_12480497115c60a082416027_17555872',
+    0 => 'Block_2498950635ca4689c9d9882_70304104',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -88,14 +88,54 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
                             </div>
                         </div>
 
+
                         <div class="form-group">
-                            <label><?php echo $_smarty_tpl->tpl_vars['_L']->value['Plan type'];?>
-</label>
-                            <select class="form-control" name="api_name">
-                                <option value="basic" <?php if ($_smarty_tpl->tpl_vars['plan']->value && $_smarty_tpl->tpl_vars['plan']->value->api_name == 'basic') {?>selected<?php }?>>Basic [Has basic features]</option>
-                                <option value="standard" <?php if ($_smarty_tpl->tpl_vars['plan']->value && $_smarty_tpl->tpl_vars['plan']->value->api_name == 'standard') {?>selected<?php }?>>Standard [Has standard features]</option>
-                                <option value="plus" <?php if ($_smarty_tpl->tpl_vars['plan']->value && $_smarty_tpl->tpl_vars['plan']->value->api_name == 'plus') {?>selected<?php }?>>Plus [Has all features]</option>
-                            </select>
+                            <div class="table-responsive">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered roles no-margin">
+                                        <thead>
+                                        <tr>
+                                            <th class="bold"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Module'];?>
+</th>
+                                            <th class="text-center bold"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Enabled'];?>
+</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['available_modules']->value, 'available_module');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['available_module']->value) {
+?>
+                                            <tr>
+
+
+                                                <td class="bold">
+
+                                                    <?php echo $_smarty_tpl->tpl_vars['available_module']->value['name'];?>
+
+
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="checkbox">
+                                                        <div class="i-checks"><label  style="padding-left: 0"> <input name="<?php echo $_smarty_tpl->tpl_vars['available_module']->value['short_name'];?>
+" class="ib_checkbox" type="checkbox" <?php if ($_smarty_tpl->tpl_vars['modules']->value) {?> <?php if (isset($_smarty_tpl->tpl_vars['modules']->value->{$_smarty_tpl->tpl_vars['available_module']->value['short_name']})) {?> checked <?php }?> <?php } else { ?> checked<?php }?> value="yes"></label></div>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -122,6 +162,9 @@ echo $_smarty_tpl->tpl_vars['plan']->value->description;
                 </div>
             </div>
         </div>
+
+
+
     </div>
 
 <?php
@@ -129,12 +172,12 @@ echo $_smarty_tpl->tpl_vars['plan']->value->description;
 }
 /* {/block "content"} */
 /* {block 'script'} */
-class Block_11309183195c60a082420ae2_56481257 extends Smarty_Internal_Block
+class Block_10010819375ca4689c9e44d6_90237498 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'script' => 
   array (
-    0 => 'Block_11309183195c60a082420ae2_56481257',
+    0 => 'Block_10010819375ca4689c9e44d6_90237498',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -157,6 +200,18 @@ super_admin/plans';
                 }).fail(function(data) {
                     spNotify(data.responseText,'error');
                 });
+
+            });
+
+
+            $(function() {
+
+                $('.i-checks').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue'
+                });
+
+
 
             });
 

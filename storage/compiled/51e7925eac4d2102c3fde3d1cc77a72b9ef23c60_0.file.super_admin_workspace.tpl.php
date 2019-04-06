@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-02-15 05:51:08
+/* Smarty version 3.1.33, created on 2019-04-03 04:06:28
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/super_admin_workspace.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c66999ca02760_76974027',
+  'unifunc' => 'content_5ca46984af5327_98774662',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '51e7925eac4d2102c3fde3d1cc77a72b9ef23c60' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/super_admin_workspace.tpl',
-      1 => 1550227865,
+      1 => 1554277607,
       2 => 'file',
     ),
   ),
@@ -20,32 +20,32 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5c66999ca02760_76974027 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ca46984af5327_98774662 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_16246787995c66999c9fbdc6_85581951', "style");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10972108575ca46984ae9ee9_01383627', "style");
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13127144785c66999c9fd196_33894247', "content");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15128715295ca46984aeae71_89055419', "content");
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_8630004565c66999ca017b8_30979556', 'script');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_17218408405ca46984af4511_05000462', 'script');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, ((string)$_smarty_tpl->tpl_vars['layouts_admin']->value));
 }
 /* {block "style"} */
-class Block_16246787995c66999c9fbdc6_85581951 extends Smarty_Internal_Block
+class Block_10972108575ca46984ae9ee9_01383627 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'style' => 
   array (
-    0 => 'Block_16246787995c66999c9fbdc6_85581951',
+    0 => 'Block_10972108575ca46984ae9ee9_01383627',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -58,12 +58,12 @@ ui/lib/dp/dist/datepicker.min.css" />
 }
 /* {/block "style"} */
 /* {block "content"} */
-class Block_13127144785c66999c9fd196_33894247 extends Smarty_Internal_Block
+class Block_15128715295ca46984aeae71_89055419 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'content' => 
   array (
-    0 => 'Block_13127144785c66999c9fd196_33894247',
+    0 => 'Block_15128715295ca46984aeae71_89055419',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -88,6 +88,52 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 </option>
                                 <option <?php if (isset($_smarty_tpl->tpl_vars['selected_workspace_config']->value['subscribed'])) {?> selected<?php }?> value="1"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Subscribed'];?>
 </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label><?php echo $_smarty_tpl->tpl_vars['_L']->value['Plan'];?>
+</label>
+                            <select class="form-control" name="workspace_plan">
+
+
+                                <option <?php if (!isset($_smarty_tpl->tpl_vars['selected_workspace_config']->value['plan'])) {?> selected<?php }?> value="0"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Default'];?>
+</option>
+
+                                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['plans']->value, 'plan');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['plan']->value) {
+?>
+
+                                    <option value="<?php echo $_smarty_tpl->tpl_vars['plan']->value->id;?>
+" <?php if (isset($_smarty_tpl->tpl_vars['selected_workspace_config']->value['plan']) && ($_smarty_tpl->tpl_vars['selected_workspace_config']->value['plan'] == $_smarty_tpl->tpl_vars['plan']->value->id)) {?> selected<?php }?> ><?php echo $_smarty_tpl->tpl_vars['plan']->value->name;?>
+</option>
+
+                                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+
+                                <?php if (isset($_smarty_tpl->tpl_vars['selected_workspace_config']->value['subscribed'])) {?>
+
+                                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['plans']->value, 'plan');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['plan']->value) {
+?>
+
+                                        <option value="<?php echo $_smarty_tpl->tpl_vars['plan']->value->id;?>
+"><?php echo $_smarty_tpl->tpl_vars['plan']->value->name;?>
+</option>
+
+                                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+
+                                <?php }?>
+
                             </select>
                         </div>
 
@@ -139,12 +185,12 @@ super_admin/workspaces"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Back To 
 }
 /* {/block "content"} */
 /* {block 'script'} */
-class Block_8630004565c66999ca017b8_30979556 extends Smarty_Internal_Block
+class Block_17218408405ca46984af4511_05000462 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'script' => 
   array (
-    0 => 'Block_8630004565c66999ca017b8_30979556',
+    0 => 'Block_17218408405ca46984af4511_05000462',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

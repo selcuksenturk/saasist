@@ -1227,4 +1227,7 @@ $_L = [
     'Current plan' => 'Mevcut Plan',
     'Plan' => 'Üyelik Planları',
     'Login as' => 'Giriş Yap >',
+	'Modules' => 'Modüller',
+    'Module' => 'Modül',
+    'Enabled' => 'Aktif',
 ];

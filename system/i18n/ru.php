@@ -1242,4 +1242,7 @@ $_L = [
     'Current plan' => 'Current plan',
     'Plan' => 'Plan',
     'Login as' => 'Login as',
+    'Modules' => 'Modules',
+    'Module' => 'Module',
+    'Enabled' => 'Enabled',
 ];

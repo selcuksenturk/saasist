@@ -23,6 +23,32 @@
                         </div>
 
                         <div class="form-group">
+                            <label>{$_L['Plan']}</label>
+                            <select class="form-control" name="workspace_plan">
+
+
+                                <option {if !isset($selected_workspace_config['plan'])} selected{/if} value="0">{$_L['Default']}</option>
+
+                                {foreach $plans as $plan}
+
+                                    <option value="{$plan->id}" {if isset($selected_workspace_config['plan']) && ($selected_workspace_config['plan'] == $plan->id)} selected{/if} >{$plan->name}</option>
+
+                                {/foreach}
+
+                                {if isset($selected_workspace_config['subscribed'])}
+
+                                    {foreach $plans as $plan}
+
+                                        <option value="{$plan->id}">{$plan->name}</option>
+
+                                    {/foreach}
+
+                                {/if}
+
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label>{$_L['Trial ends at']}</label>
                             <input class="form-control" name="trial_ends_at" value="{$selected_workspace->trial_ends_at}" datepicker data-date-format="yyyy-mm-dd" data-auto-close="true">
                         </div>

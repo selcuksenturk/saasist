@@ -778,7 +778,7 @@ $_L = [
     'Feb' => 'Feb',
     'Mar' => 'Mar',
     'Apr' => 'Apr',
-    'May' => 'May',	
+	'May' => 'May',
     'Jun' => 'Jun',
     'Jul' => 'Jul',
     'Aug' => 'Aug',
@@ -1227,4 +1227,7 @@ $_L = [
     'Current plan' => 'Current plan',
     'Plan' => 'Plan',
     'Login as' => 'Login as',
+    'Modules' => 'Modules',
+    'Module' => 'Module',
+    'Enabled' => 'Enabled',
 ];

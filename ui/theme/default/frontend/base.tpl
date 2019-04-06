@@ -7,7 +7,7 @@
     {if isset($page_title)}
         <title>{$page_title} | {$config['CompanyName']}</title>
     {else}
-        <title>Business Software - Accounting, Inventory, Invoicing & CRM</title>
+        <title>Asist</title>
     {/if}
 
     <!-- Bootstrap CSS -->

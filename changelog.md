@@ -1,3 +1,9 @@
+### Version 1.1.6 | Build 116 | April 03, 2019
+
+* Added option to select module for each plan
+* Added option to select plan for workspace from Super Admin
+* Added option to support API. All business suite API is supported by SaaS.
+
 ### Version 1.1.5 | Build 115 | March 11, 2019
 
 * Fixed an issue when creating Role

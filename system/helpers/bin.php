@@ -2044,7 +2044,7 @@ function apiAuth(){
     $token = getBearerToken();
     $key = ApiKey::where('apikey',$token)->first();
     if($key){
-        return true;
+        return $key;
     }
     else{
 
@@ -2617,4 +2617,12 @@ function getConfig($workspace_id)
 	}
 
 	return $config;
+}
+
+function is_super_admin($user)
+{
+	if($user->workspace_id != 1)
+	{
+		abort(401,'Unauthorised.');
+	}
 }

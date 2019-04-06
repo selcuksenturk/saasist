@@ -1,8 +1,28 @@
 <?php
 
 $version = route(1);
-$user = User::_info();
-$workspace_id = $user->workspace_id;
+
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+	// Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
+	// you want to allow, and if so:
+	header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+	header('Access-Control-Allow-Credentials: true');
+}
+
+// Access-Control headers are received during OPTIONS requests
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+
+	if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+		// may also be using PUT, PATCH, HEAD etc
+		header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+
+	if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+		header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+
+	exit(0);
+}
+
+
 switch ($version){
 
     case 'v2':
@@ -11,7 +31,9 @@ switch ($version){
 
         header('Access-Control-Allow-Origin: *');
 
-        apiAuth();
+        $key = apiAuth();
+
+        $workspace_id = $key->workspace_id;
 
         $object = route(2);
 

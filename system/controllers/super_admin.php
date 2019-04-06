@@ -19,10 +19,13 @@ $workspace = Workspace::find($workspace_id);
 $ui->assign('workspace', $workspace);
 $ui->assign('user',$user);
 
+$saas_current_build = 116;
+
 if($user->workspace_id != 1)
 {
     exit;
 }
+
 
 $action = route(1,'dashboard');
 
@@ -30,6 +33,11 @@ $action = route(1,'dashboard');
 switch($action){
 
     case 'dashboard':
+
+	    if(!isset($settings['saas_build']) || $settings['saas_build'] != $saas_current_build)
+	    {
+	    	r2(U.'super_admin/update');
+	    }
 
 
         $total_users = User::count();
@@ -75,6 +83,7 @@ switch($action){
         $selected_workspace = Workspace::find($id);
 
 
+
         if($selected_workspace)
         {
             $selected_workspace_config = [];
@@ -86,10 +95,14 @@ switch($action){
                 $selected_workspace_config[$selected_setting->setting] = $selected_setting->value;
             }
 
+            $plans = Plan::all();
+
+
 
             view('super_admin_workspace',[
                 'selected_workspace' => $selected_workspace,
-                'selected_workspace_config' => $selected_workspace_config
+                'selected_workspace_config' => $selected_workspace_config,
+	            'plans' => $plans,
             ]);
         }
 
@@ -131,7 +144,13 @@ switch($action){
                 }
             }
 
+            $workspace_plan = _post('workspace_plan');
 
+	        $selected_settings = new Setting;
+	        $selected_settings->workspace_id = $id;
+	        $selected_settings->setting = 'plan';
+	        $selected_settings->value = $workspace_plan;
+	        $selected_settings->save();
 
         }
 
@@ -207,16 +226,31 @@ switch($action){
     case 'plan':
 
         $plan = false;
+	    $modules = false;
 
         $id = route(2);
 
         if($id != '')
         {
             $plan = Plan::find($id);
+
+
+            if($plan->modules)
+            {
+            	$modules = json_decode($plan->modules);
+            }
         }
 
-        view('super_admin_plan',[
-            'plan' => $plan
+
+
+	    $available_modules = Plan::availableModules();
+
+
+
+	    view('super_admin_plan',[
+            'plan' => $plan,
+		    'available_modules' => $available_modules,
+		    'modules' => $modules
         ]);
 
 
@@ -231,8 +265,26 @@ switch($action){
         $name = _post('name');
         $billing_period = _post('billing_period');
         $price = _post('price');
-        $api_name = _post('api_name');
+        $api_name = 'default';
         $description = $_POST['description'];
+
+        $available_modules = Plan::availableModules();
+
+        $enabled_modules = [];
+
+        foreach ($available_modules as $available_module)
+        {
+        	if(isset($_POST[$available_module['short_name']]))
+	        {
+	        	$enabled_modules[$available_module['short_name']] = 1;
+	        }
+        }
+
+        $modules = json_encode($enabled_modules);
+
+
+
+
 
         if($name == '' || $billing_period == '' || $price == '' || $api_name == '' || $description == '')
         {
@@ -276,6 +328,8 @@ switch($action){
         $plan->description = $description;
         $plan->term_length = $term_length;
         $plan->billing_period = $billing_period;
+
+        $plan->modules = $modules;
 
         $plan->save();
 
@@ -563,6 +617,14 @@ switch($action){
 
         }
 
+
+        if(!db_column_exist('plans','modules'))
+        {
+        	ORM::execute('ALTER TABLE `plans` ADD `modules` TEXT NULL DEFAULT NULL AFTER `description`');
+        }
+
+
+        update_option('saas_build',$saas_current_build);
 
 
         $message .= 'All tables were created...'.PHP_EOL;

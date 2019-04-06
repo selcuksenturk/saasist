@@ -34,13 +34,51 @@
                             </div>
                         </div>
 
+{*                        <div class="form-group">*}
+{*                            <label>{$_L['Plan type']}</label>*}
+{*                            <select class="form-control" name="api_name">*}
+{*                                <option value="basic" {if $plan && $plan->api_name == 'basic'}selected{/if}>Basic [Has basic features]</option>*}
+{*                                <option value="standard" {if $plan && $plan->api_name == 'standard'}selected{/if}>Standard [Has standard features]</option>*}
+{*                                <option value="plus" {if $plan && $plan->api_name == 'plus'}selected{/if}>Plus [Has all features]</option>*}
+{*                            </select>*}
+{*                        </div>*}
+
                         <div class="form-group">
-                            <label>{$_L['Plan type']}</label>
-                            <select class="form-control" name="api_name">
-                                <option value="basic" {if $plan && $plan->api_name == 'basic'}selected{/if}>Basic [Has basic features]</option>
-                                <option value="standard" {if $plan && $plan->api_name == 'standard'}selected{/if}>Standard [Has standard features]</option>
-                                <option value="plus" {if $plan && $plan->api_name == 'plus'}selected{/if}>Plus [Has all features]</option>
-                            </select>
+                            <div class="table-responsive">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered roles no-margin">
+                                        <thead>
+                                        <tr>
+                                            <th class="bold">{$_L['Module']}</th>
+                                            <th class="text-center bold">{$_L['Enabled']}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {foreach $available_modules as $available_module}
+                                            <tr>
+
+
+                                                <td class="bold">
+
+                                                    {$available_module['name']}
+
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="checkbox">
+                                                        <div class="i-checks"><label  style="padding-left: 0"> <input name="{$available_module['short_name']}" class="ib_checkbox" type="checkbox" {if $modules} {if isset($modules->$available_module['short_name'])} checked {/if} {else} checked{/if} value="yes"></label></div>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        {/foreach}
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -62,6 +100,9 @@
                 </div>
             </div>
         </div>
+
+
+
     </div>
 
 {/block}
@@ -81,6 +122,18 @@
                 }).fail(function(data) {
                     spNotify(data.responseText,'error');
                 });
+
+            });
+
+
+            $(function() {
+
+                $('.i-checks').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue'
+                });
+
+
 
             });
 

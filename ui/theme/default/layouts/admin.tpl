@@ -118,6 +118,7 @@
                                     <li><a href="{$_url}super_admin/workspaces">{$_L['Workspaces']}</a></li>
                                     <li><a href="{$_url}super_admin/users">{$_L['Users']}</a></li>
                                     <li><a href="{$_url}super_admin/plans">{$_L['Plans']}</a></li>
+                                    <li><a href="{$_url}settings/plugins">{$_L['Plugins']}</a></li>
                                     <li><a href="{$_url}super_admin/settings">{$_L['Settings']}</a></li>
 
                                 </ul>

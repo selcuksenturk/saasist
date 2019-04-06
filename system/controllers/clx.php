@@ -45,7 +45,7 @@ switch ($action){
     case 'append':
 
         $new_strings = [
-            'Login as' => 'Login as',
+            'Enabled' => 'Enabled',
             '' => '',
             '' => '',
             '' => '',
