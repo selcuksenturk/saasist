@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-04-05 14:04:56
+/* Smarty version 3.1.33, created on 2019-05-03 04:47:12
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/plugin-activity.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5ca798c83b4027_14510166',
+  'unifunc' => 'content_5ccc0010cc0097_57954789',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '270c39d670cd93e18101bf95d2ca6db7902f68be' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/plugin-activity.tpl',
-      1 => 1505464289,
+      1 => 1556695882,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ca798c83b4027_14510166 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ccc0010cc0097_57954789 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html>
 

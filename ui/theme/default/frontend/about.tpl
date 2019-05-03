@@ -3,53 +3,11 @@
 {block name="content"}
 
 
-
     <section class="welcome-agency text-center" data-scroll-index="1" style="background-image: url({$app_url}storage/pages/team-brainstorm-meeting-in-bright-sunny-office_925x.jpg)">
         <div class="overlay-bg-75 flex-center">
             <div class="container">
                 <div class="welcome-text">
-                    <h1 class="mb-20px color-fff">Who we are and what we do</h1>
-                    <p class="color-aaa">More about us and the people behind it.</p>
-                    <a class="main-btn btn-1 mt-10px mr-10px before-gray" href="{$_url}contact">Say Hi!</a>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="brands-area bg-gray md-padding text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-2 col-sm-4">
-                    <div class="mt-25px mb-25px">
-                        <img alt="img" src="{$app_url}storage/pages/br4.png">
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-4">
-                    <div class="mt-25px mb-25px">
-                        <img alt="img" src="{$app_url}storage/pages/br5.png">
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-4">
-                    <div class="mt-25px mb-25px">
-                        <img alt="img" src="{$app_url}storage/pages/br6.png">
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-4">
-                    <div class="mt-25px mb-25px">
-                        <img alt="img" src="{$app_url}storage/pages/br2.png">
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-4">
-                    <div class="mt-25px mb-25px">
-                        <img alt="img" src="{$app_url}storage/pages/br3.png">
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-4">
-                    <div class="mt-25px mb-25px">
-                        <img alt="img" src="{$app_url}storage/pages/br1.png">
-                    </div>
+                    <h1 class="mb-20px color-fff">About</h1>
                 </div>
             </div>
         </div>
@@ -67,9 +25,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="mt-25px mb-25px wow fadeInRight" data-wow-delay="0.7s">
-                        <span class="color-blue fs-18 fw-500">About</span>
-                        <h3 class="mt-10px mb-15px fw-600">The product</h3>
-                        <p class="mb-15px">StackB is a groundbreaking innovative company based in San Francisco that aims to simplify business management to the businesses. Our goal is to deliver the best product experience for businesses and their customers. </p>
+                        <h3 class="mt-10px mb-15px fw-600">Who are we?</h3>
+                        <p class="mb-15px">We are small, hardworking also ambitious team from Turkey. We believe that simplifying business management will move forward you and your business. Simply our goal is to deliver the best user experience for businesses and their customers. Because we are passionate about it.</p>
                         <p class="mb-10px"><i class="fa fa-check color-blue mr-5px"></i>We’ve gained tons of knowledge about growth and customer relations.</p>
                         <p class="mb-10px"><i class="fa fa-check color-blue mr-5px"></i>Our team is focused to build best business management software.</p>
                         <p><i class="fa fa-check color-blue mr-5px"></i>We are always open for the feedbacks.</p>
@@ -78,10 +35,8 @@
                 </div>
             </div>
 
-
         </div>
     </section>
-
 
 
 {/block}

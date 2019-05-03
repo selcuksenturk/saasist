@@ -722,7 +722,7 @@
 
 
                                 {if $user['img'] eq ''}
-                                    <img src="https://res.cloudinary.com/stackb/image/upload/v1538939205/stackpie/user-avatar-placeholder.webp" alt="">
+                                    <img src="{$app_url}storage/system/user-avatar-placeholder.png" alt="{$user['fullname']}">
                                 {else}
                                     <img src="{$app_url}{$user['img']}" class="img-circle" alt="{$user['fullname']}">
                                 {/if}
@@ -997,18 +997,6 @@
         {if isset($xjq)}
         {$xjq}
         {/if}
-
-        $('#app_media').fancybox({
-            'width'		: 900,
-            'height'	: 600,
-            'type'		: 'iframe',
-            'autoScale'    	: false,
-            buttons : [
-
-                'fullScreen',
-                'close'
-            ]
-        });
 
 
 

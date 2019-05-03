@@ -7,8 +7,8 @@ class Workspace extends Model
     public static function createWorkspace($data)
     {
 
-
-        $workspace_settings = require 'system/config/workspace.php';
+        global $app;
+        $workspace_settings = require 'system/config/workspace_default_settings.php';
 
         $free_trial_days = $workspace_settings['free_trial_days'];
 
@@ -53,7 +53,7 @@ class Workspace extends Model
 
             $activation_key = mt_rand(100000, 999999);
             $username = (string) \Ramsey\Uuid\Uuid::uuid4();
-            $base_url = 'https://'.$username.'.cloudonex.com';
+            $base_url = 'https://'.$username.'.app.saas.ist';
 
             $workspace = new Workspace;
             $workspace->username = $username;
@@ -63,7 +63,7 @@ class Workspace extends Model
             $workspace->is_active = 1;
             $workspace->owner_id = 1;
             $workspace->parent_id = 0;
-            $workspace->trial_ends_at = date('Y-m-d',strtotime("+$free_trial_days days"));
+            $workspace->trial_ends_at = date('d-m-Y',strtotime("+$free_trial_days days"));
             $workspace->save();
 
             $workspace_id = $workspace->id;
@@ -79,7 +79,7 @@ class Workspace extends Model
             $user->user_type = 'Admin';
             $user->status = 'Inactive';
             $user->email = $data['email'];
-            $user->creationdate = date('Y-m-d H:i:s');
+            $user->creationdate = date('d-m-Y s:i:H');
             $user->otp = 'No';
             $user->img = '';
             $user->pwresetkey = '';
@@ -107,7 +107,7 @@ class Workspace extends Model
 
             // Create Primary Data for this workspace
 
-            $settings_data = Workspace::primaryData('settings',$data);
+            $settings_data = Workspace::primaryData('settings',$data,$workspace_settings);
 
             foreach ($settings_data as $d)
             {
@@ -118,7 +118,7 @@ class Workspace extends Model
                 $s->save();
             }
 
-            $sms_templates = Workspace::primaryData('sms_templates',$data);
+            $sms_templates = require 'system/config/sms_templates.php';
 
             foreach ($sms_templates as $sms_template)
             {
@@ -129,7 +129,7 @@ class Workspace extends Model
                 $tpl->save();
             }
 
-            $categories = Workspace::primaryData('categories',$data);
+            $categories = require 'system/config/transaction_categories.php';
 
             foreach ($categories as $category)
             {
@@ -150,7 +150,7 @@ class Workspace extends Model
             $currency->symbol = '$';
             $currency->save();
 
-            $email_templates = Workspace::primaryData('email_templates',$data);
+            $email_templates = require 'system/config/email_templates.php';
 
             foreach ($email_templates as $email_template)
             {
@@ -176,7 +176,7 @@ class Workspace extends Model
             $email_config->secure = '';
             $email_config->save();
 
-            $permissions = Workspace::primaryData('permissions',$data);
+            $permissions = require 'system/config/permissions.php';
 
             foreach ($permissions as $permission)
             {
@@ -189,7 +189,10 @@ class Workspace extends Model
                 $p->save();
             }
 
-            $gateways = Workspace::primaryData('payment_gateways',$data);
+            $gateways = require 'system/config/payment_gateways.php';
+
+            $app->emit('workspace_creating_payment_gateways',[&$workspace_id]);
+
 
             foreach ($gateways as $gateway)
             {
@@ -211,7 +214,7 @@ class Workspace extends Model
 
             }
 
-            $methods = Workspace::primaryData('payment_methods',$data);
+            $methods = require 'system/config/transaction_payment_methods.php';
 
             foreach ($methods as $method)
             {
@@ -222,7 +225,7 @@ class Workspace extends Model
                 $payment_method->save();
             }
 
-            $crons = Workspace::primaryData('cron_data',$data);
+            $crons = require 'system/config/cron_data.php';
 
             foreach ($crons as $cron)
             {
@@ -286,7 +289,7 @@ class Workspace extends Model
         }
     }
 
-    public static function primaryData($type,$data)
+    public static function primaryData($type,$data,$workspace_settings)
     {
         switch ($type)
         {
@@ -300,15 +303,15 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'theme',
-                        'value' => 'default'
+                        'value' => $workspace_settings['theme']
                     ],
                     [
                         'key' => 'currency_code',
-                        'value' => '$'
+                        'value' => $workspace_settings['currency_code']
                     ],
                     [
                         'key' => 'language',
-                        'value' => 'en'
+                        'value' => $workspace_settings['language']
                     ],
                     [
                         'key' => 'show-logo',
@@ -316,35 +319,35 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'nstyle',
-                        'value' => 'light_blue'
+                        'value' => $workspace_settings['theme_style']
                     ],
                     [
                         'key' => 'dec_point',
-                        'value' => '.'
+                        'value' => $workspace_settings['decimal_point']
                     ],
                     [
                         'key' => 'thousands_sep',
-                        'value' => ','
+                        'value' => $workspace_settings['thousands_separator']
                     ],
                     [
                         'key' => 'timezone',
-                        'value' => 'America/New_York'
+                        'value' => $workspace_settings['timezone']
                     ],
                     [
                         'key' => 'country',
-                        'value' => 'United States'
+                        'value' => $workspace_settings['country']
                     ],
                     [
                         'key' => 'country_code',
-                        'value' => 'US'
+                        'value' => $workspace_settings['country_code']
                     ],
                     [
                         'key' => 'df',
-                        'value' => 'Y-m-d'
+                        'value' => $workspace_settings['date_format']
                     ],
                     [
                         'key' => 'caddress',
-                        'value' => 'CloudOnex <br>1101 Marina Villae Parkway, Suite 201<br>Alameda, California 94501<br>United State'
+                        'value' => $workspace_settings['address']
                     ],
                     [
                         'key' => 'account_search',
@@ -364,11 +367,11 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'networth_goal',
-                        'value' => '350000'
+                        'value' => $workspace_settings['networth_goal']
                     ],
                     [
                         'key' => 'sysEmail',
-                        'value' => 'demo@example.com'
+                        'value' => $workspace_settings['system_email']
                     ],
                     [
                         'key' => 'url_rewrite',
@@ -384,23 +387,23 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'pdf_font',
-                        'value' => 'dejavusanscondensed'
+                        'value' => $workspace_settings['pdf_font']
                     ],
                     [
                         'key' => 'accounting',
-                        'value' => '1'
+                        'value' => $workspace_settings['accounting']
                     ],
                     [
                         'key' => 'invoicing',
-                        'value' => '1'
+                        'value' => $workspace_settings['invoicing']
                     ],
                     [
                         'key' => 'quotes',
-                        'value' => '1'
+                        'value' => $workspace_settings['quotes']
                     ],
                     [
                         'key' => 'client_dashboard',
-                        'value' => '1'
+                        'value' => $workspace_settings['client_dashboard']
                     ],
                     [
                         'key' => 'contact_set_view_mode',
@@ -408,11 +411,11 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'invoice_terms',
-                        'value' => ''
+                        'value' => $workspace_settings['invoice_terms']
                     ],
                     [
                         'key' => 'console_notify_invoice_created',
-                        'value' => '0'
+                        'value' => $workspace_settings['console_notify_invoice_created']
                     ],
                     [
                         'key' => 'i_driver',
@@ -432,7 +435,7 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'hide_footer',
-                        'value' => '1'
+                        'value' => '0'
                     ],
                     [
                         'key' => 'design',
@@ -444,7 +447,7 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'recaptcha',
-                        'value' => '1'
+                        'value' => '0'
                     ],
                     [
                         'key' => 'recaptcha_sitekey',
@@ -456,39 +459,39 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'home_currency',
-                        'value' => 'USD'
+                        'value' => $workspace_settings['home_currency']
                     ],
                     [
                         'key' => 'currency_decimal_digits',
-                        'value' => 'true'
+                        'value' => $workspace_settings['currency_decimal_digits']
                     ],
                     [
                         'key' => 'currency_symbol_position',
-                        'value' => 'p'
+                        'value' => $workspace_settings['currency_symbol_position']
                     ],
                     [
                         'key' => 'thousand_separator_placement',
-                        'value' => '3'
+                        'value' => $workspace_settings['thousand_separator_placement']
                     ],
                     [
                         'key' => 'dashboard',
-                        'value' => 'canvas'
+                        'value' => $workspace_settings['dashboard']
                     ],
                     [
                         'key' => 'header_scripts',
-                        'value' => ''
+                        'value' => $workspace_settings['header_scripts']
                     ],
                     [
                         'key' => 'footer_scripts',
-                        'value' => ''
+                        'value' => $workspace_settings['footer_scripts']
                     ],
                     [
                         'key' => 'ib_key',
-                        'value' => 'vLBLfhA6DNi1R2MFHO8IvFWr4Cn9665eHUF+L/sqAKM='
+                        'value' => ''
                     ],
                     [
                         'key' => 'ib_s',
-                        'value' => 'PNhjeZ0sOFF3JNfzT2mLxvNNKPeh6ltqpE+G5LVSDSvgp/z79Sco7W4tJEoXYIl8'
+                        'value' => ''
                     ],
                     [
                         'key' => 'ib_u_t',
@@ -500,7 +503,7 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'momentLocale',
-                        'value' => 'en'
+                        'value' => getMomentLocale($workspace_settings['language'])
                     ],
                     [
                         'key' => 'contentAnimation',
@@ -508,23 +511,23 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'calendar',
-                        'value' => '1'
+                        'value' => $workspace_settings['calendar']
                     ],
                     [
                         'key' => 'leads',
-                        'value' => '1'
+                        'value' => $workspace_settings['leads']
                     ],
                     [
                         'key' => 'tasks',
-                        'value' => '1'
+                        'value' => $workspace_settings['tasks']
                     ],
                     [
                         'key' => 'orders',
-                        'value' => '1'
+                        'value' => $workspace_settings['orders']
                     ],
                     [
                         'key' => 'show_quantity_as',
-                        'value' => ''
+                        'value' => $workspace_settings['show_quantity_as']
                     ],
                     [
                         'key' => 'gmap_api_key',
@@ -552,23 +555,23 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'add_fund',
-                        'value' => '1'
+                        'value' => $workspace_settings['add_fund']
                     ],
                     [
                         'key' => 'add_fund_minimum_deposit',
-                        'value' => '100'
+                        'value' => $workspace_settings['add_fund_minimum_deposit']
                     ],
                     [
                         'key' => 'add_fund_maximum_deposit',
-                        'value' => '2500'
+                        'value' => $workspace_settings['add_fund_maximum_deposit']
                     ],
                     [
                         'key' => 'add_fund_maximum_balance',
-                        'value' => '25000'
+                        'value' => $workspace_settings['add_fund_maximum_balance']
                     ],
                     [
                         'key' => 'add_fund_require_active_order',
-                        'value' => '0'
+                        'value' => $workspace_settings['add_fund_require_active_order']
                     ],
                     [
                         'key' => 'industry',
@@ -576,11 +579,11 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'sales_target',
-                        'value' => '10000'
+                        'value' => 10000
                     ],
                     [
                         'key' => 'inventory',
-                        'value' => '1'
+                        'value' => $workspace_settings['inventory']
                     ],
                     [
                         'key' => 'secondary_currency',
@@ -588,59 +591,59 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'customer_custom_username',
-                        'value' => '1'
+                        'value' => $workspace_settings['customer_custom_username']
                     ],
                     [
                         'key' => 'documents',
-                        'value' => '1'
+                        'value' => $workspace_settings['documents']
                     ],
                     [
                         'key' => 'projects',
-                        'value' => '0'
+                        'value' => $workspace_settings['projects']
                     ],
                     [
                         'key' => 'purchase',
-                        'value' => '1'
+                        'value' => $workspace_settings['purchase']
                     ],
                     [
                         'key' => 'suppliers',
-                        'value' => '1'
+                        'value' => $workspace_settings['suppliers']
                     ],
                     [
                         'key' => 'support',
-                        'value' => '1'
+                        'value' => $workspace_settings['support']
                     ],
                     [
                         'key' => 'hrm',
-                        'value' => '0'
+                        'value' => $workspace_settings['hrm']
                     ],
                     [
                         'key' => 'companies',
-                        'value' => '1'
+                        'value' => $workspace_settings['companies']
                     ],
                     [
                         'key' => 'plugins',
-                        'value' => '1'
+                        'value' => $workspace_settings['plugins']
                     ],
                     [
                         'key' => 'country_flag_code',
-                        'value' => 'us'
+                        'value' => $workspace_settings['country_flag_code']
                     ],
                     [
                         'key' => 'graph_primary_color',
-                        'value' => '00a2e5'
+                        'value' => $workspace_settings['graph_primary_color']
                     ],
                     [
                         'key' => 'graph_secondary_color',
-                        'value' => 'eb3c00'
+                        'value' => $workspace_settings['graph_secondary_color']
                     ],
                     [
                         'key' => 'expense_type_1',
-                        'value' => 'Personal'
+                        'value' => $workspace_settings['expense_type_1']
                     ],
                     [
                         'key' => 'expense_type_2',
-                        'value' => 'Business'
+                        'value' => $workspace_settings['expense_type_2']
                     ],
                     [
                         'key' => 'edition',
@@ -648,11 +651,11 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'assets',
-                        'value' => '1'
+                        'value' => $workspace_settings['assets']
                     ],
                     [
                         'key' => 'kb',
-                        'value' => '1'
+                        'value' => $workspace_settings['kb']
                     ],
                     [
                         'key' => 'business_id_1',
@@ -664,19 +667,19 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'logo_default',
-                        'value' => 'logo_2105025689.png'
+                        'value' => $workspace_settings['logo_default']
                     ],
                     [
                         'key' => 'logo_inverse',
-                        'value' => 'logo_inverse_7627893866.png'
+                        'value' => $workspace_settings['logo_inverse']
                     ],
                     [
                         'key' => 'add_fund_client',
-                        'value' => '0'
+                        'value' => $workspace_settings['add_fund_client']
                     ],
                     [
                         'key' => 'order_method',
-                        'value' => 'create_invoice_later'
+                        'value' => $workspace_settings['order_method']
                     ],
                     [
                         'key' => 'purchase_code',
@@ -684,91 +687,91 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'invoice_receipt_number',
-                        'value' => '0'
+                        'value' => $workspace_settings['invoice_receipt_number']
                     ],
                     [
                         'key' => 'allow_customer_registration',
-                        'value' => '1'
+                        'value' => $workspace_settings['allow_customer_registration']
                     ],
                     [
                         'key' => 'fax_field',
-                        'value' => '0'
+                        'value' => $workspace_settings['fax_field']
                     ],
                     [
                         'key' => 'show_business_number',
-                        'value' => '1'
+                        'value' => $workspace_settings['show_business_number']
                     ],
                     [
                         'key' => 'label_business_number',
-                        'value' => 'Business Number'
+                        'value' => $workspace_settings['label_business_number']
                     ],
                     [
                         'key' => 'sms',
-                        'value' => '1'
+                        'value' => $workspace_settings['sms']
                     ],
                     [
                         'key' => 'sms_request_method',
-                        'value' => 'POST'
+                        'value' => $workspace_settings['sms_request_method']
                     ],
                     [
                         'key' => 'sms_auth_header',
-                        'value' => ''
+                        'value' => $workspace_settings['sms_auth_header']
                     ],
                     [
                         'key' => 'sms_req_url',
-                        'value' => ''
+                        'value' => $workspace_settings['sms_req_url']
                     ],
                     [
                         'key' => 'sms_notify_admin_new_deposit',
-                        'value' => '0'
+                        'value' => $workspace_settings['sms_notify_admin_new_deposit']
                     ],
                     [
                         'key' => 'sms_notify_customer_signed_up',
-                        'value' => '0'
+                        'value' => $workspace_settings['sms_notify_customer_signed_up']
                     ],
                     [
                         'key' => 'sms_notify_customer_invoice_created',
-                        'value' => '0'
+                        'value' => $workspace_settings['sms_notify_customer_invoice_created']
                     ],
                     [
                         'key' => 'sms_notify_customer_invoice_paid',
-                        'value' => '0'
+                        'value' => $workspace_settings['sms_notify_customer_invoice_paid']
                     ],
                     [
                         'key' => 'sms_notify_customer_payment_received',
-                        'value' => '0'
+                        'value' => $workspace_settings['sms_notify_customer_payment_received']
                     ],
                     [
                         'key' => 'sms_api_handler',
-                        'value' => 'Nexmo'
+                        'value' => $workspace_settings['sms_api_handler']
                     ],
                     [
                         'key' => 'sms_auth_username',
-                        'value' => ''
+                        'value' => $workspace_settings['sms_auth_username']
                     ],
                     [
                         'key' => 'sms_auth_password',
-                        'value' => ''
+                        'value' => $workspace_settings['sms_auth_password']
                     ],
                     [
                         'key' => 'sms_sender_name',
-                        'value' => 'CLX'
+                        'value' => $workspace_settings['sms_sender_name']
                     ],
                     [
                         'key' => 'sms_http_params',
-                        'value' => ''
+                        'value' => $workspace_settings['sms_http_params']
                     ],
                     [
                         'key' => 'purchase_invoice_payment_status',
-                        'value' => '0'
+                        'value' => $workspace_settings['purchase_invoice_payment_status']
                     ],
                     [
                         'key' => 'quote_confirmation_email',
-                        'value' => '1'
+                        'value' => $workspace_settings['quote_confirmation_email']
                     ],
                     [
                         'key' => 'client_drive',
-                        'value' => '1'
+                        'value' => $workspace_settings['client_drive']
                     ],
                     [
                         'key' => 's_version',
@@ -780,27 +783,27 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'invoice_show_watermark',
-                        'value' => '1'
+                        'value' => $workspace_settings['invoice_show_watermark']
                     ],
                     [
                         'key' => 'show_country_flag',
-                        'value' => '0'
+                        'value' => $workspace_settings['show_country_flag']
                     ],
                     [
                         'key' => 'drive',
-                        'value' => '0'
+                        'value' => $workspace_settings['drive']
                     ],
                     [
                         'key' => 'tax_system',
-                        'value' => 'default'
+                        'value' => $workspace_settings['tax_system']
                     ],
                     [
                         'key' => 'pos',
-                        'value' => '1'
+                        'value' => $workspace_settings['pos']
                     ],
                     [
                         'key' => 'password_manager',
-                        'value' => 'default'
+                        'value' => $workspace_settings['password_manager']
                     ],
                     [
                         'key' => 'update_manager',
@@ -829,691 +832,6 @@ class Workspace extends Model
                     [
                         'key' => 'slack_webhook_url',
                         'value' => '1'
-                    ]
-                ];
-
-                break;
-
-            case 'sms_templates':
-
-                return [
-
-                    [
-                        'name' => 'Invoice Created',
-                        'template' => 'Your Invoice- {{invoice_id}} is created. To view your invoice- {{invoice_url}}'
-                    ],
-                    [
-                        'name' => 'Invoice Payment Reminder',
-                        'template' => 'We have not received payment for invoice {{invoice_id}}, dated {{invoice_date}}. To view your invoice- {{invoice_url}}'
-                    ],
-                    [
-                        'name' => 'Invoice Overdue Notice',
-                        'template' => 'Your Invoice- {{invoice_id}} is now overdue. To view your invoice- {{invoice_url}}'
-                    ],
-                    [
-                        'name' => 'Invoice Payment Confirmation',
-                        'template' => 'We have received your Payment for Invoice ID- {{invoice_id}}'
-                    ],
-                    [
-                        'name' => 'Invoice Refund Confirmation',
-                        'template' => 'Your Payment for {{invoice_id}} has been refunded.'
-                    ],
-                    [
-                        'name' => 'Quote Created',
-                        'template' => 'A Quote has been created- {{quote_id}}. You can view this Quote- {{quote_url}}'
-                    ],
-                    [
-                        'name' => 'Quote Accepted',
-                        'template' => 'Thanks for Accepting Quote - {{quote_id}}. You can view this Quote- {{quote_url}}'
-                    ],
-                    [
-                        'name' => 'Quote Cancelled',
-                        'template' => 'Quote has been cancelled - {{quote_id}}. You can view this Quote- {{quote_url}}'
-                    ],
-                    [
-                        'name' => 'Quote Accepted: Admin Notification',
-                        'template' => 'Quote - {{quote_id}} has been accepted. You can view this Quote- {{quote_url}}'
-                    ],
-                    [
-                        'name' => 'Quote Cancelled: Admin Notification',
-                        'template' => 'Quote - {{quote_id}} has been Cancelled. You can view this Quote- {{quote_url}}'
-                    ]
-                ];
-
-                break;
-
-            case 'categories':
-
-                return [
-
-                    [
-                        'name' => 'Advertising',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Bank and Credit Card Interest',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Car and Truck',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Commissions and Fees',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Contract Labor',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Contributions',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Cost of Goods Sold',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Credit Card Interest',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Depreciation',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Dividend Payments',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Employee Benefit Programs',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Entertainment',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Gift',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Insurance',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Legal, Accountant &amp; Other Professional Services',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Meals',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Mortgage Interest',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Non-Deductible Expense',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Other Business Property Leasing',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Owner Draws',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Payroll Taxes',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Phone',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Postage',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Rent',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Repairs &amp; Maintenance',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Supplies',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Taxes and Licenses',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Transfer Funds',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Travel',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Utilities',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Vehicle, Machinery &amp; Equipment Rental or Leasing',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Wages',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Regular Income',
-                        'type' => 'Income'
-                    ],
-                    [
-                        'name' => 'Owner Contribution',
-                        'type' => 'Income'
-                    ],
-                    [
-                        'name' => 'Interest Income',
-                        'type' => 'Income'
-                    ],
-                    [
-                        'name' => 'Expense Refund',
-                        'type' => 'Income'
-                    ],
-                    [
-                        'name' => 'Other Income',
-                        'type' => 'Income'
-                    ],
-                    [
-                        'name' => 'Salary',
-                        'type' => 'Income'
-                    ],
-                    [
-                        'name' => 'Equities',
-                        'type' => 'Income'
-                    ],
-                    [
-                        'name' => 'Rent &amp; Royalties',
-                        'type' => 'Income'
-                    ],
-                    [
-                        'name' => 'Home equity',
-                        'type' => 'Income'
-                    ],
-                    [
-                        'name' => 'Part Time Work',
-                        'type' => 'Income'
-                    ],
-                    [
-                        'name' => 'Account Transfer',
-                        'type' => 'Income'
-                    ],
-                    [
-                        'name' => 'Health Care',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Loans',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Selling Software',
-                        'type' => 'Income'
-                    ],
-                    [
-                        'name' => 'Software Customization',
-                        'type' => 'Income'
-                    ],
-                    [
-                        'name' => 'Salary',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Paypal',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Office Equipment',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Staff Entertaining',
-                        'type' => 'Expense'
-                    ],
-                    [
-                        'name' => 'Uncategorized',
-                        'type' => 'Income'
-                    ],
-
-                ];
-
-                break;
-
-            case 'email_templates':
-
-                return [
-
-                    [
-                        'name' => 'Invoice:Invoice Created',
-                        'subject' => '{{business_name}} Invoice',
-                        'message' => '<div style="line-height:1.6;color:#222;text-align:left;width:550px;font-size:10pt;margin:0px 10px;font-family:verdana,\'droid sans\',\'lucida sans\',sans-serif;padding:14px;border:3px solid #d8d8d8;border-top:3px solid #007bc3"><div style="padding:5px;font-size:11pt;font-weight:bold">   Greetings,</div>	<div style="padding:5px">		This email serves as your official invoice from <strong>{{business_name}}. </strong>	</div><div style="padding:10px 5px">    Invoice URL: <a href="{{invoice_url}}" target="_blank">{{invoice_url}}</a><a target="_blank" style="color:#1da9c0;font-weight:bold;padding:3px;text-decoration:none" href="{{app_url}}"></a><br>Invoice ID: {{invoice_id}}<br>Invoice Amount: {{invoice_amount}}<br>Due Date: {{invoice_due_date}}</div><div style="padding:5px"><span style="font-size: 13.3333330154419px; line-height: 21.3333320617676px;">If you have any questions or need assistance, please don\'t hesitate to contact us.</span><br></div><div style="padding:0px 5px">	<div>Best Regards,<br>{{business_name}} Team</div></div></div>'
-                    ],
-                    [
-                        'name' => 'Admin:Password Change Request',
-                        'subject' => '{{business_name}} password change request',
-                        'message' => '<div style="line-height:1.6;color:#222;text-align:left;width:550px;font-size:10pt;margin:0px 10px;font-family:verdana,\'droid sans\',\'lucida sans\',sans-serif;padding:14px;border:3px solid #d8d8d8;border-top:3px solid #007bc3"><div style="padding:5px;font-size:11pt;font-weight:bold">   Hi {{name}},</div>	<div style="padding:5px">		This is to confirm that we have received a Forgot Password request for your Account Username - {{username}} <br>From the IP Address - {{ip_address}}	</div>	<div style="padding:5px">		Click this linke to reset your password- <br><a target="_blank" style="color:#1da9c0;font-weight:bold;padding:3px;text-decoration:none" href="{{password_reset_link}}">{{password_reset_link}}</a>	</div><div style="padding:5px">Please note: until your password has been changed, your current password will remain valid. The Forgot Password Link will be available for a limited time only.</div><div style="padding:0px 5px">	<div>Best Regards,<br>{{business_name}} Team</div></div></div>'
-                    ],
-                    [
-                        'name' => 'Admin:New Password',
-                        'subject' => '{{business_name}} New Password for Admin',
-                        'message' => '<div style="line-height:1.6;color:#222;text-align:left;width:550px;font-size:10pt;margin:0px 10px;font-family:verdana,\'droid sans\',\'lucida sans\',sans-serif;padding:14px;border:3px solid #d8d8d8;border-top:3px solid #007bc3">
-
-<div style="padding:5px;font-size:11pt;font-weight:bold">
-   Hello {{name}}
-</div>
-
-
-	<div style="padding:5px">
-		Here is your new password for <strong>{{business_name}}. </strong>
-	</div>
-
-	
-<div style="padding:10px 5px">
-    Log in URL: <a target="_blank" style="color:#1da9c0;font-weight:bold;padding:3px;text-decoration:none" href="{{login_url}}">{{login_url}}</a><br>Username: {{username}}<br>Password: {{password}}</div>
-
-<div style="padding:5px">For security reason, Please change your password after login. </div>
-
-<div style="padding:0px 5px">
-	<div>Best Regards,<br>{{business_name}} Team</div>
-
-</div>
-
-</div>'
-                    ],
-                    [
-                        'name' => 'Invoice:Invoice Payment Reminder',
-                        'subject' => '{{business_name}} Invoice Payment Reminder',
-                        'message' => '<div style="line-height:1.6;color:#222;text-align:left;width:550px;font-size:10pt;margin:0px 10px;font-family:verdana,\'droid sans\',\'lucida sans\',sans-serif;padding:14px;border:3px solid #d8d8d8;border-top:3px solid #007bc3"><div style="padding:5px;font-size:11pt;font-weight:bold">   Greetings,</div>	<div style="padding:5px">		This is a billing reminder that your invoice no. {{invoice_id}} which was generated on {{invoice_date}} is due on {{invoice_due_date}}. 	</div><div style="padding:10px 5px">    Invoice URL: <a href="{{invoice_url}}" target="_blank">{{invoice_url}}</a><a target="_blank" style="color:#1da9c0;font-weight:bold;padding:3px;text-decoration:none" href="{{app_url}}"></a><br>Invoice ID: {{invoice_id}}<br>Invoice Amount: {{invoice_amount}}<br>Due Date: {{invoice_due_date}}</div><div style="padding:5px"><span style="font-size: 13.3333330154419px; line-height: 21.3333320617676px;">If you have any questions or need assistance, please don\'t hesitate to contact us.</span><br></div><div style="padding:0px 5px">	<div>Best Regards,<br>{{business_name}} Team</div></div></div>'
-                    ],
-                    [
-                        'name' => 'Invoice:Invoice Overdue Notice',
-                        'subject' => '{{business_name}} Invoice Overdue Notice',
-                        'message' => '<div style="line-height:1.6;color:#222;text-align:left;width:550px;font-size:10pt;margin:0px 10px;font-family:verdana,\'droid sans\',\'lucida sans\',sans-serif;padding:14px;border:3px solid #d8d8d8;border-top:3px solid #007bc3"><div style="padding:5px;font-size:11pt;font-weight:bold">   Greetings,</div>	<div style="padding:5px">		This is the notice that your invoice no. {{invoice_id}} which was generated on {{invoice_date}} is now overdue.	</div>	<div style="padding:10px 5px">    Invoice URL: <a href="{{invoice_url}}" target="_blank">{{invoice_url}}</a><a target="_blank" style="color:#1da9c0;font-weight:bold;padding:3px;text-decoration:none" href="{{app_url}}"></a><br>Invoice ID: {{invoice_id}}<br>Invoice Amount: {{invoice_amount}}<br>Due Date: {{invoice_due_date}}</div><div style="padding:5px"><span style="font-size: 13.3333330154419px; line-height: 21.3333320617676px;">If you have any questions or need assistance, please don\'t hesitate to contact us.</span><br></div><div style="padding:0px 5px">	<div>Best Regards,<br>{{business_name}} Team</div></div></div>'
-                    ],
-                    [
-                        'name' => 'Invoice:Invoice Payment Confirmation',
-                        'subject' => '{{business_name}} Invoice Payment Confirmation',
-                        'message' => '<div style="line-height:1.6;color:#222;text-align:left;width:550px;font-size:10pt;margin:0px 10px;font-family:verdana,\'droid sans\',\'lucida sans\',sans-serif;padding:14px;border:3px solid #d8d8d8;border-top:3px solid #007bc3">
-
-<div style="padding:5px;font-size:11pt;font-weight:bold">
-   Greetings,
-</div>
-
-
-
-	<div style="padding:5px">
-		This is a payment receipt for Invoice {{invoice_id}} sent on {{invoice_date}}.
-	</div>
-
-
-	<div style="padding:5px">
-		Login to your client Portal to view this invoice.
-	</div>
-
-
-<div style="padding:10px 5px">
-    Invoice URL: <a href="{{invoice_url}}" target="_blank">{{invoice_url}}</a><a target="_blank" style="color:#1da9c0;font-weight:bold;padding:3px;text-decoration:none" href="{{app_url}}"></a><br>Invoice ID: {{invoice_id}}<br>Invoice Amount: {{invoice_amount}}<br>Due Date: {{invoice_due_date}}</div>
-
-
-<div style="padding:5px"><span style="font-size: 13.3333330154419px; line-height: 21.3333320617676px;">If you have any questions or need assistance, please don\'t hesitate to contact us.</span><br></div>
-
-
-<div style="padding:0px 5px">
-	<div>Best Regards,<br>{{business_name}} Team</div>
-
-
-</div>
-
-
-</div>'
-                    ],
-                    [
-                        'name' => 'Invoice:Invoice Refund Confirmation',
-                        'subject' => '{{business_name}} Invoice Refund Confirmation',
-                        'message' => '<div style="line-height:1.6;color:#222;text-align:left;width:550px;font-size:10pt;margin:0px 10px;font-family:verdana,\'droid sans\',\'lucida sans\',sans-serif;padding:14px;border:3px solid #d8d8d8;border-top:3px solid #007bc3"><div style="padding:5px;font-size:11pt;font-weight:bold">   Greetings,</div>	<div style="padding:5px">		This is confirmation that a refund has been processed for Invoice {{invoice_id}} sent on {{invoice_date}}.	</div><div style="padding:10px 5px">    Invoice URL: <a href="{{invoice_url}}" target="_blank">{{invoice_url}}</a><a target="_blank" style="color:#1da9c0;font-weight:bold;padding:3px;text-decoration:none" href="{{app_url}}"></a><br>Invoice ID: {{invoice_id}}<br>Invoice Amount: {{invoice_amount}}<br>Due Date: {{invoice_due_date}}</div><div style="padding:5px"><span style="font-size: 13.3333330154419px; line-height: 21.3333320617676px;">If you have any questions or need assistance, please don\'t hesitate to contact us.</span><br></div><div style="padding:0px 5px">	<div>Best Regards,<br>{{business_name}} Team</div></div></div>'
-                    ],
-                    [
-                        'name' => 'Quote:Quote Created',
-                        'subject' => '{{quote_subject}}',
-                        'message' => '<div style="line-height:1.6;color:#222;text-align:left;width:550px;font-size:10pt;margin:0px 10px;font-family:verdana,sans-serif;padding:14px;border:3px solid #d8d8d8;border-top:3px solid #007bc3"><div style="padding:5px;font-size:11pt;font-weight:bold">   Greetings,</div>	<div style="padding:5px">		Dear {{contact_name}},&nbsp;<br> Here is the quote you requested for.  The quote is valid until {{valid_until}}.	</div><div style="padding:10px 5px">    Quote Unique URL: <a href="{{quote_url}}" target="_blank">{{quote_url}}</a><br></div><div style="padding:5px"><span style="font-size: 13.3333330154419px; line-height: 21.3333320617676px;">You may view the quote at any time and simply reply to this email with any further questions or requirement.</span><br></div><div style="padding:0px 5px">	<div>Best Regards,<br>{{business_name}} Team</div></div></div>'
-                    ],
-                    [
-                        'name' => 'Client:Client Signup Email',
-                        'subject' => 'Your {{business_name}} Login Info',
-                        'message' => '<p>Dear {{client_name}},</p>
-<p>Welcome to {{business_name}}.</p>
-<p>You can track your billing, profile, transactions from this portal.</p>
-<p>Your login information is as follows:</p>
-<p>---------------------------------------------------------------------------------------</p>
-<p>Login URL: {{client_login_url}} <br />Email Address: {{client_email}}<br /> Password: Your chosen password.</p>
-<p>----------------------------------------------------------------------------------------</p>
-<p>We very much appreciate you for choosing us.</p>
-<p>{{business_name}} Team</p>'
-                    ],
-                    [
-                        'name' => 'Tickets:Client Ticket Created',
-                        'subject' => '{{subject}}',
-                        'message' => '<p>{{client_name}},</p>
-<p>Thank you for contacting our support team. A support ticket has now been opened for your request. You will be notified when a response is made by email. Your ticket ID is {{ticket_id}} and a copy of your original message is included below.</p>
-<p>
-Subject: {ticket_subject}
-<br /> Message: <br />
-{{message}}
-<br /> Priority: {{ticket_priority}}
-<br /> Status: {{ticket_status}}
-</p>
-<p>You can view the ticket at any time at {{ticket_link}}</p>
-'
-                    ],
-                    [
-                        'name' => 'Tickets:Admin Ticket Created',
-                        'subject' => '{{subject}}',
-                        'message' => '<p>{{admin_view_link}}</p> {{message}}'
-                    ],
-                    [
-                        'name' => 'Tickets:Client Response',
-                        'subject' => '{{subject}}',
-                        'message' => '<p>{{ticket_message}}</p>
-<p>----------------------------------------------<br /> Ticket ID: #{{ticket_id}}<br /> Subject: {{ticket_subject}}<br /> Status: {{ticket_status}}<br /> Ticket URL: {{ticket_link}}<br /> ----------------------------------------------</p>'
-                    ],
-                    [
-                        'name' => 'Tickets:Admin Response',
-                        'subject' => '{{subject}}',
-                        'message' => '<p>{{ticket_message}}</p>
-<p>----------------------------------------------<br /> Ticket ID: #{{ticket_id}}<br /> Subject: {{ticket_subject}}<br /> Status: {{ticket_status}}<br /> Ticket URL: {{ticket_link}}<br /> ----------------------------------------------</p>'
-                    ],
-                    [
-                        'name' => 'Purchase Invoice:Invoice Created',
-                        'subject' => '{{business_name}} Invoice',
-                        'message' => '<div style="line-height: 1.6; color: #222; text-align: left; width: 550px; font-size: 10pt; margin: 0px 10px; font-family: verdana,\'droid sans\',\'lucida sans\',sans-serif; padding: 14px; border: 3px solid #d8d8d8; border-top: 3px solid #007bc3;">
-<div style="padding: 5px; font-size: 11pt; font-weight: bold;">Greetings,</div>
-<div style="padding: 5px;">This email serves as your official invoice from <strong>{{business_name}}. </strong></div>
-<div style="padding: 10px 5px;">Invoice URL: {{invoice_url}}<br />Invoice ID: {{invoice_id}}<br />Invoice Amount: {{invoice_amount}}</div>
-<div style="padding: 5px;"><span style="font-size: 13.3333330154419px; line-height: 21.3333320617676px;">If you have any questions or need assistance, please don\'t hesitate to contact us.</span></div>
-<div style="padding: 0px 5px;">
-<div>Best Regards,<br />{{business_name}} Team</div>
-</div>
-</div>'
-                    ],
-                    [
-                        'name' => 'Quote:Quote Cancelled',
-                        'subject' => '{{business_name}} Quote',
-                        'message' => '<div style="line-height: 1.6; color: #222; text-align: left; width: 550px; font-size: 10pt; margin: 0px 10px; font-family: verdana,sans-serif; padding: 14px; border: 3px solid #d8d8d8; border-top: 3px solid #007bc3;">
-<div style="padding: 5px; font-size: 11pt; font-weight: bold;">Greetings,</div>
-<div style="padding: 5px;">Dear {{contact_name}},&nbsp;<br />We are sorry to see you go. If you chnage your mind, you can Accept it again from following url. The quote is valid until {{valid_until}}.</div>
-<div style="padding: 10px 5px;">Quote Unique URL: <a href="http://stackb.dev/{{quote_url}}" target="_blank" rel="noopener noreferrer">{{quote_url}}</a></div>
-<div style="padding: 5px;"><span style="font-size: 13.3333330154419px; line-height: 21.3333320617676px;">You may view the quote at any time and simply reply to this email with any further questions or requirement.</span></div>
-<div style="padding: 0px 5px;">
-<div>Best Regards,<br />{{business_name}} Team</div>
-</div>
-</div>'
-                    ],
-                    [
-                        'name' => 'Quote:Quote Accepted',
-                        'subject' => '{{business_name}} Quote',
-                        'message' => '<div style="line-height: 1.6; color: #222; text-align: left; width: 550px; font-size: 10pt; margin: 0px 10px; font-family: verdana,sans-serif; padding: 14px; border: 3px solid #d8d8d8; border-top: 3px solid #007bc3;">
-<div style="padding: 5px; font-size: 11pt; font-weight: bold;">Greetings,</div>
-<div style="padding: 5px;">Dear {{contact_name}},&nbsp;<br />Thank you for accepting the Quote.</div>
-<div style="padding: 10px 5px;">Quote: <a href="{{quote_url}}" target="_blank" rel="noopener noreferrer">{{quote_url}}</a></div>
-<div style="padding: 5px;"><span style="font-size: 13.3333330154419px; line-height: 21.3333320617676px;">You may view the quote at any time and simply reply to this email with any further questions or requirement.</span></div>
-<div style="padding: 0px 5px;">
-<div>Best Regards,<br />{{business_name}} Team</div>
-</div>
-</div>'
-                    ],
-
-                ];
-                
-                break;
-
-            case 'permissions':
-
-                return [
-
-                    [
-                        'name' => 'Customers',
-                        'shortname' => 'customers'
-                    ],
-                    [
-                        'name' => 'Companies',
-                        'shortname' => 'companies'
-                    ],
-                    [
-                        'name' => 'Transactions',
-                        'shortname' => 'transactions'
-                    ],
-                    [
-                        'name' => 'Sales',
-                        'shortname' => 'sales'
-                    ],
-                    [
-                        'name' => 'Bank & Cash',
-                        'shortname' => 'bank_n_cash'
-                    ],
-                    [
-                        'name' => 'Products & Services',
-                        'shortname' => 'products_n_services'
-                    ],
-                    [
-                        'name' => 'Reports',
-                        'shortname' => 'reports'
-                    ],
-                    [
-                        'name' => 'Utilities',
-                        'shortname' => 'utilities'
-                    ],
-                    [
-                        'name' => 'Appearance',
-                        'shortname' => 'appearance'
-                    ],
-                    [
-                        'name' => 'Plugins',
-                        'shortname' => 'plugins'
-                    ],
-                    [
-                        'name' => 'Calendar',
-                        'shortname' => 'calendar'
-                    ],
-                    [
-                        'name' => 'Leads',
-                        'shortname' => 'leads'
-                    ],
-                    [
-                        'name' => 'Tasks',
-                        'shortname' => 'tasks'
-                    ],
-                    [
-                        'name' => 'Contracts',
-                        'shortname' => 'contracts'
-                    ],
-                    [
-                        'name' => 'Orders',
-                        'shortname' => 'orders'
-                    ],
-                    [
-                        'name' => 'Settings',
-                        'shortname' => 'settings'
-                    ],
-                    [
-                        'name' => 'Documents',
-                        'shortname' => 'documents'
-                    ],
-                    [
-                        'name' => 'Purchase',
-                        'shortname' => 'purchase'
-                    ],
-                    [
-                        'name' => 'Suppliers',
-                        'shortname' => 'suppliers'
-                    ],
-                    [
-                        'name' => 'SMS',
-                        'shortname' => 'sms'
-                    ],
-                    [
-                        'name' => 'Support',
-                        'shortname' => 'support'
-                    ],
-                    [
-                        'name' => 'Knowledgebase',
-                        'shortname' => 'kb'
-                    ],
-                    [
-                        'name' => 'Password Manager',
-                        'shortname' => 'password_manager'
-                    ],
-                    [
-                        'name' => 'HRM',
-                        'shortname' => 'hr'
-                    ],
-
-                ];
-
-                break;
-
-            case 'payment_gateways':
-
-                return [
-
-                    [
-                        'name' => 'Paypal',
-                        'processor' => 'paypal',
-                        'settings' => 'Paypal Email',
-                        'value' => 'demo@example.com',
-                        'ins' => 'Invoices',
-                        'c1' => 'USD',
-                        'c2' => '1',
-                        'c3' => '',
-                        'c4' => '',
-                        'c5' => ''
-                    ],
-                    [
-                        'name' => 'Stripe',
-                        'processor' => 'stripe',
-                        'settings' => 'API Key',
-                        'value' => '',
-                        'ins' => '',
-                        'c1' => '',
-                        'c2' => '',
-                        'c3' => '',
-                        'c4' => '',
-                        'c5' => ''
-                    ],
-                    [
-                        'name' => 'Bank / Cash',
-                        'processor' => 'manualpayment',
-                        'settings' => 'Instructions',
-                        'value' => 'Make a Payment to Our Bank Account <br>Bank Name: City Bank <br>Account Name: Sadia Sharmin <br>Account Number: 1505XXXXXXXX <br>',
-                        'ins' => '',
-                        'c1' => '',
-                        'c2' => '',
-                        'c3' => '',
-                        'c4' => '',
-                        'c5' => ''
-                    ],
-                    [
-                        'name' => 'Authorize.net',
-                        'processor' => 'authorize_net',
-                        'settings' => 'API_LOGIN_ID',
-                        'value' => 'Insert API Login ID here',
-                        'ins' => '',
-                        'c1' => 'Insert Transaction Key Here',
-                        'c2' => '',
-                        'c3' => '',
-                        'c4' => '',
-                        'c5' => ''
-                    ],
-                    [
-                        'name' => 'Braintree',
-                        'processor' => 'braintree',
-                        'settings' => 'Merchant ID',
-                        'value' => 'your merchant id',
-                        'ins' => '',
-                        'c1' => 'your public key',
-                        'c2' => 'your private key',
-                        'c3' => 'bank account',
-                        'c4' => 'sandbox',
-                        'c5' => ''
-                    ],
-
-                ];
-
-                break;
-
-            case 'payment_methods':
-
-                return [
-
-                    [
-                        'name' => 'Cash',
-                        'sort_order' => '1'
-                    ],
-                    [
-                        'name' => 'Check',
-                        'sort_order' => '4'
-                    ],
-                    [
-                        'name' => 'Credit Card',
-                        'sort_order' => '5'
-                    ],
-                    [
-                        'name' => 'Debit',
-                        'sort_order' => '6'
-                    ],
-                    [
-                        'name' => 'Electronic Transfer',
-                        'sort_order' => '7'
-                    ],
-                    [
-                        'name' => 'Paypal',
-                        'sort_order' => '2'
-                    ],
-                    [
-                        'name' => 'ATM Withdrawals',
-                        'sort_order' => '3'
-                    ]
-                ];
-
-                break;
-
-            case 'cron_data':
-
-                return [
-                    [
-                        'name' => 'accounting_snapshot',
-                        'value' => 'Active'
-                    ],
-                    [
-                        'name' => 'recurring_invoice',
-                        'value' => 'Active'
-                    ],
-                    [
-                        'name' => 'notify',
-                        'value' => 'Active'
-                    ],
-                    [
-                        'name' => 'notifyemail',
-                        'value' => 'demo@example.com'
                     ]
                 ];
 

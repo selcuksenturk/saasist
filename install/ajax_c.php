@@ -103,6 +103,19 @@ define(\'APP_STAGE\', \'Live\'); # Change Live to Dev to enable Debug
     fwrite($fh, $input);
     fclose($fh);
 
+    // rename all the config files
+
+    if(isset($files_to_rename))
+    {
+        foreach ($files_to_rename as $key => $value)
+        {
+            if(file_exists('system/config/'.$key))
+            {
+                rename('system/config/'.$key,'system/config/'.$value);
+            }
+        }
+    }
+
     echo '1';
 
 

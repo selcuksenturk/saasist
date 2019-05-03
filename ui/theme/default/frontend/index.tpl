@@ -2,13 +2,13 @@
 
 {block name="content"}
 
+
     <section class="welcome-area sec-padding p-relative o-hidden" data-scroll-index="1">
         <div class="container">
             <div class="row welcome-text sec-padding flex-center">
                 <div class="col-md-6 mb-50px z-index-1">
-                    <h2 class="mb-20px">
-                        Sell, service, market & manage!</h2>
-                    <p>It is the central repository of information about business services, products, company financials, suppliers, customer orders - and more. With CloudOneX, improve efficiency and insight across your entire business which enables you to make more informed decisions.</p>
+                    <h2 class="mb-20px">Need asist?</h2>
+                    <p>If it is a yes! we provide you all in one business solutions which includes a beautiful dashboard with accounting, crm, leads, sales, purchase, suppliers, orders, quotes, reports, tasks and more. Improve efficiency in your entire business which enables you to make more accurete decisions.</p>
                     <a class="main-btn btn-3 mt-30px" href="{$_url}register">Try for free</a>
                 </div>
                 <div class="col-md-6 text-center">
@@ -20,18 +20,19 @@
         </div>
     </section>
 
+
     <section class="services-area-5 text-center p-relative" data-scroll-index="3">
         <div class="container">
-            <h1 class="title-h">All you need to run your business. All in one place.</h1>
-            <p class="title-p">Tired of switching between many applications to manage your day to day business tasks? The all-in-one business management software, integrated, connected each modules, you were waiting for is here, and it’s in the cloud!</p>
+            <h1 class="title-h">Assisted business & All in one place</h1>
+            <p class="title-p">All in one business management application, integrated, connected each modules, you were waiting for is here also cloud-weighted!</p>
             <div class="row">
                 <div class="col-md-4">
                     <div class="services-text pl-30px pr-30px mt-25px mb-25px wow fadeInUp">
                         <i class="im im-bank p-absolute color-blue fs-35 bg-gray text-center radius-50 mb-25px transition-2"></i>
                         <div class="pl-">
-                            <h4 class="mb-5px">Financials</h4>
-                            <span class="color-blue bg-gray pl-15px pr-15px pt-5px pb-5px radius-50px fw-400 fs-14">Stress less about financials</span>
-                            <p class="mt-15px">See your financial whole picture all in one place. Plan for today and tomorrow with one solution to manage all your finances.</p>
+                            <h4 class="mb-5px">Finance Management</h4>
+                            <span class="color-blue bg-gray pl-15px pr-15px pt-5px pb-5px radius-50px fw-400 fs-14">Less effort more results</span>
+                            <p class="mt-15px">Be prepared from today to plan for tomorrow with one solution to manage all your financials.</p>
                         </div>
                     </div>
                 </div>
@@ -39,9 +40,9 @@
                     <div class="services-text pl-30px pr-30px mt-25px mb-25px fadeInUp">
                         <i class="im im-credit-card p-absolute color-blue fs-35 bg-gray text-center radius-50 mb-25px transition-2"></i>
                         <div class="pl-">
-                            <h4 class="mb-5px">Billing</h4>
-                            <span class="color-blue bg-gray pl-15px pr-15px pt-5px pb-5px radius-50px fw-400 fs-14">From orders to invoicing</span>
-                            <p class="mt-15px">Wow your clients with online invoices with built in payment gateway integration that take only seconds to create.</p>
+                            <h4 class="mb-5px">Supply & Sales</h4>
+                            <span class="color-blue bg-gray pl-15px pr-15px pt-5px pb-5px radius-50px fw-400 fs-14">From order to invoicing</span>
+                            <p class="mt-15px">Start with the order, continue supply, sale and invoicing in seconds. As what-whenever you wish.</p>
                         </div>
                     </div>
                 </div>
@@ -49,9 +50,9 @@
                     <div class="services-text pl-30px pr-30px mt-25px mb-25px fadeInUp">
                         <i class="im im-users p-absolute color-blue fs-35 bg-gray text-center radius-50 mb-25px transition-2"></i>
                         <div class="pl-">
-                            <h4 class="mb-5px">CRM</h4>
-                            <span class="color-blue bg-gray pl-15px pr-15px pt-5px pb-5px radius-50px fw-400 fs-14">First contact to service</span>
-                            <p class="mt-15px">It helps to sell, reach customers, and improve your customer service. Manage every stage of your customer journey.</p>
+                            <h4 class="mb-5px">CRM in 360°</h4>
+                            <span class="color-blue bg-gray pl-15px pr-15px pt-5px pb-5px radius-50px fw-400 fs-14">Increasing satisfaction</span>
+                            <p class="mt-15px">It helps to reach new customers, manage current and improve whole customer services.</p>
                         </div>
                     </div>
                 </div>
@@ -70,16 +71,14 @@
                 </div>
                 <div class="col-md-6">
                     <div class="mt-25px mb-25px">
-                        <span class="fs-20 fw-400 color-blue">You're in good company</span>
-                        <h3 class="mb-15px mt-10px">It's loved by the businesses around the world.</h3>
-                        <p class="mb-20px">Businesses around the world using this software daily & it's shaped by their feedbacks.</p>
+                        <h3 class="mb-15px mt-10px">* Suggested by businesses</h3>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mt-10px mb-10px p-relative">
                                     <i class="icon-genius color-blue fs-35 p-absolute"></i>
                                     <div class="pl-60px">
-                                        <h5>Easy To Use</h5>
-                                        <p>It is simple and intuitive. Simply signup & start using this software from the cloud. </p>
+                                        <h5>> Ease of use</h5>
+                                        <p>Works simple, reliable and fast also allows you to easily adapt and focus.</p>
                                     </div>
                                 </div>
                             </div>
@@ -87,8 +86,8 @@
                                 <div class="mt-10px mb-10px p-relative">
                                     <i class="icon-key color-blue fs-35 p-absolute"></i>
                                     <div class="pl-60px">
-                                        <h5>Your data lives in the cloud</h5>
-                                        <p>You can access it securely from your desktop, phone and tablet wherever you are. </p>
+                                        <h5>> Lives in the cloud</h5>
+                                        <p>Access securely from your desktop, tablet and phone wherever you are.</p>
                                     </div>
                                 </div>
                             </div>
@@ -96,8 +95,8 @@
                                 <div class="mt-10px mb-10px p-relative">
                                     <i class="icon-global color-blue fs-35 p-absolute"></i>
                                     <div class="pl-60px">
-                                        <h5>Powerful Features</h5>
-                                        <p>Stay on top of your spending by tracking incomes and expenses. Set your goals & use the tools to get you there.</p>
+                                        <h5>> Powerful features</h5>
+                                        <p>Your little helper works seamless with whole integrated system.</p>
                                     </div>
                                 </div>
                             </div>
@@ -105,8 +104,8 @@
                                 <div class="mt-10px mb-10px p-relative">
                                     <i class="icon-tools-2 color-blue fs-35 p-absolute"></i>
                                     <div class="pl-60px">
-                                        <h5>You are our top priority</h5>
-                                        <p>We have resources to get you and your team up and running fast.</p>
+                                        <h5>> Top priority</h5>
+                                        <p>Becomes indispensable for innovative businesses and their managers.</p>
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +117,6 @@
     </section>
 
 
-
     <!-- ==================================================
                           End testimonials-2
     ================================================== -->
@@ -128,22 +126,21 @@
     ================================================== -->
     <section class="sec-padding faqs" data-scroll-index="4">
         <div class="container">
-            <h1 class="title-h">Have a Question?</h1>
-            <p class="title-p">Check out here, where you’ll find answers to common questions about using our software. Or contact with us for more informations.</p>
+            <h1 class="title-h">Any question?</h1>
+            <p class="title-p">Please contact with us for more without hesitate.</p>
             <div class="row">
                 <div class="col-md-12">
                     <div class="box mt-25px mb-25px wow fadeInLeft" data-wow-delay="0.7s">
-                        <h6 class="orange mb-15px radius-50px pl-20px pt-7px pb-7px"><span class="mr-5px fs-30">-</span> How does the 30 day free trial work?</h6>
-                        <p class="pl-20px mb-15px">Try it, it’s on us. You can have unlimited access for 30 days, with no contracts and no credit card required. You even get free phone and email support in case you have questions about setting up your account.</p>
-                        <h6 class="blue mb-15px radius-50px pl-20px pt-7px pb-7px"><span class="mr-5px fs-30">-</span> What happens after my free trial?</h6>
-                        <p class="pl-20px mb-15px">With the free trial, you can use our software at no charge for 30 days (no credit card required). After your trial is up, you can choose from one of several paid plans.</p>
-                        <h6 class="blue mb-15px radius-50px pl-20px pt-7px pb-7px"><span class="mr-5px fs-30">-</span> Do I need to install any software?</h6>
-                        <p class="pl-20px mb-15px">It is 100% web based, meaning you can access it anywhere and there’s no software to install on your computer.</p>
-                        <h6 class="blue mb-15px radius-50px pl-20px pt-7px pb-7px"><span class="mr-5px fs-30">-</span> Is my data safe?</h6>
-                        <p class="pl-20px mb-15px">Your data securely stored in the cloud. For security of transactions we use the Secure Sockets Layer (SSL) protocol, which encrypts any information such as credit card number and billing information that you send us electronically. The encryption process protects your information by scrambling it before it is sent to us from your computer. In addition, your data is backed up automatically and is accessible from any device, so you can always stay connected and up-to-date.</p>
+                        <h6 class="orange mb-15px radius-50px pl-20px pt-7px pb-7px"><span class="mr-5px fs-30">-</span>Free * forever right?</h6>
+                        <p class="pl-20px mb-15px">Yes, absolutely 100% free! You can have unlimited access to free plan * forever, with no contracts and no credit card required.</p>
+                        <h6 class="blue mb-15px radius-50px pl-20px pt-7px pb-7px"><span class="mr-5px fs-30">-</span>Any support?</h6>
+                        <p class="pl-20px mb-15px">You are getting always free e-mail support with low priority in case if you have any question. For top priority please contact with us.</p>
+                        <h6 class="blue mb-15px radius-50px pl-20px pt-7px pb-7px"><span class="mr-5px fs-30">-</span>Additional software?</h6>
+                        <p class="pl-20px mb-15px">"Software as a Service" called SAAS which is 100% web based, meaning you can access it anywhere and there’s no software to install on your computer.</p>
+                        <h6 class="blue mb-15px radius-50px pl-20px pt-7px pb-7px"><span class="mr-5px fs-30">-</span> What about safety?</h6>
+                        <p class="pl-20px mb-15px">Your whole data securely stored in the cloud. For security of transactions we use the Secure Sockets Layer (SSL) protocol, which encrypts any information that you send us electronically. Your data is backed up automatically and is accessible from any device, so you can always stay connected and up-to-date.</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -153,17 +150,16 @@
         <div class="container">
             <div class="row mb-50px">
                 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 z-index-2">
-                    <h3 class="mb-10px">Get started for free today.</h3>
-                    <p class="mb-30px">Try it Free for 30 days. No credit card required. Cancel anytime.</p>
+                    <h3 class="mb-10px">Start for free * Forever!</h3>
+                    <p class="mb-30px">We don't care your credit card please feel free!</p>
                     <form class="p-relative" method="post" action="{$_url}register">
-                        <input type="email" name="email" required class="radius-50px mb-10px pl-15px pt-7px pb-7px no-border w-100" placeholder="Enter your email">
-                        <button class="bg-orange color-fff radius-50px pr-15px pl-15px pt-7px pb-7px no-border p-absolute">Get Started</button>
+                        <input type="email" name="email" required class="radius-50px mb-10px pl-15px pt-7px pb-7px no-border w-100" placeholder="E-mail Address">
+                        <button class="bg-orange color-fff radius-50px pr-15px pl-15px pt-7px pb-7px no-border p-absolute">Send</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-
 
 
 {/block}

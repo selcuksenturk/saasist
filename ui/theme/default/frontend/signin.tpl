@@ -10,6 +10,7 @@
     {/if}
 {/block}
 
+
 {block name="content"}
 
     <section class="welcome-area sec-padding p-relative o-hidden bg-gray" data-scroll-index="1">
@@ -25,17 +26,17 @@
                     <div class="card"">
 
                         <div class="card-body">
-                            <h5 class="card-title">Giriş</h5>
+                            <h5 class="card-title">Sign in</h5>
 
                             <form class="login" method="post" action="{$_url}login/post/{if isset($after)}{$after}/{/if}">
 
                                 <div class="form-group m-bottom-md">
-                                    <label>Kullanıcı Adı</label>
+                                    <label>Username</label>
                                     <input type="text" class="form-control" id="username" name="username">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Şifre</label>
+                                    <label>Password</label>
                                     <input type="password" class="form-control" id="password" name="password">
                                 </div>
 
@@ -51,8 +52,7 @@
                                 {/if}
 
 
-
-                                <button type="submit" class="btn btn-primary">Gönder</button>
+                                <button type="submit" class="btn btn-primary">Send</button>
 
 
                             </form>

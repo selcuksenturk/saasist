@@ -18,58 +18,34 @@
 
     <section class="price-area bg-gray text-center" style="padding-top: 150px;" data-scroll-index="5">
         <div class="container">
-            <h1 class="title-h">Pricing</h1>
-            <p class="title-p">Get started for free. All plans include business essentials.</p>
+            <h1 class="color-blue">Pricing</h1>
+            <br>
+            <p class="title-p">We have announcement to make: Promote us!</p>
             <ul class="tabs list-unstyled  text-center">
-                <li id="tab1" class="active pl-25px pr-25px pt-10px pb-10px bg-fff color-blue mb-10px d-inline-block">Monthly</li>
-                <li id="tab2" class="pl-25px pr-25px pt-10px pb-10px bg-fff color-blue mb-10px d-inline-block">Yearly </li>
+                <li id="tab1" class="active pl-25px pr-25px pt-10px pb-10px bg-fff color-blue mb-10px d-inline-block">Free | ∞</li>
+                <li id="tab2" class="pl-25px pr-25px pt-10px pb-10px bg-fff color-blue mb-10px d-inline-block">* * * * *</li>
             </ul>
             <div class="tabs-content">
                 <div id="tab1-content">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="price-table bg-fff mt-25px mb-25px">
-                                <h3 class="fw-500">Basic</h3>
-                                <h1 class="fw-500 mt-20px mb-20px"><span class="fw-200 bg-gray radius-50px pl-15px pr-15px">19 <span class="fs-25">$</span> </span>  <span class="fs-20"> / mo</span></h1>
-                                <p class="ml-10px mr-10x mb-20px">Great for Independent Contractors or Sole Proprietors</p>
-                                <p><i class="fa fa-check color-blue"></i> Financials</p>
-                                <p><i class="fa fa-check color-blue"></i>  CRM</p>
-                                <p><i class="fa fa-check color-blue"></i>  Sales</p>
-                                <p><i class="fa fa-check color-blue"></i>  Suppliers & Purchases</p>
-                                <p><i class="fa fa-close color-orange"></i> Customer Support</p>
-                                <p><i class="fa fa-close color-orange"></i> SMS & Email marketing</p>
-                                <p><i class="fa fa-close color-orange"></i> HRM</p>
-                                <a class="main-btn btn-3 mt-20px" href="{$_url}register">Free Trial</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="price-table bg-fff mt-25px mb-25px">
-                                <h3 class="fw-500">Standard</h3>
-                                <h1 class="fw-500 mt-20px mb-20px"><span class="fw-200 bg-gray radius-50px pl-15px pr-15px">49 <span class="fs-25">$</span> </span>  <span class="fs-20"> / mo</span></h1>
-                                <p class="ml-10px mr-10x mb-20px">For businesses with a sales rep or bookkeeper and office manager</p>
-                                <p><i class="fa fa-check color-blue"></i> Financials</p>
-                                <p><i class="fa fa-check color-blue"></i>  CRM</p>
-                                <p><i class="fa fa-check color-blue"></i>  Sales</p>
-                                <p><i class="fa fa-check color-blue"></i>  Suppliers & Purchases</p>
-                                <p><i class="fa fa-check color-blue"></i> Customer Support</p>
-                                <p><i class="fa fa-close color-orange"></i> SMS & Email marketing</p>
-                                <p><i class="fa fa-close color-orange"></i> HRM</p>
-                                <a class="main-btn btn-3 mt-20px" href="{$_url}register">Free Trial</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="price-table bg-fff mt-25px mb-25px">
-                                <h3 class="fw-500">Plus</h3>
-                                <h1 class="fw-500 mt-20px mb-20px"><span class="fw-200 bg-gray radius-50px pl-15px pr-15px">99 <span class="fs-25">$</span> </span>  <span class="fs-20"> / mo</span></h1>
-                                <p class="ml-10px mr-10x mb-20px">Onboard your entire team, let your company grow without bounds</p>
-                                <p><i class="fa fa-check color-blue"></i> Financials</p>
-                                <p><i class="fa fa-check color-blue"></i>  CRM</p>
-                                <p><i class="fa fa-check color-blue"></i>  Sales</p>
-                                <p><i class="fa fa-check color-blue"></i>  Suppliers & Purchases</p>
-                                <p><i class="fa fa-check color-blue"></i> Customer Support</p>
-                                <p><i class="fa fa-check color-blue"></i> SMS & Email marketing</p>
-                                <p><i class="fa fa-check color-blue"></i> HRM</p>
-                                <a class="main-btn btn-3 mt-20px" href="{$_url}register">Free Trial</a>
+                                <h3 class="fw-500">Free * Forever</h3>
+                                <h1 class="fw-500 mt-20px mb-20px"><span class="fw-500 bg-gray radius-50px pl-25px pr-25px">$ <span class="fs-40">0</span></h1>
+                                <p><i class="fa fa-check color-blue"></i> Accounting</p>
+                                <p><i class="fa fa-check color-blue"></i> Sales</p>
+                                <p><i class="fa fa-check color-blue"></i> Billing</p>
+                                <p><i class="fa fa-check color-blue"></i> Supply</p>
+                                <p><i class="fa fa-check color-blue"></i> Clients</p>
+                                <p><i class="fa fa-check color-blue"></i> Plans</p>
+                                <p><i class="fa fa-check color-blue"></i> Reports</p>
+                                <p><i class="fa fa-check color-blue"></i> Orders</p>
+                                <p><i class="fa fa-check color-blue"></i> Support</p>
+            </ul>
+                                <p class="ml-10px mr-10x mb-20px">No trials, limitations or hidden fees! Use many features as you want freely.</p>
+            </ul>
+                                <p class="ml-10px mr-10x mb-20px">All these features will be always free when you announce or promote us!</p>
+                                <a class="main-btn btn-3 mt-20px" href="{$_url}register">Sign up</a>
                             </div>
                         </div>
                     </div>
@@ -78,47 +54,21 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="price-table bg-fff mt-25px mb-25px">
-                                <h3 class="fw-500">Basic</h3>
-                                <h1 class="fw-500 mt-20px mb-20px"><span class="fw-200 bg-gray radius-50px pl-15px pr-15px">9 <span class="fs-25">$</span> </span>  <span class="fs-20"> / month</span></h1>
-                                <p class="ml-10px mr-10x mb-20px">Great for Independent Contractors or Sole Proprietors</p>
-                                <p><i class="fa fa-check color-blue"></i> Financials</p>
-                                <p><i class="fa fa-check color-blue"></i>  CRM</p>
-                                <p><i class="fa fa-check color-blue"></i>  Sales</p>
-                                <p><i class="fa fa-check color-blue"></i>  Suppliers & Purchases</p>
-                                <p><i class="fa fa-close color-orange"></i> Customer Support</p>
-                                <p><i class="fa fa-close color-orange"></i> SMS & Email marketing</p>
-                                <p><i class="fa fa-close color-orange"></i> HRM</p>
-                                <a class="main-btn btn-3 mt-20px" href="{$_url}register">Free Trial</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="price-table bg-fff mt-25px mb-25px">
-                                <h3 class="fw-500">Standard</h3>
-                                <h1 class="fw-500 mt-20px mb-20px"><span class="fw-200 bg-gray radius-50px pl-15px pr-15px">29 <span class="fs-25">$</span> </span>  <span class="fs-20"> / month</span></h1>
-                                <p class="ml-10px mr-10x mb-20px">For businesses with a sales rep or bookkeeper and office manager</p>
-                                <p><i class="fa fa-check color-blue"></i> Financials</p>
-                                <p><i class="fa fa-check color-blue"></i>  CRM</p>
-                                <p><i class="fa fa-check color-blue"></i>  Sales</p>
-                                <p><i class="fa fa-check color-blue"></i>  Suppliers & Purchases</p>
-                                <p><i class="fa fa-check color-blue"></i> Customer Support</p>
-                                <p><i class="fa fa-close color-orange"></i> SMS & Email marketing</p>
-                                <p><i class="fa fa-close color-orange"></i> HRM</p>
-                                <a class="main-btn btn-3 mt-20px" href="{$_url}register">Free Trial</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="price-table bg-fff mt-25px mb-25px">
-                                <h3 class="fw-500">Plus</h3>
-                                <h1 class="fw-500 mt-20px mb-20px"><span class="fw-200 bg-gray radius-50px pl-15px pr-15px">39 <span class="fs-25">$</span> </span>  <span class="fs-20"> / month</span></h1>
-                                <p class="ml-10px mr-10x mb-20px">Onboard your entire team, let your company grow without bounds</p>
-                                <p><i class="fa fa-check color-blue"></i> Financials</p>
-                                <p><i class="fa fa-check color-blue"></i>  CRM</p>
-                                <p><i class="fa fa-check color-blue"></i>  Sales</p>
-                                <p><i class="fa fa-check color-blue"></i>  Suppliers & Purchases</p>
-                                <p><i class="fa fa-check color-blue"></i> Customer Support</p>
-                                <p><i class="fa fa-check color-blue"></i> SMS & Email marketing</p>
-                                <p><i class="fa fa-check color-blue"></i> HRM</p>
-                                <a class="main-btn btn-3 mt-20px" href="{$_url}register">Free Trial</a>
+                                <h3 class="fw-500">* * * * *</h3>
+                                <h1 class="fw-500 mt-20px mb-20px"><span class="fw-500 bg-gray radius-50px pl-25px pr-25px">♕</span></h1>
+                                <p><i class="fa fa-check color-blue"></i> Consult & Advise</p>
+                                <p><i class="fa fa-check color-blue"></i> Many Integrations</p>
+                                <p><i class="fa fa-check color-blue"></i> Human Resources</p>
+                                <p><i class="fa fa-check color-blue"></i> Documentation</p>
+                                <p><i class="fa fa-check color-blue"></i> Getting Payments</p>
+                                <p><i class="fa fa-check color-blue"></i> Import & Export</p>
+                                <p><i class="fa fa-check color-blue"></i> No Branding</p>
+                                <p><i class="fa fa-check color-blue"></i> Professional Support</p>
+            </ul>
+                                <p class="ml-10px mr-10x mb-20px">As "someone wise" we aim to reach new entrepreneurs and initiatives that need financial support.</p>
+            </ul>
+                                <p class="ml-10px mr-10x mb-20px">We provide financial consulting services to enterprises. We do our best for years.</p>
+                                <a class="main-btn btn-3 mt-20px" href="{$_url}register">Contact us</a>
                             </div>
                         </div>
                     </div>
@@ -127,19 +77,5 @@
         </div>
     </section>
 
-    <section class="get-started bg-gray text-center triangle-bottom">
-        <div class="container">
-            <div class="row mb-50px">
-                <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 z-index-2">
-                    <h3 class="mb-10px">Start free trial!</h3>
-                    <p class="mb-30px">Try it Free for 30 days. No credit card required. Cancel anytime.</p>
-                    <form class="p-relative" method="post" action="{$_url}register">
-                        <input type="email" name="email" required class="radius-50px mb-10px pl-15px pt-7px pb-7px no-border w-100" placeholder="Enter your email">
-                        <button class="bg-orange color-fff radius-50px pr-15px pl-15px pt-7px pb-7px no-border p-absolute">Sign up Free</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
 
 {/block}

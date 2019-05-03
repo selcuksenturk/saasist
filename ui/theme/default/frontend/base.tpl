@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {if isset($page_title)}
-        <title>{$page_title} | {$config['CompanyName']}</title>
+        <title>Asist | Business in Assistance</title>
     {else}
-        <title>Asist</title>
+        <title>Asist | Business in Assistance</title>
     {/if}
 
     <!-- Bootstrap CSS -->
@@ -21,13 +21,14 @@
 </head>
 <body>
 
+
 <!-- ==================================================
                       navbar
 ================================================== -->
 <nav class="navbar navbar-transparent {if isset($_navbar_is_white)} navbar-transparent {else} navbar-black-links{/if} navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="{$app_url}">
-            <img src="{$app_url}storage/pages/logo.png" style="max-height: 40px;" alt="logo">
+            <img src="{$app_url}storage/pages/logo.png" style="max-height: 50px;" alt="logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="fa fa-bars"></span>
@@ -39,15 +40,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {if $_active_menu == 'Features'}active{/if}" href="{$_url}features">Features and benefits</a>
+                    <a class="nav-link {if $_active_menu == 'Features'}active{/if}" href="{$_url}features">Features</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {if $_active_menu == 'Pricing'}active{/if}" href="{$_url}pricing">Plans & Pricing</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link {if $_active_menu == 'About'}active{/if}" href="{$_url}about">About</a>
+                    <a class="nav-link {if $_active_menu == 'Pricing'}active{/if}" href="{$_url}pricing">Pricing</a>
                 </li>
 
                 <li class="nav-item">
@@ -55,7 +52,7 @@
                 </li>
 
                 <li class="nav-item log-in">
-                    <a class="nav-link flex-center bg-blue radius-5px transition-3" href="{$_url}register">Free Trial</a>
+                    <a class="nav-link flex-center bg-blue radius-5px transition-3" href="{$_url}register">Sign up</a>
                 </li>
             </ul>
         </div>
@@ -64,63 +61,19 @@
 
 {block name="content"}{/block}
 
-
 <!-- ==================================================
                       End get-started
 ================================================== -->
 
+
 <!-- ==================================================
                       footer-area
 ================================================== -->
-<section class="footer-area sec-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-5 col-sm-6">
-                <div class="mt-25px mb-25px">
-                    <img src="{$app_url}storage/pages/logo.png" style="max-height: 35px;" class="mb-20px" alt="img">
-                    <h6>What is Business suite ?</h6>
-                    <p class="mb-20px">A business suite is a set of business software functions enabling the core business and business support processes inside and beyond the boundaries of an organization.</p>
-                    <a class="main-btn btn-3" href="{$_url}register">Get Started</a>
-                </div>
-            </div>
 
-            <div class="col-lg-3 col-sm-6">
-                <div class="mt-25px mb-25px links">
-                    <h4 class="mb-20px">Company</h4>
-                    <h6 class="mb-10px">
-                        <i class="fa fa-angle-right"></i> <a href="{$_url}about" class="color-333 color-blue-hvr transition-3">About</a>
-                    </h6>
-                    <h6 class="mb-10px">
-                        <i class="fa fa-angle-right"></i> <a href="{$_url}pricing" class="color-333 color-blue-hvr transition-3">Pricing</a>
-                    </h6>
-
-                    <h6 class="mb-10px">
-                        <i class="fa fa-angle-right"></i> <a href="{$_url}signin" class="color-333 color-blue-hvr transition-3">Sign In</a>
-                    </h6>
-                    <h6 class="mb-10px">
-                        <i class="fa fa-angle-right"></i> <a href="{$_url}contact" class="color-333 color-blue-hvr transition-3">Contact</a>
-                    </h6>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="mt-25px mb-25px">
-                    <h4 class="mb-20px">Contact</h4>
-                    <h6><i class="fa fa-map-marker mr-5px fs-15 color-blue bg-gray radius-50 address text-center"></i> Address </h6>
-                    <p>350 Rhode Island St Suite 240 <br> San Francisco, CA 94103, USA</p>
-                    <h6><i class="fa fa-phone mr-5px fs-15 color-blue bg-gray radius-50 address text-center"></i> +1 (650) 488-7772</h6>
-                    <h6 class="mb-30px"><i class="fa fa-envelope mr-5px fs-15 color-blue bg-gray radius-50 address text-center"></i> sales@cloudonex.com</h6>
-                    <a href="https://www.facebook.com/cloudonex/" target="_blank" class="social color-blue color-fff-hvr bg-orange-hvr bg-gray text-center radius-50 fs-15 d-inline-block"><i class="fa fa-facebook"></i> </a>
-                    <a href="javascript:;" class="social color-blue color-fff-hvr bg-orange-hvr bg-gray text-center radius-50 fs-15 d-inline-block"><i class="fa fa-twitter"></i> </a>
-                    <a href="javascript:;" class="social color-blue color-fff-hvr bg-orange-hvr bg-gray text-center radius-50 fs-15 d-inline-block"><i class="fa fa-linkedin"></i> </a>
-                    <a href="javascript:;" class="social color-blue color-fff-hvr bg-orange-hvr bg-gray text-center radius-50 fs-15 d-inline-block"><i class="fa fa-behance"></i> </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <!-- ==================================================
                       End footer-area
 ================================================== -->
+
 
 <!-- ==================================================
                       copyright-area
@@ -144,7 +97,6 @@
 <!-- ==================================================
                       End scroll-top-btn
 ================================================== -->
-
 
 
 {*<script src="js/jquery-3.3.1.min.js"></script>*}

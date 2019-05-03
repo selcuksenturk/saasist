@@ -43,7 +43,7 @@ switch($action){
         $total_users = User::count();
         $total_workspaces = Workspace::count();
 
-        $mrr = Workspace::where('is_subscribed',1)->sum('monthly_fee');
+        $mrr = Workspace::where('is_subscribed',1)->sum('fee');
 
         $saas_users = User::orderBy('id','desc')->limit(10)->get();
         $saas_workspaces = Workspace::orderBy('id','desc')->limit(10)->get();
@@ -621,6 +621,26 @@ switch($action){
         if(!db_column_exist('plans','modules'))
         {
         	ORM::execute('ALTER TABLE `plans` ADD `modules` TEXT NULL DEFAULT NULL AFTER `description`');
+        }
+
+        if(!db_column_exist('clx_shared_preferences','workspace_id'))
+        {
+        	ORM::execute('ALTER TABLE `clx_shared_preferences` ADD `workspace_id` INT(11) NULL DEFAULT NULL AFTER `id`');
+        }
+
+
+        if(!db_column_exist('clx_shared_preferences','workspace_id'))
+        {
+            ORM::execute('ALTER TABLE `clx_shared_preferences` ADD `workspace_id` INT(11) NULL DEFAULT NULL AFTER `id`');
+        }
+
+        if(!db_column_exist('workspaces','is_subscribed'))
+        {
+            ORM::execute('ALTER TABLE `workspaces` 
+  ADD `is_subscribed` TINYINT(1) NOT NULL DEFAULT \'0\' after `parent_id`, 
+  ADD `plan` VARCHAR(100) NULL DEFAULT NULL after `is_subscribed`, 
+  ADD `fee` DECIMAL(14, 2) NOT NULL DEFAULT \'0.00\' after `plan`, 
+  ADD `trial_ends_at` DATE NULL DEFAULT NULL after `fee`');
         }
 
 

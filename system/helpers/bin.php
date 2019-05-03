@@ -2138,7 +2138,7 @@ function clxPerformLongProcess()
 
 function slackPost($config,$text)
 {
-    if($config['slack_webhook_url'] != '')
+    if(isset($config['slack_webhook_url']) && $config['slack_webhook_url'] != '')
     {
         $client = new \GuzzleHttp\Client([
             'headers' => [ 'Content-Type' => 'application/json' ]

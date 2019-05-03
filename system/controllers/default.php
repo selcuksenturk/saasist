@@ -1,9 +1,8 @@
 <?php
 
-// If you want to disable the homepage and want to redirect to another page-
-
-// r2('https://www.YOUR-DOMAIN.tld');
-
+if (defined('SAAS_HOMEPAGE')) {
+    r2(SAAS_HOMEPAGE);
+}
 
 view('frontend/index',[
     '_active_menu' => 'Home',

@@ -1,3 +1,8 @@
+### Version 1.1.7 | Build 117 | May 03, 2019
+* The default config system is completely rewritten, so that update will not replace the configurations.
+* Added Social sign on using Google. Facebook is coming soon. To enable, you will have to configure system/config/social_sign_on.php 
+
+
 ### Version 1.1.6 | Build 116 | April 03, 2019
 
 * Added option to select module for each plan

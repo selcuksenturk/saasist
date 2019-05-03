@@ -53,7 +53,7 @@ foreach ($ps as $p) {
 
     } else {
         //   trigger_error("Plugin directory '$plugindir' does not exists!", E_USER_WARNING);
-        _msglog('e',"Plugin directory '$plugindir' does not exists! <a href='".U."settings/plugin_force_remove/$plugindir/' style='color: white; text-decoration: underline;'>[ Click Here ]</a> to Remove This Plugin Entry.");
+        _msglog('e',"Plugin directory '$plugindir_path' does not exists! <a href='".U."settings/plugin_force_remove/$plugindir_path/' style='color: white; text-decoration: underline;'>[ Click Here ]</a> to Remove This Plugin Entry.");
     }
 }
 
