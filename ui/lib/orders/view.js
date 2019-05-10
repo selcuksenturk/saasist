@@ -27,10 +27,7 @@ $(function() {
         ],
         toolbar1: 'fontselect fontsizeselect  insertfile | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
         toolbar2: '| responsivefilemanager | undo redo rtl print preview media image | forecolor backcolor link | codesample',
-        image_advtab: true ,
-        external_filemanager_path: app_url+ "system/lib/filemanager/",
-        filemanager_title:"File Manager" ,
-        external_plugins: { "filemanager" : app_url + "system/lib/filemanager/plugin.min.js"}
+        image_advtab: true
     });
 
     var $btn_activation_message_save = $("#btn_activation_message_save");

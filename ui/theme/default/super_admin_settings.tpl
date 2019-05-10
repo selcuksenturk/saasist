@@ -2,13 +2,15 @@
 
 {block name="content"}
 
-
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="ibilling-page-header">{$_L['Settings']}</h3>
+        </div>
+    </div>
 
 
     <div class="row">
         <div class="col-md-6">
-
-
 
 
             <div class="panel">
@@ -36,6 +38,9 @@
                 </div>
             </div>
         </div>
+
+
+
     </div>
 
     <div class="row">

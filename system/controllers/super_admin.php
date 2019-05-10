@@ -19,7 +19,7 @@ $workspace = Workspace::find($workspace_id);
 $ui->assign('workspace', $workspace);
 $ui->assign('user',$user);
 
-$saas_current_build = 116;
+$saas_current_build = 119;
 
 if($user->workspace_id != 1)
 {
@@ -62,7 +62,7 @@ switch($action){
 
     case 'workspaces':
 
-        $workspaces = Workspace::all();
+        $workspaces = Workspace::orderBy('id','desc')->get();
 
         $workspace_users = User::all()
             ->groupBy('workspace_id')
@@ -642,6 +642,14 @@ switch($action){
   ADD `fee` DECIMAL(14, 2) NOT NULL DEFAULT \'0.00\' after `plan`, 
   ADD `trial_ends_at` DATE NULL DEFAULT NULL after `fee`');
         }
+
+        if(!db_column_exist('workspaces','plan'))
+        {
+            ORM::execute('ALTER TABLE `workspaces` 
+  ADD `plan` VARCHAR(100) NULL DEFAULT NULL after `is_subscribed`, 
+  ADD `fee` DECIMAL(14, 2) NOT NULL DEFAULT \'0.00\' after `plan`');
+        }
+
 
 
         update_option('saas_build',$saas_current_build);

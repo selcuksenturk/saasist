@@ -171,7 +171,8 @@ _L[\'are_you_sure\'] = \''.$_L['are_you_sure'].'\';
 
             $invoice = Invoice::forSingleItem($cid,$p->name,$amount);
 
-            $iid = $invoice->id;
+
+            $iid = $invoice['id'];
 
         }
 
@@ -223,7 +224,7 @@ _L[\'email_sent\'] = \''.$_L['Email Sent'].'\';
 
 
 
-            $ui->assign('xfooter', Asset::js(array('tinymce/tinymce.min','numeric','orders/view')));
+            $ui->assign('xfooter', Asset::js(array('tinymce/tinymce.min','numeric')));
 
             $ui->assign('order',$order);
 

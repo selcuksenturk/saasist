@@ -63,7 +63,7 @@ class Workspace extends Model
             $workspace->is_active = 1;
             $workspace->owner_id = 1;
             $workspace->parent_id = 0;
-            $workspace->trial_ends_at = date('d-m-Y',strtotime("+$free_trial_days days"));
+            $workspace->trial_ends_at = date('Y-m-d',strtotime("+$free_trial_days days"));
             $workspace->save();
 
             $workspace_id = $workspace->id;
@@ -79,7 +79,7 @@ class Workspace extends Model
             $user->user_type = 'Admin';
             $user->status = 'Inactive';
             $user->email = $data['email'];
-            $user->creationdate = date('d-m-Y s:i:H');
+            $user->creationdate = date('Y-m-d H:i:s');
             $user->otp = 'No';
             $user->img = '';
             $user->pwresetkey = '';
@@ -383,7 +383,7 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'animate',
-                        'value' => '0'
+                        'value' => '1'
                     ],
                     [
                         'key' => 'pdf_font',
@@ -435,7 +435,7 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'hide_footer',
-                        'value' => '0'
+                        'value' => '1'
                     ],
                     [
                         'key' => 'design',
@@ -447,7 +447,7 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'recaptcha',
-                        'value' => '0'
+                        'value' => '1'
                     ],
                     [
                         'key' => 'recaptcha_sitekey',
@@ -579,7 +579,7 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'sales_target',
-                        'value' => 10000
+                        'value' => '1000000'
                     ],
                     [
                         'key' => 'inventory',
@@ -827,7 +827,7 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'top_bar_is_dark',
-                        'value' => '1'
+                        'value' => '0'
                     ],
                     [
                         'key' => 'slack_webhook_url',

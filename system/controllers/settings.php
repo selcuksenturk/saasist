@@ -2287,7 +2287,7 @@ $(".cdelete").click(function (e) {
             $d->regexpr = $validation;
             $d->fieldoptions = $options;
             $d->ctype = 'crm';
-            $d->relid = '';
+            $d->relid = 0;
             $d->adminonly = '';
             $d->required = '';
             $d->showorder = '';

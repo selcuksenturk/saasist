@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-05-03 02:35:52
+/* Smarty version 3.1.33, created on 2019-05-07 07:54:28
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/dev.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5ccbe1480ac656_56786443',
+  'unifunc' => 'content_5cd171f4b02181_47682936',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '63e0b02d1f5fe3212bea5e27e02494d9fcdf1af5' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/dev.tpl',
-      1 => 1556695882,
+      1 => 1557230065,
       2 => 'file',
     ),
   ),
@@ -20,53 +20,31 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ccbe1480ac656_56786443 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cd171f4b02181_47682936 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_5104401845ccbe1480a8b63_11283212', "content");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10363011795cd171f4b00c46_22606999', "content");
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild($_smarty_tpl, ((string)$_smarty_tpl->tpl_vars['layouts_admin']->value));
 }
 /* {block "content"} */
-class Block_5104401845ccbe1480a8b63_11283212 extends Smarty_Internal_Block
+class Block_10363011795cd171f4b00c46_22606999 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'content' => 
   array (
-    0 => 'Block_5104401845ccbe1480a8b63_11283212',
+    0 => 'Block_10363011795cd171f4b00c46_22606999',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
-    <div class="row">
 
-
-
-        <div class="col-md-12">
-
-
-
-            <div class="panel panel-default">
-                <div class="panel-body">
-
-                    <a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/reset/" class="btn btn-danger">Reset Demo</a>
-
-
-                </div>
-
-            </div>
-        </div>
-
-
-
-    </div>
 
     <div class="row">
 
@@ -80,58 +58,15 @@ demo/reset/" class="btn btn-danger">Reset Demo</a>
 
                 <div class="panel-body">
 
-                    <h3> Set Demo </h3>
+                    <h3> <?php echo $_smarty_tpl->tpl_vars['_L']->value['Developer'];?>
+ </h3>
 
 
 
                     <hr>
 
-                    <ul>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/se">Sweden</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/bd">Bangladesh</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/no">Norway</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/au">Australia</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/ca">Canada</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/ca_quebec">Canada - Quebec</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/id">Indonesia</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/">Malaysia</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/in">India</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/br">Brazil</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/fr">French</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/de">Germany</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/it">Italy</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/dk">Denmark</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/uk">United Kingdom</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/pt">Portugal</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/tr">Turkey</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/sa">Saudi Arabia</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/iq">Iraq</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/ma">Morocco</a> </li>
-                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-demo/us">United States</a> </li>
-
-
-                    </ul>
+                    <a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+demo/create" class="btn btn-primary">Create Demo Workspace</a>
 
 
                 </div>

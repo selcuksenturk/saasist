@@ -68,6 +68,8 @@ Class Contacts
             $password = '';
             $img = '';
 
+            $notes = '';
+
 
             $d = ORM::for_table('crm_accounts')->create();
 
@@ -114,6 +116,10 @@ Class Contacts
 
             if(isset($data['country'])){
                 $country = $data['country'];
+            }
+
+            if(isset($data['notes'])){
+                $notes = $data['notes'];
             }
 
 //            if(isset($data['company'])){
@@ -177,7 +183,7 @@ Class Contacts
             $d->o = '0';
             $d->balance = '0.00';
             $d->status = 'Active';
-            $d->notes = '';
+            $d->notes = $notes;
             $d->password = $password;
             $d->token = '';
             $d->ts = '';

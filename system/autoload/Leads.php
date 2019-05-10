@@ -186,6 +186,8 @@ Class Leads{
             $data['country'] = $lead->country;
             $data['company'] = $lead->company;
 
+            $data['notes'] = $lead->memo;
+
             return Contacts::add($data);
 
 

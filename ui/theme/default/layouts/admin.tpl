@@ -121,17 +121,21 @@
                                     <li><a href="{$_url}settings/plugins">{$_L['Plugins']}</a></li>
                                     <li><a href="{$_url}super_admin/settings">{$_L['Settings']}</a></li>
 
+
+
                                 </ul>
                             </li>
 
 
+{*                            {if APP_STAGE eq 'Dev'}*}
+
+{*                                <li {if $_application_menu eq 'dev'}class="active"{/if}><a href="{$_url}dev"><i class="fa fa-file-code-o"></i> <span class="nav-label">{$_L['Developer']}</span></a></li>*}
+
+{*                            {/if}*}
+
                         {/if}
 
-                        {if APP_STAGE eq 'Dev'}
 
-                            <li {if $_application_menu eq 'dev'}class="active"{/if}><a href="{$_url}dev"><i class="fa fa-file-code-o"></i> <span class="nav-label">{$_L['Developer']}</span></a></li>
-
-                        {/if}
 
                         {$admin_extra_nav[1]}
 
@@ -175,10 +179,6 @@
                                         <li><a href="{$_url}transactions/deposit/">{$_L['New Deposit']}</a></li>
                                         <li><a href="{$_url}transactions/expense/">{$_L['New Expense']}</a></li>
                                         <li><a href="{$_url}transactions/transfer/">{$_L['Transfer']}</a></li>
-
-                                        {if $config['edition'] == 'iqm'}
-                                            <li><a href="{$_url}transactions/exchange/">{$_L['Currency Exchange']}</a></li>
-                                        {/if}
 
                                         <li><a href="{$_url}transactions/list/">{$_L['View Transactions']}</a></li>
                                         <li><a href="{$_url}accounts/balances/transactions">{$_L['Balance Sheet']}</a></li>

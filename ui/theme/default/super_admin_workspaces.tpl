@@ -10,6 +10,14 @@
                 <h4>{$_L['Workspaces']}</h4>
                 <div class="hr-line-dashed"></div>
 
+                {if APP_STAGE == 'Dev'}
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <a href="{$_url}demo/create" class="btn btn-primary" style="margin-bottom: 15px;">Create Demo Workspace</a>
+                        </div>
+                    </div>
+                {/if}
+
                 <form class="form-horizontal" method="post" action="">
                     <div class="form-group">
                         <div class="col-md-12">

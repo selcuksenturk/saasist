@@ -8,14 +8,18 @@ class TransactionCategory extends Model
 
     public static function expense(){
 
-       return self::where('type','Expense')->get();
+        global $workspace_id;
+
+       return self::where('workspace_id',$workspace_id)->where('type','Expense')->get();
 
     }
 
 
     public static function sumExpenseCategory($cat_name){
 
-       return Transaction::where('category',$cat_name)->sum('amount');
+        global $workspace_id;
+
+       return Transaction::where('workspace_id',$workspace_id)->where('category',$cat_name)->sum('amount');
 
     }
 

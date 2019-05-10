@@ -22,6 +22,7 @@ $files_to_rename = [
     'transaction_categories.sample.php' => 'transaction_categories.php',
     'transaction_payment_methods.sample.php' => 'transaction_payment_methods.php',
     'workspace_default_settings.sample.php' => 'workspace_default_settings.php',
+    'demo_settings.sample.php' => 'demo_settings.php',
 ];
 
 

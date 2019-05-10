@@ -18,14 +18,7 @@ $ui->assign('user', $user);
 Event::trigger('leads');
 switch ($action) {
     case 'list':
-        $ui->assign('salutations', db_find_array('crm_salutations'));
-        $ui->assign('sources', db_find_array('crm_lead_sources'));
-        $ui->assign('industries', db_find_array('crm_industries'));
-        $ui->assign('ls', db_find_array('crm_lead_status'));
-        $ui->assign('companies', db_find_array('sys_companies', array(
-            'id',
-            'company_name'
-        )));
+
         $ui->assign('xheader', Asset::css(array(
             'modal',
             'select/select.min',
@@ -45,20 +38,20 @@ switch ($action) {
         $ui->assign('jsvar', '
 _L[\'are_you_sure\'] = \'' . $_L['are_you_sure'] . '\';
  ');
-        view('leads');
+        view('leads',[
+            'salutations' => Salutation::all()->toArray(),
+            'sources' => LeadSource::all()->toArray(),
+            'industries' => Industry::all()->toArray(),
+            'ls' => LeadStatus::all()->toArray(),
+            'companies' => Company::all()->toArray(),
+        ]);
+
         break;
 
     case 'modal_lead':
         $act = route(2);
         $ui->assign('act', $act);
-        $ui->assign('salutations', db_find_array('crm_salutations'));
-        $ui->assign('sources', db_find_array('crm_lead_sources'));
-        $ui->assign('industries', db_find_array('crm_industries'));
-        $ui->assign('ls', db_find_array('crm_lead_status'));
-        $ui->assign('companies', db_find_array('sys_companies', array(
-            'id',
-            'company_name'
-        )));
+
         $val = array();
         if ($act == 'view') {
             $id = route(3);
@@ -136,7 +129,14 @@ _L[\'are_you_sure\'] = \'' . $_L['are_you_sure'] . '\';
         }
 
         $ui->assign('val', $val);
-        view('modal_lead');
+        view('modal_lead',[
+            'salutations' => Salutation::all()->toArray(),
+            'sources' => LeadSource::all()->toArray(),
+            'industries' => Industry::all()->toArray(),
+            'ls' => LeadStatus::all()->toArray(),
+            'companies' => Company::all()->toArray(),
+        ]);
+
         break;
 
     case 'post':
@@ -272,8 +272,12 @@ _L[\'are_you_sure\'] = \'' . $_L['are_you_sure'] . '\';
         break;
 
     case 'convert_to_customer':
+
         $lid = _post('lid');
+
         echo Leads::convertToCustomer($lid);
+
+
         break;
 
     case 'update_memo':

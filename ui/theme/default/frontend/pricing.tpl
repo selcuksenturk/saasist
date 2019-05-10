@@ -20,18 +20,22 @@
         <div class="container">
             <h1 class="color-blue">Pricing</h1>
             <br>
-            <p class="title-p">We have announcement to make: Promote us!</p>
+                <div class="col-md-8 text-center">
+                    <img alt="img" src="{$app_url}storage/pages/credit-card.png" class="ml-auto mr-auto">
+                </div>
+            <br>
+            <p class="title-p"></p>
             <ul class="tabs list-unstyled  text-center">
                 <li id="tab1" class="active pl-25px pr-25px pt-10px pb-10px bg-fff color-blue mb-10px d-inline-block">Free | ∞</li>
                 <li id="tab2" class="pl-25px pr-25px pt-10px pb-10px bg-fff color-blue mb-10px d-inline-block">* * * * *</li>
-            </ul>
+            </ul>            
             <div class="tabs-content">
                 <div id="tab1-content">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="price-table bg-fff mt-25px mb-25px">
                                 <h3 class="fw-500">Free * Forever</h3>
-                                <h1 class="fw-500 mt-20px mb-20px"><span class="fw-500 bg-gray radius-50px pl-25px pr-25px">$ <span class="fs-40">0</span></h1>
+                                <h1 class="fw-500 mt-20px mb-20px"><span class="fw-500 bg-gray radius-50px pl-25px pr-25px"><span class="fs-40">$ 0</span></h1>
                                 <p><i class="fa fa-check color-blue"></i> Accounting</p>
                                 <p><i class="fa fa-check color-blue"></i> Sales</p>
                                 <p><i class="fa fa-check color-blue"></i> Billing</p>
@@ -41,6 +45,8 @@
                                 <p><i class="fa fa-check color-blue"></i> Reports</p>
                                 <p><i class="fa fa-check color-blue"></i> Orders</p>
                                 <p><i class="fa fa-check color-blue"></i> Support</p>
+            </ul>
+                                <p class="ml-10px mr-10x mb-20px">We have announcement to make: Promote us!</p>
             </ul>
                                 <p class="ml-10px mr-10x mb-20px">No trials, limitations or hidden fees! Use many features as you want freely.</p>
             </ul>
@@ -55,7 +61,7 @@
                         <div class="col-md-4">
                             <div class="price-table bg-fff mt-25px mb-25px">
                                 <h3 class="fw-500">* * * * *</h3>
-                                <h1 class="fw-500 mt-20px mb-20px"><span class="fw-500 bg-gray radius-50px pl-25px pr-25px">♕</span></h1>
+                                <h1 class="fw-500 mt-20px mb-20px"><span class="fw-500 bg-gray radius-50px pl-25px pr-25px">◡</span></h1>
                                 <p><i class="fa fa-check color-blue"></i> Consult & Advise</p>
                                 <p><i class="fa fa-check color-blue"></i> Many Integrations</p>
                                 <p><i class="fa fa-check color-blue"></i> Human Resources</p>
@@ -73,7 +79,9 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
+            
         </div>
     </section>
 
