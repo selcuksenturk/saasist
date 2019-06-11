@@ -8,7 +8,7 @@
             <div class="row welcome-text sec-padding flex-center">
                 <div class="col-md-6 mb-50px z-index-1">
                     <h2 class="mb-20px">Need asist?</h2>
-                    <p>If it is a yes! we provide you all in one business solutions which includes a beautiful dashboard with accounting, crm, leads, sales, purchase, suppliers, orders, quotes, reports, tasks and more. Improve efficiency in your entire business which enables you to make more accurete decisions.</p>
+                    <p>If it is a yes! We provide you all in one business solutions which includes a beautiful dashboard with accounting, crm, leads, sales, purchase, suppliers, orders, quotes, reports, tasks and more. Improve efficiency in your entire business which enables you to make more accurete decisions.</p>
                     <a class="main-btn btn-3 mt-30px" href="{$_url}register">Try for free</a>
                 </div>
                 <div class="col-md-6 text-center">

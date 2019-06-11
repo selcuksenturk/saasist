@@ -25,9 +25,6 @@ switch ($action) {
 
     case 'themes':
 
-// by Max Mendez [ github user Akiracr ]
-
-        //Scan for themes
         $themes = glob('ui/theme/*');
         $themes = array_map('basename', array_filter($themes, 'is_dir'));
         $ui->assign('themes', $themes);
@@ -104,13 +101,12 @@ switch ($action) {
             update_option('top_bar_is_dark',0);
         }
 
-        $d = ORM::for_table('sys_appconfig')->where('setting','theme')->where('workspace_id',$workspace_id)->find_one();
-        $d->value = $theme;
-        $d->save();
 
-        $d = ORM::for_table('sys_appconfig')->where('setting','nstyle')->where('workspace_id',$workspace_id)->find_one();
-        $d->value = $nstyle;
-        $d->save();
+        update_option('theme',$theme);
+
+
+        update_option('nstyle',$nstyle);
+
 
         r2(U.'appearance/themes/','s',$_L['Settings Saved Successfully']);
 

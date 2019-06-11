@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-02-10 17:07:24
+/* Smarty version 3.1.33, created on 2019-06-03 05:50:00
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/contacts_list.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c60a09c638d99_09712406',
+  'unifunc' => 'content_5cf4ed48851842_90080305',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a7dce6a0052535b47a599d27798c26a5af51dc7b' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/contacts_list.tpl',
-      1 => 1546537212,
+      1 => 1559555398,
       2 => 'file',
     ),
   ),
@@ -20,30 +20,30 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5c60a09c638d99_09712406 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cf4ed48851842_90080305 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_8167928485c60a09c6261b7_29731778', "content");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_8071391445cf4ed488447b2_08806235', "content");
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_8439174395c60a09c62e0c1_19348749', "script");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11245579055cf4ed4884ae08_81740846', "script");
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild($_smarty_tpl, ((string)$_smarty_tpl->tpl_vars['layouts_admin']->value));
 }
 /* {block "content"} */
-class Block_8167928485c60a09c6261b7_29731778 extends Smarty_Internal_Block
+class Block_8071391445cf4ed488447b2_08806235 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'content' => 
   array (
-    0 => 'Block_8167928485c60a09c6261b7_29731778',
+    0 => 'Block_8071391445cf4ed488447b2_08806235',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -95,7 +95,7 @@ contacts/import_csv/" class="btn btn-success"><i class="fa fa-upload"></i> <?php
                             <thead>
                             <tr class="heading">
                                 <th><input id="d_select_all" type="checkbox" value="" name=""  class="i-checks"/></th>
-                                <th>#</th>
+
                                 <th><?php echo $_smarty_tpl->tpl_vars['_L']->value['Image'];?>
 </th>
                                 <th><?php echo $_smarty_tpl->tpl_vars['_L']->value['Name'];?>
@@ -113,7 +113,6 @@ contacts/import_csv/" class="btn btn-success"><i class="fa fa-upload"></i> <?php
                             </tr>
 
                             <tr class="heading">
-                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td><input type="text" id="account" name="account" class="form-control"></td>
@@ -144,12 +143,12 @@ contacts/import_csv/" class="btn btn-success"><i class="fa fa-upload"></i> <?php
 }
 /* {/block "content"} */
 /* {block "script"} */
-class Block_8439174395c60a09c62e0c1_19348749 extends Smarty_Internal_Block
+class Block_11245579055cf4ed4884ae08_81740846 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'script' => 
   array (
-    0 => 'Block_8439174395c60a09c62e0c1_19348749',
+    0 => 'Block_11245579055cf4ed4884ae08_81740846',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -258,7 +257,7 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
                         "render": function ( data, type, row ) {
                             return '<a href="' + base_url +'contacts/view/'+ row[9] +'">'+ data +'</a>';
                         },
-                        "targets": 3
+                        "targets": 2
                     },
                     // {
                     //     "render": function (data) {
@@ -270,12 +269,11 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
                     //     "targets": 7
                     // },
                     { "orderable": false, "targets": 0 },
-                    { "orderable": false, "targets": 8 },
-                    { "orderable": false, "targets": 2 },
+                    { "orderable": false, "targets": 7 },
+                    { "orderable": false, "targets": 1 },
                     { className: "text-center", "targets": [ 1 ] },
-                    { "type": "html-num", "targets": 1 }
                 ],
-                "order": [[ 1, 'desc' ]],
+                "order": [[ 2, 'desc' ]],
                 "scrollX": true,
                 "initComplete": function () {
                     $ib_data_panel.unblock();

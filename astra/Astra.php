@@ -260,7 +260,7 @@ if (!class_exists('Astra')) {
 
                 $db_allowed_urls = $db_params['url'];
 
-                $allowed_urls = array('/admin/', '/wp-admin', 'checkout', 'paypal', '/ipn.php', '/transaction', 'callback', 'contact-form-7', 'wc-ajax=', '/wc-api');
+                $allowed_urls = array('/admin/', '/wp-admin', 'checkout', 'paypal', '/ipn.php', '/transaction', 'callback', 'contact-form-7', 'wc-ajax=', '/wc-api', '/wp-json', 'api/soap', 'api/v2_soap');
 
                 $merge = array_merge($allowed_urls, $db_allowed_urls);
 
@@ -293,6 +293,14 @@ if (!class_exists('Astra')) {
                 header('X-XSS-Protection: 1; mode=block');
                 header('X-Frame-Options: deny');
                 header('X-Content-Type-Options: nosniff');
+
+                /* No cache headers */
+                header("Expires: Tue, 03 Jul 2001 06:00:00 GMT");
+                header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+                header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+                header("Cache-Control: post-check=0, pre-check=0", false);
+                header("Pragma: no-cache");
+                header("Connection: close");
             }
 
             if (file_exists($block_page_path)) {

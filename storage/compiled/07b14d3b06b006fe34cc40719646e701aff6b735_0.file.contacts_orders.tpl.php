@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-03-07 07:50:14
+/* Smarty version 3.1.33, created on 2019-06-03 05:43:29
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/contacts_orders.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c811386633b01_38156025',
+  'unifunc' => 'content_5cf4ebc1225382_75318381',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '07b14d3b06b006fe34cc40719646e701aff6b735' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/contacts_orders.tpl',
-      1 => 1506033187,
+      1 => 1556695881,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5c811386633b01_38156025 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cf4ebc1225382_75318381 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
     <a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 orders/add/" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> <?php echo $_smarty_tpl->tpl_vars['_L']->value['Add New Order'];?>

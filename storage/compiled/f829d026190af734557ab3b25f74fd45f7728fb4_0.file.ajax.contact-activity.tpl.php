@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-03-07 07:50:06
+/* Smarty version 3.1.33, created on 2019-06-03 05:40:23
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/ajax.contact-activity.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c81137e7add54_97794878',
+  'unifunc' => 'content_5cf4eb07df8411_24739115',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f829d026190af734557ab3b25f74fd45f7728fb4' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/ajax.contact-activity.tpl',
-      1 => 1505464289,
+      1 => 1556695881,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5c81137e7add54_97794878 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cf4eb07df8411_24739115 (Smarty_Internal_Template $_smarty_tpl) {
 ?><section class="activity-post mb-xlg">
     <form method="get" action="/">
         <textarea name="message-text" id="msg" data-plugin-textarea-autosize="" placeholder="<?php echo $_smarty_tpl->tpl_vars['_L']->value['Add Activity'];?>

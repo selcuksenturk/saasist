@@ -69,6 +69,34 @@ return [
                     'amount' => 700
                 ]
             ],
+            'expenses' => [
+                [
+
+                    'description' => 'Salaries',
+                    'amount' => 5400
+
+                ],
+                [
+                    'description' => 'Freight',
+                    'amount' => 1800
+                ],
+                [
+                    'description' => 'Travel',
+                    'amount' => 2500
+                ],
+                [
+                    'description' => 'Phone',
+                    'amount' => 1500
+                ],
+                [
+                    'description' => 'Rent',
+                    'amount' => 4000
+                ],
+                [
+                    'description' => 'Bank Fees',
+                    'amount' => 700
+                ]
+            ],
         ],
 
         // Poland
@@ -133,6 +161,34 @@ return [
                 ],
                 [
                     'description' => 'Interest',
+                    'amount' => 700
+                ]
+            ],
+            'expenses' => [
+                [
+
+                    'description' => 'Salaries',
+                    'amount' => 5400
+
+                ],
+                [
+                    'description' => 'Freight',
+                    'amount' => 1800
+                ],
+                [
+                    'description' => 'Travel',
+                    'amount' => 2500
+                ],
+                [
+                    'description' => 'Phone',
+                    'amount' => 1500
+                ],
+                [
+                    'description' => 'Rent',
+                    'amount' => 4000
+                ],
+                [
+                    'description' => 'Bank Fees',
                     'amount' => 700
                 ]
             ],

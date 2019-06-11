@@ -116,6 +116,7 @@ EDT;
             return DIRECTORY_SEPARATOR . 'opt' . DIRECTORY_SEPARATOR . ltrim($path, DIRECTORY_SEPARATOR);
         }
 
+        return $path;
     }
 
     public function getBasePath()

@@ -8,8 +8,8 @@ session_start();
 
 $app_name = 'CloudOnex Business Suite SaaS';
 $app_url = 'www.cloudonex.com';
-$release_date = 'May 3, 2019';
-$author_name = 'Razib M.';
+$release_date = '2019';
+$author_name = 'CloudOnex';
 $support_url = 'https://www.cloudonex.com';
 
 $files_to_rename = [

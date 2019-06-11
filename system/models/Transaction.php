@@ -70,7 +70,10 @@ class Transaction extends Model
         }
 
         //find the transaction
-        $t = ORM::for_table('sys_transactions')->where('workspace_id',$workspace_id)->find_one($id);
+        $t = ORM::for_table('sys_transactions')
+            ->where('workspace_id',$workspace_id)
+            ->where('uuid',$id)
+            ->find_one();
         if($t){
 
 

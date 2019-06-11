@@ -235,10 +235,19 @@ class PHPIDS
             'POST.g-recaptcha-response',
             'POST.g-recaptcha-res',
             '/POST.state_([0-999]*)$/',
+            '/POST.input_([0-999]*)$/',
             'POST.form_token',
             'GET.fbclid',
             'POST.itsec_two_factor_on_board_data',
-            'GET.mainwpsignature'
+            'GET.mainwpsignature',
+            'POST.wp_statistics_hit',
+            'POST.customize_messenger_channel',
+            'POST.product.media_gallery.values',
+            'GET.utm_source',
+            'GET.utm_medium',
+            'GET.utm_campaign',
+            'POST.fl_builder_data.data.settings.content',
+            'POST.fl_builder_data.node_preview.items.7',
         );
 
 

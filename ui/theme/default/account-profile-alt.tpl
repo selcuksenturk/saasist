@@ -171,7 +171,7 @@
 
 
                 if (window.history.replaceState) {
-                    window.history.replaceState( {} , '',  _url + 'contacts/view/'+ cid +'/' + action + '/' );
+                    window.history.replaceState( { } , '',  _url + 'contacts/view/{$d->uuid}/' + action + '/' );
                 }
 
 
@@ -560,7 +560,7 @@
                         var _url = $("#_url").val();
                         if ($.isNumeric(data)) {
 
-                            window.location = _url + 'contacts/view/' + data + '/activity/';
+                            window.location = _url + 'contacts/view/{$d->uuid}/activity/';
                         }
                         else {
                             $('#ibox_form').unblock();
@@ -586,7 +586,7 @@
 
                         if ($.isNumeric(data)) {
 
-                            window.location = _url + 'contacts/view/' + data + '/edit/';
+                            window.location = _url + 'contacts/view/{$d->uuid}/edit/';
                         }
                         else {
                             $('#ibox_form').unblock();
@@ -606,7 +606,7 @@
 
                         if ($.isNumeric(data)) {
 
-                            window.location = base_url + 'contacts/view/' + data + '/credit_card_info/';
+                            window.location = base_url + 'contacts/view/{$d->uuid}/credit_card_info/';
                         }
                         else {
                             $('#ibox_form').unblock();
@@ -638,7 +638,7 @@
                         var _url = $("#_url").val();
                         if ($.isNumeric(data)) {
 
-                            window.location = _url + 'contacts/view/' + data + '/email/';
+                            window.location = _url + 'contacts/view/{$d->uuid}/email/';
                         }
                         else {
                             $('#ibox_form').unblock();
@@ -666,7 +666,7 @@
 
                         if ($.isNumeric(data)) {
 
-                            window.location = _url + 'contacts/view/' + data + '/files/';
+                            window.location = _url + 'contacts/view/{$d->uuid}/files/';
                         }
                         else {
                             $('#ibox_form').unblock();
@@ -712,7 +712,7 @@
                         var _url = $("#_url").val();
                         if ($.isNumeric(data)) {
 
-                            window.location = _url + 'contacts/view/' + data + '/';
+                            window.location = _url + 'contacts/view/{$d->uuid}/';
                         }
                         else {
                             $('#ibox_form').unblock();

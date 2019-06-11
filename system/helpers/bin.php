@@ -216,6 +216,7 @@ foreach ($result as $value) {
     $config[$value['setting']] = $value['value'];
 }
 
+
 $settings = $config;
 
 
@@ -857,6 +858,7 @@ function update_option($option, $value)
     if ($d) {
         $d->value = $value;
         $d->save();
+
         return true;
     }
     else {
@@ -2626,3 +2628,53 @@ function is_super_admin($user)
 		abort(401,'Unauthorised.');
 	}
 }
+
+
+/**
+ * @param $number
+ * @param $currency_iso_code
+ * @return float|mixed
+ */
+function createFromCurrency($number, $currency_iso_code)
+{
+    $currency = Currency::getAllCurrencies();
+
+    if (isset($currency[$currency_iso_code])) {
+        $selected_currency = $currency[$currency_iso_code];
+        $currency_symbol = $selected_currency['symbol'];
+        $currency_decimal_point = $selected_currency['decimal_mark'];
+        $number = str_replace($currency_symbol, '', $number);
+        $number = str_replace(' ', '', $number);
+        if ($currency_decimal_point == ',') {
+            $number = str_replace('.', '', $number);
+            $number = str_replace(',', '.', $number);
+        } else {
+            $number = str_replace(',', '', $number);
+        }
+
+        return (float)$number;
+    }
+
+    return $number;
+
+
+}
+
+function translate_date_string($string,$language)
+{
+    $string_arr = explode(' ',$string);
+
+    if(isset($string_arr[0]) && isset($language[$string_arr[0]]))
+    {
+        $string_arr[0] = $language[$string_arr[0]];
+    }
+
+    if(isset($string_arr[1]) && isset($language[$string_arr[1]]))
+    {
+        $string_arr[1] = $language[$string_arr[1]];
+    }
+
+    return implode(' ',$string_arr);
+
+}
+

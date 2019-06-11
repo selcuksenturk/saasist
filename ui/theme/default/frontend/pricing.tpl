@@ -74,6 +74,10 @@
                                 <p class="ml-10px mr-10x mb-20px">As "someone wise" we aim to reach new entrepreneurs and initiatives that need financial support.</p>
             </ul>
                                 <p class="ml-10px mr-10x mb-20px">We provide financial consulting services to enterprises. We do our best for years.</p>
+            </ul>
+                                <p class="ml-10px mr-10x mb-20px">For a custom quote please</p>
+            </ul>
+                                <p class="ml-10px mr-10x mb-20px">﹀</p>
                                 <a class="main-btn btn-3 mt-20px" href="{$_url}register">Contact us</a>
                             </div>
                         </div>

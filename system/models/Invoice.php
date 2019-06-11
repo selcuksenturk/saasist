@@ -427,7 +427,7 @@ class Invoice extends Model
     }
 
 
-    public static function forSingleItem($cid,$item,$amount,$is_credit_invoice='0'){
+    public static function forSingleItem($cid,$item,$amount,$is_credit_invoice='0',$send_email=false,$qty=1){
 
         global $config,$workspace_id;
 
@@ -511,14 +511,21 @@ class Invoice extends Model
         $d->save();
         $invoiceid = $d->id();
 
+        //
+
+
+
 
 
 
         // Add Invoice Items
 
-        $sqty = 1;
-        $samount = $amount;
-        $ltotal = $amount;
+        $sqty = $qty;
+        $samount = $amount*$qty;
+        $ltotal = $amount*$qty;
+
+
+
 
 
         $d = ORM::for_table('sys_invoiceitems')->create();
@@ -554,6 +561,19 @@ class Invoice extends Model
         $invoice = array();
         $invoice['id'] = $invoiceid;
         $invoice['vtoken'] = $vtoken;
+
+        if($send_email)
+        {
+            $msg = Invoice::gen_email($invoiceid, 'created');
+            if ($msg) {
+                $subj = $msg['subject'];
+                $message_o = $msg['body'];
+                $email = $msg['email'];
+                $name = $msg['name'];
+
+                Notify_Email::_send($name, $email, $subj, $message_o, $cid, $invoiceid);
+            }
+        }
 
         return $invoice;
 

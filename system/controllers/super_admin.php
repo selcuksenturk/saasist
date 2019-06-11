@@ -19,7 +19,7 @@ $workspace = Workspace::find($workspace_id);
 $ui->assign('workspace', $workspace);
 $ui->assign('user',$user);
 
-$saas_current_build = 119;
+$saas_current_build = 200;
 
 if($user->workspace_id != 1)
 {
@@ -652,10 +652,212 @@ switch($action){
 
 
 
+
+
+
+
+        if(!isset($config['saas_build']) || $config['saas_build'] < 200)
+        {
+            ORM::execute('ALTER TABLE `crm_accounts` ADD `uuid` CHAR(36) NULL DEFAULT NULL AFTER `workspace_id`, ADD `code` VARCHAR(100) NULL DEFAULT NULL');
+
+            $message .= 'Contacts: Added uuid column...'.PHP_EOL;
+
+            $contacts = Contact::all();
+
+            foreach ($contacts as $contact)
+            {
+                $uuid = Str::uuid();
+                $contact->uuid = $uuid;
+                $contact->save();
+
+                $message .= 'Updated: '.$contact->account.PHP_EOL;
+            }
+
+
+            ORM::execute('ALTER TABLE `crm_leads` ADD `uuid` CHAR(36) NULL DEFAULT NULL AFTER `workspace_id`, ADD `code` VARCHAR(100) NULL DEFAULT NULL');
+
+            $message .= 'Leads: Added uuid column...'.PHP_EOL;
+
+            $leads = Lead::all();
+
+            foreach ($leads as $lead)
+            {
+                $uuid = Str::uuid();
+                $lead->uuid = $uuid;
+                $lead->save();
+
+            }
+
+
+            ORM::execute('ALTER TABLE `sys_companies` ADD `uuid` CHAR(36) NULL DEFAULT NULL AFTER `workspace_id`, ADD `code` VARCHAR(100) NULL DEFAULT NULL');
+
+            $message .= 'Companies: Added uuid column...'.PHP_EOL;
+
+            $companies = Company::all();
+
+            foreach ($companies as $company)
+            {
+                $uuid = Str::uuid();
+                $company->uuid = $uuid;
+                $company->save();
+
+            }
+
+            ORM::execute('ALTER TABLE `sys_transactions` ADD `uuid` CHAR(36) NULL DEFAULT NULL AFTER `workspace_id`, ADD `code` VARCHAR(100) NULL DEFAULT NULL');
+
+            $message .= 'Transactions: Added uuid column...'.PHP_EOL;
+
+            $transactions = Transaction::all();
+
+            foreach ($transactions as $transaction)
+            {
+                $uuid = Str::uuid();
+                $transaction->uuid = $uuid;
+                $transaction->save();
+            }
+
+
+            ORM::execute('ALTER TABLE `sys_invoices` ADD `uuid` CHAR(36) NULL DEFAULT NULL AFTER `workspace_id`, ADD `code` VARCHAR(100) NULL DEFAULT NULL');
+
+            $message .= 'Invoices: Added uuid column...'.PHP_EOL;
+
+            $invoices = Invoice::all();
+
+            foreach ($invoices as $invoice)
+            {
+                $uuid = Str::uuid();
+                $invoice->uuid = $uuid;
+                $invoice->save();
+            }
+
+
+            ORM::execute('ALTER TABLE `sys_quotes` ADD `uuid` CHAR(36) NULL DEFAULT NULL AFTER `workspace_id`, ADD `code` VARCHAR(100) NULL DEFAULT NULL');
+
+            $message .= 'Quotes: Added uuid column...'.PHP_EOL;
+
+            $quotes = Quote::all();
+
+            foreach ($quotes as $quote)
+            {
+                $uuid = Str::uuid();
+                $quote->uuid = $uuid;
+                $quote->save();
+            }
+
+
+            ORM::execute('ALTER TABLE `sys_tickets` ADD `uuid` CHAR(36) NULL DEFAULT NULL AFTER `workspace_id`, ADD `code` VARCHAR(100) NULL DEFAULT NULL');
+
+            $message .= 'Tickets: Added uuid column...'.PHP_EOL;
+
+            $tickets = Ticket::all();
+
+            foreach ($tickets as $ticket)
+            {
+                $uuid = Str::uuid();
+                $ticket->uuid = $uuid;
+                $ticket->save();
+            }
+
+
+            ORM::execute('ALTER TABLE `sys_orders` ADD `uuid` CHAR(36) NULL DEFAULT NULL AFTER `workspace_id`');
+
+            $message .= 'Orders: Added uuid column...'.PHP_EOL;
+
+            $orders = Order::all();
+
+            foreach ($orders as $order)
+            {
+                $uuid = Str::uuid();
+                $order->uuid = $uuid;
+                $order->save();
+            }
+
+            $message .= 'Creating Bills Table ...'.PHP_EOL;
+            $message .= '...'.PHP_EOL;
+            ORM::execute('CREATE TABLE `bills` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `workspace_id` int(10) unsigned NOT NULL,
+  `uuid` CHAR(36) NULL DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `from_account_id` int(10) unsigned DEFAULT NULL,
+  `contact_id` int(10) unsigned DEFAULT NULL,
+  `category_id` int(10) unsigned DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `next_date` date NOT NULL,
+  `last_paid_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `currency` CHAR(3),
+  `net_amount` decimal(16,8) NOT NULL,
+  `recurring_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `website` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remind_days_before` smallint(5) unsigned NOT NULL DEFAULT \'0\',
+  `add_transaction_automatically` tinyint(1) NOT NULL DEFAULT \'0\',
+  `is_active` tinyint(1) NOT NULL DEFAULT \'1\',
+  `is_paid` tinyint(1) NOT NULL DEFAULT \'0\',
+  `is_skipped` tinyint(1) NOT NULL DEFAULT \'0\',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
+            $message .= 'Bills Table Created!'.PHP_EOL;
+
+            ORM::execute('CREATE TABLE `assets` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `workspace_id` int(10) unsigned NOT NULL,
+  `uuid` CHAR(36) NULL DEFAULT NULL,
+  `asset` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `brand` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_purchased` date DEFAULT NULL,
+  `supported_until` date DEFAULT NULL,
+  `price` decimal(16,4) DEFAULT NULL,
+  `depreciation` decimal(16,4) DEFAULT NULL,
+  `serial` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `notes` text COLLATE utf8mb4_unicode_ci,
+  `category_id` int(10) unsigned DEFAULT NULL,
+  `employee_id` int(10) unsigned DEFAULT NULL,
+  `contact_id` int(10) unsigned DEFAULT NULL,
+  `location_id` int(10) unsigned DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
+
+
+            ORM::execute('CREATE TABLE `asset_categories` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `workspace_id` int(10) unsigned NOT NULL,
+  `uuid` CHAR(36) NULL DEFAULT NULL,
+  `parent_id` int(10) unsigned NOT NULL DEFAULT \'0\',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `api_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `plural` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prefix` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sl` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT \'1\',
+  `is_default` tinyint(1) NOT NULL DEFAULT \'0\',
+  `sort_order` int(10) unsigned NOT NULL DEFAULT \'1\',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
+
+            $message .= 'Assets Table Created!'.PHP_EOL;
+
+        }
+
+
+
+
         update_option('saas_build',$saas_current_build);
 
 
         $message .= 'All tables were created...'.PHP_EOL;
+        $message .= 'Build updated to: '.$saas_current_build.PHP_EOL;
 
         $message .= '---------------------------'.PHP_EOL;
         $message .= 'Redirecting, please wait...';

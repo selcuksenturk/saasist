@@ -21,7 +21,7 @@
 /**
  * Validator class
  */
-class Validator{
+class Validator extends \Rakit\Validation\Validator{
 
     /**
      * String text finder

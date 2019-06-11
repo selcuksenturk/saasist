@@ -168,8 +168,18 @@ _L[\'are_you_sure\'] = \''.$_L['are_you_sure'].'\';
 
         if($generate_invoice == 'Yes'){
 
+            $send_email = false;
 
-            $invoice = Invoice::forSingleItem($cid,$p->name,$amount);
+            $input_send_email = _post('send_email');
+
+            if($input_send_email == 'Yes')
+            {
+                $send_email = true;
+            }
+
+            $qty = _post('qty');
+
+            $invoice = Invoice::forSingleItem($cid,$p->name,$amount,0,$send_email,$qty);
 
 
             $iid = $invoice['id'];
@@ -179,6 +189,8 @@ _L[\'are_you_sure\'] = \''.$_L['are_you_sure'].'\';
         else{
             $iid = 0;
         }
+
+
 
 
 
@@ -196,6 +208,7 @@ _L[\'are_you_sure\'] = \''.$_L['are_you_sure'].'\';
         $order->billing_cycle = $billing_cycle;
         $order->iid = $iid;
         $order->save();
+
 
         echo $order->id();
 

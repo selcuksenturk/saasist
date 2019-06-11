@@ -1,9 +1,4 @@
 .nav-highlight > li.active, .nav > li:focus {
-    /*background: -webkit-linear-gradient(left, #1B49BB, #1F7EE1);*/
-    /*background: -moz-linear-gradient(left, #1B49BB, #1F7EE1);*/
-    /*background: -ms-linear-gradient(left, #1B49BB, #1F7EE1);*/
-    /*background: -o-linear-gradient(left, #1B49BB, #1F7EE1);*/
-    /*background: linear-gradient(left, #1B49BB, #1F7EE1);*/
     background: #ECEDF0;
     border-left: 6px solid #00a2e5;
     outline: none;
@@ -21,16 +16,6 @@
 .nav>li.active>a {
     color: rgb(51, 51, 51);
 }
-
-/*.nav-highlight > li.active {*/
-    /*border-left: none;*/
-/*}*/
-
-/*.navbar-default .nav > li > a:hover {*/
-    /*!*background: -webkit-linear-gradient(left, #1B49BB, #1F7EE1);*!*/
-    /*!*color: white;*!*/
-    /**/
-/*}*/
 
 .navbar-default .nav>li>a:hover {
     background: transparent;
@@ -67,11 +52,6 @@
 }
 
 .navbar-fixed-top {
-    /*background: -webkit-linear-gradient(left, #1B49BB, #1F7EE1);*/
-    /*background: -moz-linear-gradient(left, #1B49BB, #1F7EE1);*/
-    /*background: -ms-linear-gradient(left, #1B49BB, #1F7EE1);*/
-    /*background: -o-linear-gradient(left, #1B49BB, #1F7EE1);*/
-    /*background: linear-gradient(left, #1B49BB, #1F7EE1);*/
     background: #393a3d;;
     -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
@@ -93,14 +73,7 @@
 
 
 .chart-statistic-box .chart-txt {
-
-    /*background: -webkit-linear-gradient(left, #1B49BB, #1F7EE1);*/
-    /*background: -moz-linear-gradient(left, #1B49BB, #1F7EE1);*/
-    /*background: -ms-linear-gradient(left,#1B49BB, #1F7EE1);*/
-    /*background: -o-linear-gradient(left, #1B49BB, #1F7EE1);*/
-    /*background: linear-gradient(left, #1B49BB, #1F7EE1);*/
     background: #00a2e5;
-
 }
 
 .modal-header {
@@ -114,9 +87,7 @@
 }
 
 .ibilling-page-header:after {
-
     background: transparent;
-
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {

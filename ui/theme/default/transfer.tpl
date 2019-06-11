@@ -164,7 +164,7 @@
                         {foreach $tr as $trs}
                             <tr>
                                 <td>{$trs['account']}</td>
-                                <td><a href="{$_url}transactions/manage/{$trs['id']}/">{$trs['description']}</a> </td>
+                                <td><a href="{$_url}transactions/manage/{$trs['uuid']}/">{$trs['description']}</a> </td>
                                 <td class="amount">{$trs['amount']}</td>
                             </tr>
                         {/foreach}
@@ -184,91 +184,67 @@
     <script>
         $(function () {
 
-            var $amount = $("#amount");
-
-            {if $config['edition'] eq 'iqm'}
-
-
-            var c2_amount = $("#c2_amount");
-
-            var c1_amount = $("#c1_amount");
-
-            var c_rate = {$currency_rate};
-
-
-            function total_c() {
-
-//                var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
-//
-//                total_amount_c1 = parseFloat(total_amount_c1);
-//
-//                var total_amount_c2 = isNaN(parseInt(c2_amount.val()/ c_rate)) ? 0 :(c2_amount.val()/ c_rate);
-//
-//                total_amount_c2 = parseFloat(total_amount_c2);
-//
-//                var total_amount_c = total_amount_c1 + total_amount_c2;
-//
-//                $amount.val(total_amount_c);
-
-
-
-                if($amount.val() == ''){
-                    var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
-
-                    total_amount_c1 = parseFloat(total_amount_c1);
-
-                    var total_amount_c2 = isNaN(parseInt(c2_amount.val()/ c_rate)) ? 0 :(c2_amount.val()/ c_rate);
-
-                    total_amount_c2 = parseFloat(total_amount_c2);
-
-                    var total_amount_c = total_amount_c1 + total_amount_c2;
-
-                    $amount.val(total_amount_c);
-                }
-                else{
-                    var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
-
-
-                    total_amount_c1 = parseFloat(total_amount_c1);
-
-                    //  console.log(total_amount_c1);
-                    var tr_amount = $amount.val();
-                    tr_amount = tr_amount.replace("$ ","");
-                    tr_amount = tr_amount.replace(" ","");
-                    tr_amount = tr_amount.replace(",","");
-                    tr_amount = parseFloat(tr_amount);
-                    //  console.log(tr_amount);
-                    var rest_amount = tr_amount - total_amount_c1;
-                    var rest_amount_in_iqd = rest_amount*c_rate;
-
-
-                    //  console.log(c_rate);
-                    //   console.log(rest_amount);
-
-
-                    // console.log(rest_amount_in_iqd);
-                    c2_amount.val(rest_amount_in_iqd);
-                }
-            }
-
-            c2_amount.keyup(function(){
-
-                total_c();
-
-
+            $("#faccount").select2({
+                theme: "bootstrap"
+            });
+            $("#taccount").select2({
+                theme: "bootstrap"
+            });
+            $("#pmethod").select2({
+                theme: "bootstrap"
             });
 
 
-            c1_amount.keyup(function(){
+            $('#tags').select2({
+                tags: true,
+                tokenSeparators: [','],
+                theme: "bootstrap"
+            });
 
-                total_c();
-
-
+            $("#a_hide").hide();
+            $("#emsg").hide();
+            $("#a_toggle").click(function(e){
+                e.preventDefault();
+                $("#a_hide").toggle( "slow" );
             });
 
 
+            var _url = $("#_url").val();
 
-            {/if}
+
+
+
+            $("#submit").click(function (e) {
+                e.preventDefault();
+                $('#ibox_form').block({ message: null });
+                var _url = $("#_url").val();
+                $.post(_url + 'transactions/transfer-post/', {
+
+
+                    faccount: $('#faccount').val(),
+                    taccount: $('#taccount').val(),
+                    date: $('#date').val(),
+
+                    amount: $('#amount').val(),
+
+                    description: $('#description').val(),
+                    tags: $('#tags').val(),
+
+                    pmethod: $('#pmethod').val(),
+                    ref: $('#ref').val()
+
+                })
+                    .done(function (data) {
+                        location.reload();
+                    }).fail(function(data) {
+                    $('#ibox_form').unblock();
+                    var body = $("html, body");
+                    body.animate({ scrollTop:0 }, '1000', 'swing');
+                    $("#emsgbody").html(data.responseText);
+                    $("#emsg").show("slow");
+                });
+            });
+
         });
     </script>
 {/block}

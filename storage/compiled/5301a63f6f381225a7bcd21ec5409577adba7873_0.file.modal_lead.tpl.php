@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-05-09 02:40:12
+/* Smarty version 3.1.33, created on 2019-05-13 05:06:47
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/modal_lead.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5cd3cb4ccbb927_77947059',
+  'unifunc' => 'content_5cd933a76e73c3_94104760',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5301a63f6f381225a7bcd21ec5409577adba7873' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/modal_lead.tpl',
-      1 => 1556695882,
+      1 => 1557738390,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5cd3cb4ccbb927_77947059 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cd933a76e73c3_94104760 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3>
@@ -499,21 +499,5 @@ storage/system/profile-place-holder.jpg" class="img-thumbnail img-responsive" al
     <?php }?>
 </div>
 
-<div id="modal_search_address" class="modal fade" tabindex="-1" data-focus-on="input:first" style="display: none;">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Stack Two</h4>
-    </div>
-    <div class="modal-body">
-        <p>One fine body…</p>
-        <p>One fine body…</p>
-        <input class="form-control" type="text" data-tabindex="1">
-        <input class="form-control" type="text" data-tabindex="2">
-        <button class="btn btn-default" data-toggle="modal" href="#stack3">Launch modal</button>
-    </div>
-    <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-        <button type="button" class="btn btn-primary">Ok</button>
-    </div>
-</div><?php }
+<?php }
 }

@@ -1222,6 +1222,17 @@ $_L = [
     'Modules' => '*******',
     'Module' => '******',
     'Enabled' => '*******',
+    'Bills' => '*****',
+    'Add a bill' => '**********',
+    'This field is required' => '**********************',
+    'Next Due Date' => '*************',
+    'From Account' => '************',
+    'Website' => '*******',
+    'Upcoming Bills' => '**************',
+    'Past Due' => '********',
+    'Mark as Paid' => '************',
+    'Dashboard Widgets' => '*****************',
+    'Enable Signature' => '****************',
     
 
 ];

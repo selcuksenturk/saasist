@@ -60,9 +60,9 @@ switch ($action) {
             'dp/dist/datepicker.min',
             'dp/i18n/' . $config['language'],
             'numeric',
-            'deposit'
         )));
         $x = ORM::for_table('sys_transactions')->where('type', 'Income')->where('workspace_id',$workspace_id);
+
         if (!has_access($user->roleid, 'transactions', 'all_data')) {
             $x->where('aid', $user->id);
         }
@@ -70,10 +70,7 @@ switch ($action) {
         $x->order_by_desc('id')->limit(20);
         $tr = $x->find_array();
         $currency_rate = 1;
-        if ($config['edition'] == 'iqm') {
-            $c_find = Currency::where('iso_code', 'IQD')->first();
-            $currency_rate = $c_find->rate;
-        }
+
 
         $ui->assign('tr', $tr);
         view('transactions_deposit', ['currencies' => Currency::all() , 'currency_rate' => $currency_rate]);
@@ -183,7 +180,11 @@ switch ($action) {
             }
 
             $d = ORM::for_table('sys_transactions')->create();
+
+            $uuid = Str::uuid();
+
             $d->workspace_id = $workspace_id;
+            $d->uuid = $uuid;
             $d->account = $account;
             $d->type = 'Income';
             $d->payerid = $payerid;
@@ -227,10 +228,10 @@ switch ($action) {
             // find the category and adjust balance
 
 
-            echo $tid;
+            echo $uuid;
         }
         else {
-            echo $msg;
+            responseWithError($msg);
         }
 
         break;
@@ -264,7 +265,6 @@ switch ($action) {
             'dp/dist/datepicker.min',
             'dp/i18n/' . $config['language'],
             'numeric',
-            'expense'
         )));
         $x = ORM::for_table('sys_transactions')->where('workspace_id',$workspace_id)->where('type', 'Expense');
         if (!has_access($user->roleid, 'transactions', 'all_data')) {
@@ -369,79 +369,29 @@ switch ($action) {
 
             // update the account balance table
 
-            if($config['edition'] == 'iqm'){
-
-                $r_c1 = Currency::where('iso_code','USD')->first();
-                $r_c2 = Currency::where('iso_code','IQD')->first();
-
-                $c1_amount = Finance::amount_fix(_post('c1_amount'));
-                $c2_amount = Finance::amount_fix(_post('c2_amount','0'));
-
-
-                if($c1_amount == ''){
-                    $c1_amount = '0';
-                }
-                $home_currency = Currency::where('iso_code', $config['home_currency'])->first();
-
-                $account_balance = Balance::where('account_id', $account_id)->where('currency_id', $r_c1->id)->first();
-                if ($account_balance) {
-                    $cbal = $account_balance->balance;
-                    $account_balance->balance = $cbal - $c1_amount;
-                    $account_balance->save();
-                }
-                else {
-
-                    // create record
-
-                    $account_balance = new Balance;
-                    $account_balance->account_id = $account_id;
-                    $account_balance->currency_id = $r_c1->id;
-                    $account_balance->balance = 0 - $c1_amount;
-                    $account_balance->save();
-                }
-
-
-                $account_balance = Balance::where('account_id', $account_id)->where('workspace_id',$workspace_id)->where('currency_id', $r_c2->id)->first();
-                if ($account_balance) {
-                    $cbal = $account_balance->balance;
-                    $account_balance->balance = $cbal - $c2_amount;
-                    $account_balance->save();
-                }
-                else {
-
-                    // create record
-
-                    $account_balance = new Balance;
-                    $account_balance->account_id = $account_id;
-                    $account_balance->currency_id = $r_c2->id;
-                    $account_balance->balance = 0 - $c2_amount;
-                    $account_balance->save();
-                }
-
+            $home_currency = Currency::where('iso_code', $config['home_currency'])->where('workspace_id',$workspace_id)->first();
+            $account_balance = Balance::where('account_id', $account_id)->where('currency_id', $home_currency->id)->where('workspace_id',$workspace_id)->first();
+            if ($account_balance) {
+                $cbal = $account_balance->balance;
+                $account_balance->balance = $cbal - $amount;
+                $account_balance->save();
             }
-            else{
-                $home_currency = Currency::where('iso_code', $config['home_currency'])->where('workspace_id',$workspace_id)->first();
-                $account_balance = Balance::where('account_id', $account_id)->where('currency_id', $home_currency->id)->where('workspace_id',$workspace_id)->first();
-                if ($account_balance) {
-                    $cbal = $account_balance->balance;
-                    $account_balance->balance = $cbal - $amount;
-                    $account_balance->save();
-                }
-                else {
+            else {
 
-                    // create record
+                // create record
 
-                    $account_balance = new Balance;
-                    $account_balance->workspace_id = $workspace_id;
-                    $account_balance->account_id = $account_id;
-                    $account_balance->currency_id = $home_currency->id;
-                    $account_balance->balance = 0 - $amount;
-                    $account_balance->save();
-                }
+                $account_balance = new Balance;
+                $account_balance->workspace_id = $workspace_id;
+                $account_balance->account_id = $account_id;
+                $account_balance->currency_id = $home_currency->id;
+                $account_balance->balance = 0 - $amount;
+                $account_balance->save();
             }
 
+            $uuid = Str::uuid();
             $d = ORM::for_table('sys_transactions')->create();
             $d->workspace_id = $workspace_id;
+            $d->uuid = $uuid;
             $d->account = $account;
             $d->type = 'Expense';
             $d->payeeid = $payee;
@@ -484,10 +434,10 @@ switch ($action) {
             _msglog('s', $_L['Transaction Added Successfully']);
 
 
-            echo $tid;
+            echo $uuid;
         }
         else {
-            echo $msg;
+            responseWithError($msg);
         }
 
         break;
@@ -511,8 +461,7 @@ switch ($action) {
             's2/js/i18n/' . lan() ,
             'dp/dist/datepicker.min',
             'dp/i18n/' . $config['language'],
-            'numeric',
-            'transfer'
+            'numeric'
         )));
         $ui->assign('xjq', '
 
@@ -624,34 +573,22 @@ switch ($action) {
             $a->balance = $tnbal;
             $a->save();
 
-            if($config['edition'] == 'iqm'){
-                $t = Balance::deductBalance($c1_amount,$from_account_id,'USD');
-                $t = Balance::addBalance($c1_amount,$to_account_id,'USD');
-                $t = Balance::deductBalance($c2_amount,$from_account_id,'IQD');
-                $t = Balance::addBalance($c2_amount,$to_account_id,'IQD');
-
+            $account_balance = Balance::where('account_id', $to_account_id)->where('workspace_id',$workspace_id)->where('currency_id', $home_currency->id)->first();
+            if ($account_balance) {
+                $cbal = $account_balance->balance;
+                $account_balance->balance = $cbal + $amount;
+                $account_balance->save();
             }
+            else {
 
-            else{
+                // create record
 
-                $account_balance = Balance::where('account_id', $to_account_id)->where('workspace_id',$workspace_id)->where('currency_id', $home_currency->id)->first();
-                if ($account_balance) {
-                    $cbal = $account_balance->balance;
-                    $account_balance->balance = $cbal + $amount;
-                    $account_balance->save();
-                }
-                else {
-
-                    // create record
-
-                    $account_balance = new Balance;
-                    $account_balance->workspace_id = $workspace_id;
-                    $account_balance->account_id = $to_account_id;
-                    $account_balance->currency_id = $home_currency->id;
-                    $account_balance->balance = $amount;
-                    $account_balance->save();
-                }
-
+                $account_balance = new Balance;
+                $account_balance->workspace_id = $workspace_id;
+                $account_balance->account_id = $to_account_id;
+                $account_balance->currency_id = $home_currency->id;
+                $account_balance->balance = $amount;
+                $account_balance->save();
             }
 
             // update the account balance table
@@ -660,6 +597,7 @@ switch ($action) {
 
             $d = ORM::for_table('sys_transactions')->create();
             $d->workspace_id = $workspace_id;
+            $d->uuid = Str::uuid();
             $d->account = $faccount;
             $d->type = 'Transfer';
             $d->amount = $amount;
@@ -696,6 +634,8 @@ switch ($action) {
 
             $d = ORM::for_table('sys_transactions')->create();
             $d->account = $taccount;
+            $d->workspace_id = $workspace_id;
+            $d->uuid = Str::uuid();
             $d->type = 'Transfer';
             $d->amount = $amount;
             $d->method = $pmethod;
@@ -731,7 +671,7 @@ switch ($action) {
             echo '1';
         }
         else {
-            echo $msg;
+            responseWithError($msg);
         }
 
         break;
@@ -786,10 +726,12 @@ switch ($action) {
             'dt/dt',
             'daterangepicker/daterangepicker'
         )));
+
         view('transactions_list', [
             'tr_type' => $tr_type,
             'expense_types' => ExpenseType::orderBy('sorder')->where('workspace_id',$workspace_id)->get()
         ]);
+
         break;
 
     case 'a':
@@ -830,125 +772,6 @@ switch ($action) {
         view('tra');
         break;
 
-    case 'tr_ajax':
-
-        //        $filter = '';
-        //
-        //        $d = ORM::for_table('sys_transactions');
-        //
-        //
-        //        if(isset($_POST['order_id']) AND ($_POST['order_id'] != '')){
-        //            // $iTotalRecords = ORM::for_table('flexi_req')->where('id',$_POST['order_id'])->count('id');
-        //            $oid = _post('order_id');
-        //            //  $filter .= "AND id='$oid' ";
-        //            $d->where('id',$oid);
-        //        }
-        //
-        //        if(isset($_POST['sender']) AND ($_POST['sender'] != '')){
-        //            $sender = _post('sender');
-        //            // $filter .= "AND sender='$sender'";
-        //            $d->where_like('sender', "%$sender%");
-        //        }
-        //
-        //        if(isset($_POST['receiver']) AND ($_POST['receiver'] != '')){
-        //            $receiver = _post('receiver');
-        //            // $filter .= "AND receiver='$receiver' ";
-        //            $d->where_like('receiver', "%$receiver%");
-        //        }
-        //
-        //        if(isset($_POST['sdate']) AND ($_POST['sdate'] != '') AND isset($_POST['tdate']) AND ($_POST['tdate'] != '')){
-        //            $sdate = _post('sdate');
-        //            $tdate = _post('tdate');
-        //            // $filter .= "AND reqlogtime >= '$sdate 00:00:00' AND reqlogtime <= '$tdate 23:59:59'";
-        //            $d->where_gte('reqlogtime', "$sdate 00:00:00");
-        //            $d->where_lte('reqlogtime', "$tdate 23:59:59");
-        //        }
-        //
-        //        if(isset($_POST['type']) AND ($_POST['type'] != '')){
-        //            $type = _post('type');
-        //            // $filter .= "AND type='$type' ";
-        //            $d->where('type',$type);
-        //
-        //
-        //        }
-        //
-        //
-        //
-        //        if(isset($_POST['trid']) AND ($_POST['trid'] != '')){
-        //            $trid = _post('trid');
-        //            //  $filter .= "AND transactionid='$trid' ";
-        //            $d->where('transactionid',$trid);
-        //
-        //        }
-        //
-        //        if(isset($_POST['op']) AND ($_POST['op'] != '')){
-        //            $op = _post('op');
-        //            //  $filter .= "AND op='$op' ";
-        //            $d->where('op',$op);
-        //
-        //        }
-        //
-        //        $iTotalRecords =  $d->count();
-        //
-        //
-        //        $iDisplayLength = intval($_REQUEST['length']);
-        //        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
-        //        $iDisplayStart = intval($_REQUEST['start']);
-        //        $sEcho = intval($_REQUEST['draw']);
-        //
-        //        $records = array();
-        //        $records["data"] = array();
-        //
-        //        $end = $iDisplayStart + $iDisplayLength;
-        //        $end = $end > $iTotalRecords ? $iTotalRecords : $end;
-        //
-        //
-        //        if($end > 1000){
-        //            exit;
-        //        }
-        //        $d->order_by_desc('id');
-        //        $d->limit($end);
-        //        $d->offset($iDisplayStart);
-        //        $x = $d->find_many();
-        //
-        //        $i = $iDisplayStart;
-        //        foreach ($x as $xs){
-        //
-        //
-        //
-        //
-        //            $id = ($i + 1);
-        //            $records["data"][] = array(
-        //                '<input type="checkbox" name="id[]" value="'.$xs['id'].'">',
-        //                $xs['id'],
-        //                $xs['date'],
-        //                $xs['account'],
-        //                $xs['type'],
-        //
-        //                $xs['amount'],
-        //                $xs['description'],
-        //
-        //                $xs['dr'],
-        //                $xs['cr'],
-        //                $xs['bal'],
-        //
-        //
-        //
-        //                '<a href="#" class="fview btn btn-xs blue btn-editable" id="i'.$xs['id'].'"><i class="icon-list"></i> View</a>',
-        //            );
-        //        }
-        //
-        //
-        //        $records["draw"] = $sEcho;
-        //        $records["recordsTotal"] = $iTotalRecords;
-        //        $records["recordsFiltered"] = $iTotalRecords;
-        //        $resp =  json_encode($records);
-        //        $handler = PhpConsole\Handler::getInstance();
-        //        $handler->start();
-        //        $handler->debug($_REQUEST, 'request');
-        //        echo $resp;
-
-        break;
 
     case 'list-income':
         Event::trigger('transactions/list-income/');
@@ -1008,7 +831,8 @@ switch ($action) {
     case 'manage':
         Event::trigger('transactions/manage/');
         $id = $routes['2'];
-        $t = ORM::for_table('sys_transactions')->where('workspace_id',$workspace_id)->find_one($id);
+      //  $t = ORM::for_table('sys_transactions')->where('workspace_id',$workspace_id)->find_one($id);
+        $t = Transaction::where('workspace_id',$workspace_id)->where('uuid',$id)->first();
         if ($t) {
             $p = ORM::for_table('crm_accounts')->where('workspace_id',$workspace_id)->find_many();
             $ui->assign('p', $p);
@@ -1048,7 +872,6 @@ switch ($action) {
                 'dp/dist/datepicker.min',
                 'dp/i18n/' . $config['language'],
                 'numeric',
-                'tr-manage'
             )));
             view('transactions_manage');
         }
@@ -1355,16 +1178,15 @@ switch ($action) {
         $i = $iDisplayStart;
         foreach($x as $xs) {
             $records["data"][] = array(
-                '<a href="' . U . 'transactions/manage/' . $xs['id'] . '">' . $xs['id'] . '</a>',
-                $xs['date'],
+                '<a href="' . U . 'transactions/manage/' . $xs['uuid'] . '">' . $xs['date'] . '</a>',
                 htmlentities($xs['account']),
                 htmlentities($xs['type']),
+                '<a href="' . U . 'transactions/manage/' . $xs['uuid'] . '">' . htmlentities($xs['description']) . '</a>',
                 $xs['amount'],
-                htmlentities($xs['description']),
                 $xs['dr'],
                 $xs['cr'],
                 $xs['bal'],
-                '<a href="' . U . 'transactions/manage/' . $xs['id'] . '" class="btn btn-primary btn-xs"><i class="fa fa-file-text-o"></i></a>',
+                '<a href="' . U . 'transactions/manage/' . $xs['uuid'] . '" class="btn btn-primary btn-xs"><i class="fa fa-file-text-o"></i></a>',
             );
         }
 
@@ -1490,6 +1312,217 @@ switch ($action) {
         $transaction = Transaction::where('workspace_id',$workspace_id)->find($transaction_id);
 
         view('transactions_receipt');
+
+        break;
+
+    case 'bills':
+
+        $days_before = date('Y-m-d', strtotime('-30 days'));
+        $days_after = date('Y-m-d', strtotime('+30 days'));
+
+        $today = date('Y-m-d');
+
+        $bills_upcoming = Bill::whereBetween('next_date', [$today, $days_after])
+            ->orderBy('next_date','asc')
+            ->get();
+
+        $bills_past_due = Bill::whereBetween('next_date', [$today, $days_before])
+            ->orderBy('next_date','asc')
+            ->where('is_paid',0)
+            ->get();
+
+
+        view('transactions_bills',[
+            'bills_upcoming' => $bills_upcoming,
+            'bills_past_due' => $bills_past_due
+        ]);
+
+
+        break;
+
+
+    case 'bills-all':
+
+        $bills = Bill::where('workspace_id',$workspace_id)
+            ->orderBy('next_date','desc')
+            ->get();
+
+        view('transactions_bills_all',[
+            'bills' => $bills
+        ]);
+
+        break;
+
+
+    case 'bill':
+
+        $bill = false;
+
+        $id = route(2);
+
+        if($id != '')
+        {
+            $bill = Bill::where('workspace_id',$workspace_id)
+                ->where('uuid',$id)
+                ->first();
+        }
+
+        $categories = TransactionCategory::where('workspace_id',$workspace_id)
+            ->where('type','Expense')
+            ->orderBy('sorder','asc')
+            ->get();
+
+        $contacts = Contact::getAllContacts();
+
+        $accounts = Account::getAllAccounts();
+
+        $currencies = Currency::where('workspace_id',$workspace_id)->get();
+        $currencies_all = Currency::getAllCurrencies();
+
+        view('transactions_bill',[
+            'categories' => $categories,
+            'contacts' => $contacts,
+            'accounts' => $accounts,
+            'currencies' => $currencies,
+            'currencies_all' => $currencies_all,
+            'bill' => $bill
+        ]);
+
+        break;
+
+
+    case 'bill-save':
+
+        // Validate Data
+        $validator = new Validator;
+        $data = $request->all();
+
+        $validation = $validator->validate($data, [
+            'title' => 'required',
+            'next_date' => 'required|date',
+            'amount' => 'required',
+            'currency' => 'required',
+            'recurring_type' => 'required'
+        ]);
+
+
+        if ($validation->fails()) {
+            $message = '';
+            foreach ($validation->errors()->all() as $key => $value)
+            {
+                $message .= $value.' <br> ';
+            }
+            echo $message;
+            exit;
+        } else {
+            // Data validated, Go ahead
+
+            $currency_iso_code = _post('currency');
+
+            $amount = _post('amount');
+
+            $amount = createFromCurrency($amount,$currency_iso_code);
+
+            $bill_id = _post('bill_id');
+
+            $bill = false;
+
+            if($bill_id != '')
+            {
+                $bill = Bill::where('workspace_id',$workspace_id)
+                    ->where('uuid',$bill_id)
+                    ->first();
+            }
+
+            if(!$bill)
+            {
+                $bill = new Bill;
+                $bill->workspace_id = $workspace_id;
+                $bill->uuid = Str::uuid();
+            }
+
+            $bill->title = $data['title'];
+
+            $bill->currency = $data['currency'];
+
+            if(isset($data['from_account_id']) && $data['from_account_id'] != '')
+            {
+                $bill->from_account_id = $data['from_account_id'];
+            }
+
+            if(isset($data['contact_id']) && $data['contact_id'] != '')
+            {
+                $bill->contact_id = $data['contact_id'];
+            }
+
+            if(isset($data['category_id']) && $data['category_id'] != '')
+            {
+                $bill->category_id = $data['category_id'];
+            }
+
+            if(isset($data['start_date']) && $data['start_date'] != '')
+            {
+                $bill->start_date = $data['start_date'];
+            }
+
+            if(isset($data['end_date']) && $data['end_date'] != '')
+            {
+                $bill->end_date = $data['end_date'];
+            }
+
+            $bill->next_date = $data['next_date'];
+
+            $bill->net_amount = $amount;
+
+            $bill->recurring_type = $data['recurring_type'];
+
+            if(isset($data['website']) && $data['website'] != '')
+            {
+                $bill->website = $data['website'];
+            }
+
+            $bill->save();
+
+            echo $bill->id;
+
+        }
+
+
+        break;
+
+    case 'delete-bill':
+
+        $id = route(2);
+
+        $bill = Bill::where('workspace_id',$workspace_id)
+            ->where('uuid',$id)
+            ->first();
+
+        if($bill)
+        {
+            $bill->delete();
+        }
+
+        r2(U.'transactions/bills','s',$_L['delete_successful']);
+
+        break;
+
+
+    case 'bill-mark-as-paid':
+
+        $id = route(2);
+
+        $bill = Bill::where('workspace_id',$workspace_id)
+            ->where('uuid',$id)
+            ->first();
+
+        if($bill)
+        {
+            $bill->is_paid = 1;
+            $bill->save();
+        }
+
+        r2(U.'transactions/bills','s',$_L['Data Updated']);
 
         break;
 

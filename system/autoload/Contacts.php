@@ -164,7 +164,7 @@ Class Contacts
             }
 
 
-
+            $d->uuid = Str::uuid();
             $d->email = $email;
             $d->phone = $phone;
             $d->address = $address;

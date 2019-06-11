@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-03-07 07:50:13
+/* Smarty version 3.1.33, created on 2019-06-03 05:43:31
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/ajax.contact-quotes.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c81138571e091_68298262',
+  'unifunc' => 'content_5cf4ebc36e4a07_77233946',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '90d71b28ba2ee3a3393c6890630ba5395994e179' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/ajax.contact-quotes.tpl',
-      1 => 1505464289,
+      1 => 1556695881,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5c81138571e091_68298262 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cf4ebc36e4a07_77233946 (Smarty_Internal_Template $_smarty_tpl) {
 ?><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 quotes/new/1/<?php echo $_smarty_tpl->tpl_vars['cid']->value;?>
 /" class="btn btn-primary waves-effect waves-light"><i class="fa fa-plus"></i> <?php echo $_smarty_tpl->tpl_vars['_L']->value['Create New Quote'];?>

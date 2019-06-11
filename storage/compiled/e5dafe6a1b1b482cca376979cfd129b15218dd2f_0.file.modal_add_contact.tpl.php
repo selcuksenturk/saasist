@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-02-10 16:39:36
+/* Smarty version 3.1.33, created on 2019-05-17 07:34:22
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/modal_add_contact.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c609a1855b1c5_42111921',
+  'unifunc' => 'content_5cde9c3e1dff15_94998284',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e5dafe6a1b1b482cca376979cfd129b15218dd2f' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/modal_add_contact.tpl',
-      1 => 1435131766,
+      1 => 1556695882,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5c609a1855b1c5_42111921 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cde9c3e1dff15_94998284 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3><?php echo $_smarty_tpl->tpl_vars['_L']->value['Add New Contact'];?>

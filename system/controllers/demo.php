@@ -37,7 +37,9 @@ switch ($action){
 
     case 'create':
 
-        Demo::makeReady();
+        $demo = Demo::makeReady();
+        $workspace_id = $demo['workspace_id'];
+        Transaction::rebuildCatData();
 
         r2(U.'dashboard');
 

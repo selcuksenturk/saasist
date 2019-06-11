@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-05-03 05:36:20
+/* Smarty version 3.1.33, created on 2019-06-10 04:56:11
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/transactions_expense.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5ccc0b94d6d841_62991554',
+  'unifunc' => 'content_5cfe1b2bdc5318_51717845',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '430b2c7526df1a4b8c32a6b74631b741f897b2cc' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/transactions_expense.tpl',
-      1 => 1556695882,
+      1 => 1560156969,
       2 => 'file',
     ),
   ),
@@ -20,31 +20,31 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ccc0b94d6d841_62991554 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cfe1b2bdc5318_51717845 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_384328095ccc0b94d58667_78382711', "content");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9308103995cfe1b2bdb1ab3_40260292', "content");
 ?>
 
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_7088244245ccc0b94d6ac79_63768064', "script");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11894409915cfe1b2bdc1cc3_99462338', "script");
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild($_smarty_tpl, ((string)$_smarty_tpl->tpl_vars['layouts_admin']->value));
 }
 /* {block "content"} */
-class Block_384328095ccc0b94d58667_78382711 extends Smarty_Internal_Block
+class Block_9308103995cfe1b2bdb1ab3_40260292 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'content' => 
   array (
-    0 => 'Block_384328095ccc0b94d58667_78382711',
+    0 => 'Block_9308103995cfe1b2bdb1ab3_40260292',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -107,10 +107,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                         </div>
 
 
-                                                                                                
-                                                                                                                                                
-                                                                        
-
                         <div class="form-group">
                             <label for="amount" class="col-sm-3 control-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Amount'];?>
 </label>
@@ -118,36 +114,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                 <input type="text" class="form-control amount" id="amount" name="amount">
                             </div>
                         </div>
-
-
-                        
-
-                        <?php if ($_smarty_tpl->tpl_vars['config']->value['edition'] == 'iqm') {?>
-
-                            <h4 style="border-bottom: 1px solid #eee; padding-bottom: 8px;">Paid As</h4>
-
-
-
-                            <div class="form-group">
-                                <label for="c1_amount" class="col-sm-3 control-label">$</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="c1_amount" name="c1_amount">
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="c2_amount" class="col-sm-3 control-label">IQD</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="c2_amount" name="c2_amount">
-                                </div>
-                            </div>
-
-                            <hr>
-
-                        <?php }?>
-
-                        
 
 
 
@@ -175,36 +141,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                 </select>
                             </div>
                         </div>
-
-                        <?php if ($_smarty_tpl->tpl_vars['config']->value['edition'] == 'iqm') {?>
-
-
-                            <div class="form-group">
-                                <label for="sub_type" class="col-sm-3 control-label">Type</label>
-                                <div class="col-sm-9">
-                                    <select id="sub_type" name="sub_type" class="form-control">
-
-                                        <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['expense_types']->value, 'expense_type');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['expense_type']->value) {
-?>
-                                            <option value="<?php echo $_smarty_tpl->tpl_vars['expense_type']->value->name;?>
-"><?php echo $_smarty_tpl->tpl_vars['expense_type']->value->name;?>
-</option>
-                                        <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-
-
-
-                                    </select>
-                                </div>
-                            </div>
-
-                        <?php }?>
-
 
 
 
@@ -329,7 +265,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['trs']->value) {
 ?>
                             <tr>
                                 <td><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-transactions/manage/<?php echo $_smarty_tpl->tpl_vars['trs']->value['id'];?>
+transactions/manage/<?php echo $_smarty_tpl->tpl_vars['trs']->value['uuid'];?>
 ">
                                         <?php if ($_smarty_tpl->tpl_vars['trs']->value['attachments'] != '') {?>
                                             <i class="fa fa-paperclip"></i>
@@ -400,12 +336,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 }
 /* {/block "content"} */
 /* {block "script"} */
-class Block_7088244245ccc0b94d6ac79_63768064 extends Smarty_Internal_Block
+class Block_11894409915cfe1b2bdc1cc3_99462338 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'script' => 
   array (
-    0 => 'Block_7088244245ccc0b94d6ac79_63768064',
+    0 => 'Block_11894409915cfe1b2bdc1cc3_99462338',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -416,6 +352,8 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
     <?php echo '<script'; ?>
 >
+
+        Dropzone.autoDiscover = false;
 
         jQuery(document).ready(function() {
 
@@ -448,82 +386,149 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
             ib_autonumeric();
 
+            $("#account").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
+            $("#cats").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
+            $("#pmethod").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
+            $("#payee").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
 
-            <?php if ($_smarty_tpl->tpl_vars['config']->value['edition'] == 'iqm') {?>
+            $('#tags').select2({
+                tags: true,
+                tokenSeparators: [','],
+                theme: "bootstrap",
+                language: {
+                    noResults: function () {
+                        return $("#_lan_no_results_found").val();
+                    }
+                }
+            });
 
 
-            var c2_amount = $("#c2_amount");
 
-            var c1_amount = $("#c1_amount");
+            $("#emsg").hide();
 
-            var c_rate = <?php echo $_smarty_tpl->tpl_vars['currency_rate']->value;?>
-;
+            var _url = $("#_url").val();
 
 
-            function total_c() {
 
-                if($amount.val() == ''){
-                    var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
 
-                    total_amount_c1 = parseFloat(total_amount_c1);
+            //  file attach
 
-                    var total_amount_c2 = isNaN(parseInt(c2_amount.val()/ c_rate)) ? 0 :(c2_amount.val()/ c_rate);
+            var upload_resp;
 
-                    total_amount_c2 = parseFloat(total_amount_c2);
+            var $ib_form_submit = $("#submit");
 
-                    var total_amount_c = total_amount_c1 + total_amount_c2;
 
-                    $amount.val(total_amount_c);
+            var ib_file = new Dropzone("#upload_container",
+                {
+                    url: _url + "transactions/handle_attachment/",
+                    maxFiles: 1,
+                    acceptedFiles: "image/*,application/pdf"
+                }
+            );
+
+
+            ib_file.on("sending", function() {
+
+                $ib_form_submit.prop('disabled', true);
+
+            });
+
+            ib_file.on("success", function(file,response) {
+
+                $ib_form_submit.prop('disabled', false);
+
+                upload_resp = response;
+
+                if(upload_resp.success == 'Yes'){
+
+                    toastr.success(upload_resp.msg);
+                    // $file_link.val(upload_resp.file);
+                    // files.push(upload_resp.file);
+                    //
+                    // console.log(files);
+
+                    $('#attachments').val(function(i,val) {
+                        return val + (!val ? '' : ',') + upload_resp.file;
+                    });
+
+
                 }
                 else{
-                    var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
-
-
-                    total_amount_c1 = parseFloat(total_amount_c1);
-
-                    //  console.log(total_amount_c1);
-                    var tr_amount = $amount.val();
-                    tr_amount = tr_amount.replace("$ ","");
-                    tr_amount = tr_amount.replace(" ","");
-                    tr_amount = tr_amount.replace(",","");
-                    tr_amount = parseFloat(tr_amount);
-                    //  console.log(tr_amount);
-                    var rest_amount = tr_amount - total_amount_c1;
-                    var rest_amount_in_iqd = rest_amount*c_rate;
-
-
-                    //  console.log(c_rate);
-                    //   console.log(rest_amount);
-
-
-                    // console.log(rest_amount_in_iqd);
-                    c2_amount.val(rest_amount_in_iqd);
+                    toastr.error(upload_resp.msg);
                 }
-            }
-
-            c2_amount.keyup(function(){
-
-                total_c();
 
 
-            });
 
 
-            c1_amount.keyup(function(){
 
-                total_c();
 
 
             });
 
 
+            $ib_form_submit.click(function (e) {
+                e.preventDefault();
+                $('#ibox_form').block({ message: null });
+                var _url = $("#_url").val();
+                $.post(_url + 'transactions/expense-post/', {
 
-            <?php }?>
 
+                    account: $('#account').val(),
+                    date: $('#date').val(),
 
+                    amount: $('#amount').val(),
+                    sub_type: $('#sub_type').val(),
+                    cats: $('#cats').val(),
+                    description: $('#description').val(),
+                    attachments: $('#attachments').val(),
+                    tags: $('#tags').val(),
+                    payee: $('#payee').val(),
+                    pmethod: $('#pmethod').val(),
+                    ref: $('#ref').val()
 
-
-
+                })
+                    .done(function (data) {
+                        location.reload();
+                    }).fail(function(data) {
+                    $('#ibox_form').unblock();
+                    var body = $("html, body");
+                    body.animate({ scrollTop:0 }, '1000', 'swing');
+                    $("#emsgbody").html(data.responseText);
+                    $("#emsg").show("slow");
+                });
+            });
 
 
         });

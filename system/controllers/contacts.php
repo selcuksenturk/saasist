@@ -142,10 +142,6 @@ _L[\'New Company\'] = \''.$_L['New Company'].'\';
 
 
 
-
-
-
-
         break;
 
     case 'summary':
@@ -507,8 +503,16 @@ $i = ORM::for_table('sys_invoices')->where('workspace_id',$workspace_id)->where(
 
         $id  = $routes['2'];
 
+        if(is_int($id))
+        {
+            $d = ORM::for_table('crm_accounts')->where('workspace_id',$workspace_id)->find_one($id);
+        }
+        else{
+            $d = Contact::where('workspace_id',$workspace_id)
+                ->where('uuid',$id)
+                ->first();
+        }
 
-        $d = ORM::for_table('crm_accounts')->where('workspace_id',$workspace_id)->find_one($id);
 
         // check self data only
 
@@ -823,9 +827,14 @@ $i = ORM::for_table('sys_invoices')->where('workspace_id',$workspace_id)->where(
           //  $type = _post('type');
 
 
+            $uuid = Str::uuid();
+
             $d = ORM::for_table('crm_accounts')->create();
 
+            $d->uuid = $uuid;
+
             $d->account = $account;
+
             $d->workspace_id = $workspace_id;
             $d->email = $email;
             $d->phone = $phone;
@@ -945,13 +954,13 @@ $i = ORM::for_table('sys_invoices')->where('workspace_id',$workspace_id)->where(
 
             //
 
-            echo $cid;
+            echo $uuid;
 
 
 
         }
         else{
-            echo $msg;
+            responseWithError($msg);
         }
         break;
 
@@ -2779,6 +2788,7 @@ _L[\'are_you_sure\'] = \''.$_L['are_you_sure'].'\';
 
 
         $d->select('id');
+        $d->select('uuid');
         $d->select('account');
         $d->select('img');
         $d->select('company');
@@ -2965,20 +2975,19 @@ _L[\'are_you_sure\'] = \''.$_L['are_you_sure'].'\';
             $records["data"][] = array(
              //  0 => $xs['id'],
                0 => '<input id="row_'.$xs['id'].'" type="checkbox" value="" name=""  class="i-checks"/>',
-               1 => $xs['id'],
-               2 => '<a href="'.U.'contacts/view/'.$xs['id'].'">'.$img.'</a>',
-               3 => htmlentities($xs['account']),
-               4 => htmlentities($xs['company']),
-               5 => htmlentities($xs['gname']),
-               6 => htmlentities($xs['email']),
-               7 => htmlentities($xs['phone']),
-              8 =>  '
-                <a href="'.U.'contacts/view/'.$xs['id'].'" class="btn btn-primary btn-xs cview" id="vid'.$xs['id'].'"><i class="fa fa-search"></i> </a>
-                <a href="'.U.'contacts/view/'.$xs['id'].'/edit/" class="btn btn-warning btn-xs cedit" id="eid'.$xs['id'].'"><i class="glyphicon glyphicon-pencil"></i> </a>
-                <a href="#" class="btn btn-danger btn-xs cdelete" id="uid'.$xs['id'].'"><i class="fa fa-trash"></i> </a>
+               1 => '<a href="'.U.'contacts/view/'.$xs['uuid'].'">'.$img.'</a>',
+               2 => htmlentities($xs['account']),
+               3 => htmlentities($xs['company']),
+               4 => htmlentities($xs['gname']),
+               5 => htmlentities($xs['email']),
+               6 => htmlentities($xs['phone']),
+              7 =>  '
+                <a href="'.U.'contacts/view/'.$xs['uuid'].'" class="btn btn-primary btn-xs cview" id="vid'.$xs['id'].'"><i class="fa fa-search"></i> </a>
+                <a href="'.U.'contacts/view/'.$xs['uuid'].'/edit/" class="btn btn-warning btn-xs cedit" id="eid'.$xs['id'].'"><i class="glyphicon glyphicon-pencil"></i> </a>
+                <a href="#" class="btn btn-danger btn-xs cdelete" id="uid'.$xs['uuid'].'"><i class="fa fa-trash"></i> </a>
                 ',
 
-                9 => $xs['id'],
+                9 => $xs['uuid'],
 
                 "DT_RowId" => 'dtr_'.$xs['id']
 

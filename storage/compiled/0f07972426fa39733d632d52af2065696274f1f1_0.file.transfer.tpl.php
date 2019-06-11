@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-05-07 07:47:59
+/* Smarty version 3.1.33, created on 2019-06-10 05:08:04
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/transfer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5cd1706f503027_50483820',
+  'unifunc' => 'content_5cfe1df4b53106_82098739',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0f07972426fa39733d632d52af2065696274f1f1' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/transfer.tpl',
-      1 => 1556695882,
+      1 => 1560157671,
       2 => 'file',
     ),
   ),
@@ -20,31 +20,31 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5cd1706f503027_50483820 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cfe1df4b53106_82098739 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19668015175cd1706f4f4511_93529421', "content");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20993563065cfe1df4b426d3_20317879', "content");
 ?>
 
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_21185825065cd1706f501ae1_80666962', "script");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11846561105cfe1df4b522c4_87546376', "script");
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild($_smarty_tpl, ((string)$_smarty_tpl->tpl_vars['layouts_admin']->value));
 }
 /* {block "content"} */
-class Block_19668015175cd1706f4f4511_93529421 extends Smarty_Internal_Block
+class Block_20993563065cfe1df4b426d3_20317879 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'content' => 
   array (
-    0 => 'Block_19668015175cd1706f4f4511_93529421',
+    0 => 'Block_20993563065cfe1df4b426d3_20317879',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -274,7 +274,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['trs']->value) {
                                 <td><?php echo $_smarty_tpl->tpl_vars['trs']->value['account'];?>
 </td>
                                 <td><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-transactions/manage/<?php echo $_smarty_tpl->tpl_vars['trs']->value['id'];?>
+transactions/manage/<?php echo $_smarty_tpl->tpl_vars['trs']->value['uuid'];?>
 /"><?php echo $_smarty_tpl->tpl_vars['trs']->value['description'];?>
 </a> </td>
                                 <td class="amount"><?php echo $_smarty_tpl->tpl_vars['trs']->value['amount'];?>
@@ -298,12 +298,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 }
 /* {/block "content"} */
 /* {block "script"} */
-class Block_21185825065cd1706f501ae1_80666962 extends Smarty_Internal_Block
+class Block_11846561105cfe1df4b522c4_87546376 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'script' => 
   array (
-    0 => 'Block_21185825065cd1706f501ae1_80666962',
+    0 => 'Block_11846561105cfe1df4b522c4_87546376',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -313,92 +313,67 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 >
         $(function () {
 
-            var $amount = $("#amount");
-
-            <?php if ($_smarty_tpl->tpl_vars['config']->value['edition'] == 'iqm') {?>
-
-
-            var c2_amount = $("#c2_amount");
-
-            var c1_amount = $("#c1_amount");
-
-            var c_rate = <?php echo $_smarty_tpl->tpl_vars['currency_rate']->value;?>
-;
-
-
-            function total_c() {
-
-//                var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
-//
-//                total_amount_c1 = parseFloat(total_amount_c1);
-//
-//                var total_amount_c2 = isNaN(parseInt(c2_amount.val()/ c_rate)) ? 0 :(c2_amount.val()/ c_rate);
-//
-//                total_amount_c2 = parseFloat(total_amount_c2);
-//
-//                var total_amount_c = total_amount_c1 + total_amount_c2;
-//
-//                $amount.val(total_amount_c);
-
-
-
-                if($amount.val() == ''){
-                    var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
-
-                    total_amount_c1 = parseFloat(total_amount_c1);
-
-                    var total_amount_c2 = isNaN(parseInt(c2_amount.val()/ c_rate)) ? 0 :(c2_amount.val()/ c_rate);
-
-                    total_amount_c2 = parseFloat(total_amount_c2);
-
-                    var total_amount_c = total_amount_c1 + total_amount_c2;
-
-                    $amount.val(total_amount_c);
-                }
-                else{
-                    var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
-
-
-                    total_amount_c1 = parseFloat(total_amount_c1);
-
-                    //  console.log(total_amount_c1);
-                    var tr_amount = $amount.val();
-                    tr_amount = tr_amount.replace("$ ","");
-                    tr_amount = tr_amount.replace(" ","");
-                    tr_amount = tr_amount.replace(",","");
-                    tr_amount = parseFloat(tr_amount);
-                    //  console.log(tr_amount);
-                    var rest_amount = tr_amount - total_amount_c1;
-                    var rest_amount_in_iqd = rest_amount*c_rate;
-
-
-                    //  console.log(c_rate);
-                    //   console.log(rest_amount);
-
-
-                    // console.log(rest_amount_in_iqd);
-                    c2_amount.val(rest_amount_in_iqd);
-                }
-            }
-
-            c2_amount.keyup(function(){
-
-                total_c();
-
-
+            $("#faccount").select2({
+                theme: "bootstrap"
+            });
+            $("#taccount").select2({
+                theme: "bootstrap"
+            });
+            $("#pmethod").select2({
+                theme: "bootstrap"
             });
 
 
-            c1_amount.keyup(function(){
+            $('#tags').select2({
+                tags: true,
+                tokenSeparators: [','],
+                theme: "bootstrap"
+            });
 
-                total_c();
-
-
+            $("#a_hide").hide();
+            $("#emsg").hide();
+            $("#a_toggle").click(function(e){
+                e.preventDefault();
+                $("#a_hide").toggle( "slow" );
             });
 
 
+            var _url = $("#_url").val();
 
-            <?php }?>
+
+
+
+            $("#submit").click(function (e) {
+                e.preventDefault();
+                $('#ibox_form').block({ message: null });
+                var _url = $("#_url").val();
+                $.post(_url + 'transactions/transfer-post/', {
+
+
+                    faccount: $('#faccount').val(),
+                    taccount: $('#taccount').val(),
+                    date: $('#date').val(),
+
+                    amount: $('#amount').val(),
+
+                    description: $('#description').val(),
+                    tags: $('#tags').val(),
+
+                    pmethod: $('#pmethod').val(),
+                    ref: $('#ref').val()
+
+                })
+                    .done(function (data) {
+                        location.reload();
+                    }).fail(function(data) {
+                    $('#ibox_form').unblock();
+                    var body = $("html, body");
+                    body.animate({ scrollTop:0 }, '1000', 'swing');
+                    $("#emsgbody").html(data.responseText);
+                    $("#emsg").show("slow");
+                });
+            });
+
         });
     <?php echo '</script'; ?>
 >

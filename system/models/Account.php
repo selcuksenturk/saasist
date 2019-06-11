@@ -17,4 +17,11 @@ class Account extends Model
 
     }
 
+    public static function getAllAccounts()
+    {
+        global $workspace_id;
+        return Account::where('workspace_id',$workspace_id)
+            ->get();
+    }
+
 }

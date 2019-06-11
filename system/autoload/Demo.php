@@ -98,6 +98,8 @@ Class Demo {
             $currency->workspace_id = $workspace_id;
             $currency->save();
 
+            $currency_id = $currency->id;
+
 
             $c_emails_types = ['sales','info','admin','hello','media','support','billing'];
 
@@ -125,6 +127,8 @@ Class Demo {
 
                 $company->workspace_id = $workspace_id;
 
+                $company->uuid = Str::uuid();
+
                 $company->save();
 
             }
@@ -139,6 +143,7 @@ Class Demo {
                 $c = new Contact;
 
                 $c->account = $faker->name;
+                $c->uuid = Str::uuid();
                 $c->email = $faker->email;
                 $c->phone = $faker->phoneNumber;
                 //  $c->company = $faker->company;
@@ -181,10 +186,10 @@ Class Demo {
                 $balance = new Balance;
 
                 $balance->account_id = $account->id;
-                $balance->currency_id = 1;
+                $balance->currency_id = $currency_id;
                 $balance->balance = _raid(5);
 
-                $balance->workspace_id = 1;
+                $balance->workspace_id = $workspace_id;
 
                 $balance->save();
 
@@ -192,8 +197,6 @@ Class Demo {
 
 
             $tr_incomes = $demo_settings['countries'][$default_country]['incomes'];
-
-
 
 
             $transactionMethod = TransactionMethod::where('workspace_id',$workspace_id)->get()->toArray();
@@ -229,6 +232,7 @@ Class Demo {
 
                 $transaction = new Transaction;
                 $transaction->account = $banks[0]['name'];
+                $transaction->uuid = Str::uuid();
                 $transaction->description = $tr_incomes[0]['description'];
                 $transaction->amount = $tr_incomes[0]['amount'];
                 $transaction->cr = $tr_incomes[0]['amount'];
@@ -251,7 +255,63 @@ Class Demo {
             }
 
 
-            Transaction::rebuildCatData();
+            $tr_cats = TransactionCategory::where('workspace_id',$workspace_id)->where('type','Expense')->get()->toArray();
+
+
+            $tr_expenses = $demo_settings['countries'][$default_country]['expenses'];
+
+            for ($i=0; $i < 425; $i++){
+
+                shuffle($banks);
+                shuffle($tr_expenses);
+                shuffle($transactionMethod);
+
+                shuffle($tr_cats);
+
+                $method = $transactionMethod[0]['name'];
+
+
+                if($method == 'Cash'){
+                    $ref = 'Office / Store Desk';
+                }
+                elseif ($method == 'Check'){
+                    $ref = 'Check Number- '._raid(4).'-'._raid(8);
+                }
+                elseif ($method == 'Credit Card'){
+                    $ref = $faker->creditCardType.' - '.'****'._raid(4);
+                }
+                else{
+                    $ref = 'Transaction ID- '.strtoupper(Ib_Str::random_string(17));
+                }
+
+
+
+                $transaction = new Transaction;
+                $transaction->account = $banks[0]['name'];
+                $transaction->uuid = Str::uuid();
+                $transaction->description = $tr_expenses[0]['description'];
+                $transaction->amount = $tr_expenses[0]['amount'];
+                $transaction->dr = $tr_expenses[0]['amount'];
+                $transaction->date = $faker->dateTimeBetween($startDate = '-1 year', $endDate = '+3 month');
+
+                $transaction->type = 'Expense';
+
+                $transaction->vid = _raid(8);
+
+                $transaction->ref = $ref;
+                $transaction->method = $method;
+
+                $transaction->cat_id = $tr_cats[0]['id'];
+                $transaction->category = $tr_cats[0]['name'];
+
+                $transaction->workspace_id = $workspace_id;
+
+                $transaction->save();
+
+            }
+
+
+           // Transaction::rebuildCatData();
 
             $categories = TransactionCategory::expense();
 
@@ -284,6 +344,7 @@ Class Demo {
                 $lead = new Lead;
 
                 $lead->status = $leadStatus[0]['sname'];
+                $lead->uuid = Str::uuid();
                 $lead->salutation = $salutations[0];
                 $lead->first_name = $faker->firstName;
                 $lead->last_name = $faker->lastName;
@@ -311,6 +372,8 @@ Class Demo {
             $customer_email = 'customer@example.com';
 
             $customer->account = $customer_name;
+
+            $customer->uuid = Str::uuid();
 
             $customer->img = 'storage/dev/user2.png';
 
@@ -348,7 +411,8 @@ Class Demo {
             $card_ref = $faker->creditCardType.' - '.'****'._raid(4);
 
 
-            DB::insert('INSERT INTO sys_invoices (workspace_id,userid, account, cn, invoicenum, date, duedate, datepaid, subtotal, discount_type, discount_value, discount, credit, taxname, tax, tax2, total, taxrate, taxrate2, status, paymentmethod, notes, vtoken, ptoken, r, nd, eid, ename, vid, currency, currency_symbol, currency_prefix, currency_suffix, currency_rate, recurring, recurring_ends, last_recurring_date, source, sale_agent, last_overdue_reminder, allowed_payment_methods, billing_street, billing_city, billing_state, billing_zip, billing_country, shipping_street, shipping_city, shipping_state, shipping_zip, shipping_country, q_hide, show_quantity_as, pid, is_credit_invoice, aid, aname) VALUES (1,'.$customer_id.', \''.$customer_name.'\', \'\', \'\', \''.$today.'\', \''.$today.'\', \''.$today_time.'\', 144.00, \'f\', 0.00, 0.00, 0.00, \'\', 0.00, 0.00, 144.00, 0.00, 0.00, \'Paid\', \'\', \'\', \'0738541991\', \'7715021517\', \'0\', \''.$today.'\', 0, \'\', 0, 1, \'$\', null, null, 1.0000, 0, null, null, null, 0, null, null, null, null, null, null, null, null, null, null, null, null, 0, \'\', 0, 1, 0, null), (1,'.$customer_id.', \''.$customer_name.'\', \'\', \'\', \''.$today.'\', \''.$today.'\', \''.$today_time.'\', 2000.00, \'f\', 200.00, 200.00, 0.00, \'Sales Tax\', 300.00, 0.00, 2100.00, 15.00, 0.00, \'Unpaid\', \'\', \'\', \'4491605289\', \'9317090421\', \'0\', \''.$today.'\', 0, \'\', 0, 1, \'$\', null, null, 1.0000, 0, null, null, null, 0, null, null, null, null, null, null, null, null, null, null, null, null, 0, \'\', 0, 0, 0, null), (1,'.$customer_id.', \''.$customer_name.'\', \'\', \'\', \''.$today.'\', \''.$today.'\', \''.$today_time.'\', 149.00, \'p\', 0.00, 0.00, 149.00, \'\', 0.00, 0.00, 149.00, 0.00, 0.00, \'Paid\', \'\', \'\', \'3559815740\', \'6479179633\', \'0\', \'2017-09-23\', 0, \'\', 0, 1, \'$\', null, null, 1.0000, 0, null, null, null, 0, null, null, null, null, null, null, null, null, null, null, null, null, 0, null, 0, 0, 0, null)');
+
+            DB::insert('INSERT INTO sys_invoices (workspace_id,uuid,userid, account, cn, invoicenum, date, duedate, datepaid, subtotal, discount_type, discount_value, discount, credit, taxname, tax, tax2, total, taxrate, taxrate2, status, paymentmethod, notes, vtoken, ptoken, r, nd, eid, ename, vid, currency, currency_symbol, currency_prefix, currency_suffix, currency_rate, recurring, recurring_ends, last_recurring_date, source, sale_agent, last_overdue_reminder, allowed_payment_methods, billing_street, billing_city, billing_state, billing_zip, billing_country, shipping_street, shipping_city, shipping_state, shipping_zip, shipping_country, q_hide, show_quantity_as, pid, is_credit_invoice, aid, aname) VALUES ('.$workspace_id.',\''.Str::uuid().'\','.$customer_id.', \''.$customer_name.'\', \'\', \'\', \''.$today.'\', \''.$today.'\', \''.$today_time.'\', 144.00, \'f\', 0.00, 0.00, 0.00, \'\', 0.00, 0.00, 144.00, 0.00, 0.00, \'Paid\', \'\', \'\', \'0738541991\', \'7715021517\', \'0\', \''.$today.'\', 0, \'\', 0, 1, \'$\', null, null, 1.0000, 0, null, null, null, 0, null, null, null, null, null, null, null, null, null, null, null, null, 0, \'\', 0, 1, 0, null), ('.$workspace_id.',\''.Str::uuid().'\','.$customer_id.', \''.$customer_name.'\', \'\', \'\', \''.$today.'\', \''.$today.'\', \''.$today_time.'\', 2000.00, \'f\', 200.00, 200.00, 0.00, \'Sales Tax\', 300.00, 0.00, 2100.00, 15.00, 0.00, \'Unpaid\', \'\', \'\', \'4491605289\', \'9317090421\', \'0\', \''.$today.'\', 0, \'\', 0, 1, \'$\', null, null, 1.0000, 0, null, null, null, 0, null, null, null, null, null, null, null, null, null, null, null, null, 0, \'\', 0, 0, 0, null), ('.$workspace_id.',\''.Str::uuid().'\','.$customer_id.', \''.$customer_name.'\', \'\', \'\', \''.$today.'\', \''.$today.'\', \''.$today_time.'\', 149.00, \'p\', 0.00, 0.00, 149.00, \'\', 0.00, 0.00, 149.00, 0.00, 0.00, \'Paid\', \'\', \'\', \'3559815740\', \'6479179633\', \'0\', \'2017-09-23\', 0, \'\', 0, 1, \'$\', null, null, 1.0000, 0, null, null, null, 0, null, null, null, null, null, null, null, null, null, null, null, null, 0, null, 0, 0, 0, null)');
 
             DB::insert('INSERT INTO sys_invoiceitems (workspace_id,invoiceid, userid, type, relid, itemcode, description, qty, amount, taxed, taxamount, total, duedate, paymentmethod, notes) 
 VALUES ('.$workspace_id.',1, '.$customer_id.', \'\', 0, \'\', \'Credit\', \'1\', 144.00, 0, 0.00, 144.00, \''.$today.'\', \'\', \'\'),
@@ -359,7 +423,7 @@ VALUES ('.$workspace_id.',1, '.$customer_id.', \'\', 0, \'\', \'Credit\', \'1\',
 ('.$workspace_id.',3, '.$customer_id.', \'\', 0, \'\', \'Web Hosting / Yearly\', \'1\', 149.00, 0, 0.00, 149.00, \''.$today.'\', \'\', \'\')');
 
 
-            DB::insert('INSERT INTO sys_transactions (workspace_id,account, type, sub_type, category, amount, payer, payee, payerid, payeeid, method, ref, status, description, tags, tax, date, dr, cr, bal, iid, currency, currency_symbol, currency_prefix, currency_suffix, currency_rate, base_amount, company_id, vid, aid, created_at, updated_at, updated_by, attachments, source, rid, pid, archived, trash, flag, c1, c2, c3, c4, c5) VALUES (1,\'Cash\', \'Income\', null, \'Uncategorized\', 144.00, \''.$customer_name.'\', \'\', '.$customer_id.', 0, \'Credit Card\', \''.$card_ref.'\', \'Cleared\', \'Invoice 1 Payment\', \'\', 0.00, \'2017-09-23\', 0.00, 144.00, 0.00, 1, 1, \'USD\', null, null, 1.0000, 0.0000, 0, '._raid(8).', 0, \'2017-09-23 15:19:56\', \'2017-09-23 09:19:56\', 0, null, null, 0, 0, 0, 0, 0, null, null, null, null, null), (1,\'JPMorgan Chase & Co.\', \'Income\', null, \'Uncategorized\', 149.00, \''.$customer_name.'\', \'\', '.$customer_id.', 0, \'Paypal\', \'Transaction ID- '.strtoupper(Ib_Str::random_string(17)).'\', \'Cleared\', \'Invoice 3 Payment\', \'\', 0.00, \'2017-09-23\', 0.00, 149.00, 0.00, 3, 1, \'USD\', null, null, 1.0000, 0.0000, 0, '._raid(8).', 0, \'2017-09-23 15:22:00\', \'2017-09-23 09:22:00\', 0, null, null, 0, 0, 0, 0, 0, null, null, null, null, null)');
+            DB::insert('INSERT INTO sys_transactions (workspace_id,uuid,account, type, sub_type, category, amount, payer, payee, payerid, payeeid, method, ref, status, description, tags, tax, date, dr, cr, bal, iid, currency, currency_symbol, currency_prefix, currency_suffix, currency_rate, base_amount, company_id, vid, aid, created_at, updated_at, updated_by, attachments, source, rid, pid, archived, trash, flag, c1, c2, c3, c4, c5) VALUES ('.$workspace_id.',\''.Str::uuid().'\',\'Cash\', \'Income\', null, \'Uncategorized\', 144.00, \''.$customer_name.'\', \'\', '.$customer_id.', 0, \'Credit Card\', \''.$card_ref.'\', \'Cleared\', \'Invoice 1 Payment\', \'\', 0.00, \'2017-09-23\', 0.00, 144.00, 0.00, 1, 1, \'USD\', null, null, 1.0000, 0.0000, 0, '._raid(8).', 0, \'2017-09-23 15:19:56\', \'2017-09-23 09:19:56\', 0, null, null, 0, 0, 0, 0, 0, null, null, null, null, null), ('.$workspace_id.',\''.Str::uuid().'\',\'JPMorgan Chase & Co.\', \'Income\', null, \'Uncategorized\', 149.00, \''.$customer_name.'\', \'\', '.$customer_id.', 0, \'Paypal\', \'Transaction ID- '.strtoupper(Ib_Str::random_string(17)).'\', \'Cleared\', \'Invoice 3 Payment\', \'\', 0.00, \'2017-09-23\', 0.00, 149.00, 0.00, 3, 1, \'USD\', null, null, 1.0000, 0.0000, 0, '._raid(8).', 0, \'2017-09-23 15:22:00\', \'2017-09-23 09:22:00\', 0, null, null, 0, 0, 0, 0, 0, null, null, null, null, null)');
 
 
 
@@ -367,7 +431,9 @@ VALUES ('.$workspace_id.',1, '.$customer_id.', \'\', 0, \'\', \'Credit\', \'1\',
 ('.$workspace_id.',\'Golf Hat\', \'\', 120.00, -2.0000, 0.0000, 0.0000, 0.0000, 0.0000, null, null, null, null, null, 0, null, 0, null, 0, 0, 0, 0, null, \'0002\', \'\', \'Product\', \'No\', \'No\', 0, \'Active\', null, null, \'\', 0, 0, 0, 0, null, null, null, null, null, null, 0, \'_7a0c1035255988150617492810876737.png\', 0, 0, 0.00, null, 0.00, 0, null, 70.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, null, null, 0, null, 9.0000, 108.0000, null, \'2017-10-04 18:46:13\'),
 ('.$workspace_id.',\'Gift Card 250\', \'\', 250.00, -2.0000, 0.0000, 0.0000, 0.0000, 0.0000, null, null, null, null, null, 0, null, 0, null, 0, 0, 0, 0, null, \'0003\', \'\', \'Product\', \'No\', \'No\', 0, \'Active\', null, null, \'\', 0, 0, 0, 0, null, null, null, null, null, null, 0, \'_7ae11af2868642150642538311023612.png\', 0, 0, 0.00, null, 0.00, 0, null, 250.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, null, null, 0, null, 6.0000, 1500.0000, null, \'2017-10-04 18:46:13\')');
 
-
+            return [
+                'workspace_id' => $workspace_id
+            ];
 
 
         }

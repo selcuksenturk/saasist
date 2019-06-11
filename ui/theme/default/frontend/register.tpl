@@ -1,7 +1,15 @@
 {extends file="frontend/base.tpl"}
 
-{block name="content"}
+{block name="head"}
 
+{if $social_sign_in['google']['enable']}
+    <meta name="google-signin-client_id" content="{$social_sign_in['google']['client_id']}">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+{/if}
+
+{/block}
+
+{block name="content"}
 
     <section class="welcome-page register-page sec-padding p-relative o-hidden h-auto">
         <div class="container">
@@ -57,6 +65,5 @@
         <div class="shape-1 bg-gray p-absolute">
         </div>
     </section>
-
 
 {/block}

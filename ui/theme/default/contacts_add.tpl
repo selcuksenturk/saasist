@@ -387,18 +387,14 @@
                     .done(function (data) {
                         var sbutton = $("#submit");
                         var _url = $("#_url").val();
-                        if ($.isNumeric(data)) {
-
-                            window.location = _url + 'contacts/view/' + data;
-                        }
-                        else {
-                            $('#ibox_form').unblock();
-                            var body = $("html, body");
-                            body.animate({ scrollTop:0 }, '1000', 'swing');
-                            $("#emsgbody").html(data);
-                            $("#emsg").show("slow");
-                        }
-                    });
+                        window.location = _url + 'contacts/view/' + data;
+                    }).fail(function(data) {
+                    $('#ibox_form').unblock();
+                    var body = $("html, body");
+                    body.animate({ scrollTop:0 }, '1000', 'swing');
+                    $("#emsgbody").html(data.responseText);
+                    $("#emsg").show("slow");
+                });
             });
 
             var _msg_add_new_group = $("#_msg_add_new_group").val();

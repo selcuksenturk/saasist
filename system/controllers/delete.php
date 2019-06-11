@@ -637,6 +637,43 @@ switch ($action) {
         break;
 
 
+    case 'asset-category':
+
+        $id = route(2);
+
+        $asset_category = AssetCategory::where('workspace_id',$workspace_id)
+            ->where('uuid',$id)
+            ->first();
+
+        if($asset_category)
+        {
+            $asset_category->delete();
+        }
+
+        r2(U.'assets/list','s',$_L['Deleted Successfully']);
+
+        break;
+
+
+    case 'asset':
+
+        $id = route(2);
+
+        $asset = AccountingAsset::where('workspace_id',$workspace_id)
+            ->where('uuid',$id)
+            ->first();
+
+        if($id)
+        {
+            $asset->delete();
+        }
+
+        r2(U.'assets/list','s',$_L['Deleted Successfully']);
+
+
+        break;
+
+
     case 'password':
 
         $id = route(2);

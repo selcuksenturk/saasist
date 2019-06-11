@@ -53,7 +53,7 @@ class Workspace extends Model
 
             $activation_key = mt_rand(100000, 999999);
             $username = (string) \Ramsey\Uuid\Uuid::uuid4();
-            $base_url = 'https://'.$username.'.app.saas.ist';
+            $base_url = 'https://'.$username.'app.saas.ist';
 
             $workspace = new Workspace;
             $workspace->username = $username;
@@ -383,7 +383,7 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'animate',
-                        'value' => '1'
+                        'value' => '0'
                     ],
                     [
                         'key' => 'pdf_font',
@@ -827,7 +827,7 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'top_bar_is_dark',
-                        'value' => '0'
+                        'value' => '1'
                     ],
                     [
                         'key' => 'slack_webhook_url',

@@ -307,6 +307,9 @@ switch ($action) {
             $ui->assign('emls', $emls);
             $ui->assign('emls_c', $emls_c);
             $a = ORM::for_table('crm_accounts')->where('workspace_id',$workspace_id)->find_one($d['userid']);
+
+
+
             $ui->assign('a', $a);
             $ui->assign('d', $d);
             $i_credit = $d['credit'];
@@ -994,7 +997,17 @@ $(\'[data-toggle="tooltip"]\').tooltip();
         $invoice_cancelled_amount = $invoice_cancelled_amount->sum('total');
 
      //   $cancelled = Invoice::where('status', 'Cancelled')->count();
-        view('invoices_list', ['paid' => $paid, 'unpaid' => $unpaid, 'partially_paid' => $partially_paid, 'cancelled' => $cancelled, 'invoice_paid_amount' => $invoice_paid_amount, 'invoice_un_paid_amount' => $invoice_un_paid_amount, 'invoice_cancelled_amount' => $invoice_cancelled_amount, 'invoice_partially_paid_amount' => $invoice_partially_paid_amount, 'p' => $p]);
+        view('invoices_list', [
+            'paid' => $paid,
+            'unpaid' => $unpaid,
+            'partially_paid' => $partially_paid,
+            'cancelled' => $cancelled,
+            'invoice_paid_amount' => $invoice_paid_amount,
+            'invoice_un_paid_amount' => $invoice_un_paid_amount,
+            'invoice_cancelled_amount' => $invoice_cancelled_amount,
+            'invoice_partially_paid_amount' => $invoice_partially_paid_amount,
+            'p' => $p
+        ]);
         break;
 
     case 'list-recurring':

@@ -34,6 +34,7 @@
                                 <option value="purple" {if $config['nstyle'] eq 'purple'}selected="selected" {/if}>Purple</option>
                                 <option value="indigo_blue" {if $config['nstyle'] eq 'indigo_blue'}selected="selected" {/if}>Indigo blue</option>
                                 <option value="dark" {if $config['nstyle'] eq 'dark'}selected="selected" {/if}>Dark sf</option>
+                                <option value="blue_extra" {if $config['nstyle'] eq 'blue_extra'}selected="selected" {/if}>Blue extra</option>
                             </select>
                         </div>
 

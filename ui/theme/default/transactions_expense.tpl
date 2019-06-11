@@ -42,61 +42,12 @@
                         </div>
 
 
-                        {*<div class="form-group">*}
-                        {*<label for="account" class="col-sm-3 control-label">{$_L['Currency']}</label>*}
-                        {*<div class="col-sm-9">*}
-                        {*<select id="currency" name="currency" class="form-control">*}
-
-                        {*{foreach $currencies as $currency}*}
-                        {*<option value="{$currency['id']}"*}
-                        {*{if $config['home_currency'] eq ($currency['cname'])}selected="selected" {/if}>{$currency['cname']}</option>*}
-                        {*{foreachelse}*}
-                        {*<option value="0">{$config['home_currency']}</option>*}
-                        {*{/foreach}*}
-
-                        {*</select>*}
-                        {*</div>*}
-                        {*</div>*}
-
-
                         <div class="form-group">
                             <label for="amount" class="col-sm-3 control-label">{$_L['Amount']}</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control amount" id="amount" name="amount">
                             </div>
                         </div>
-
-
-                        {* This Section is only for custom requirements *}
-
-
-                        {if $config['edition'] eq 'iqm'}
-
-                            <h4 style="border-bottom: 1px solid #eee; padding-bottom: 8px;">Paid As</h4>
-
-
-
-                            <div class="form-group">
-                                <label for="c1_amount" class="col-sm-3 control-label">$</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="c1_amount" name="c1_amount">
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="c2_amount" class="col-sm-3 control-label">IQD</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="c2_amount" name="c2_amount">
-                                </div>
-                            </div>
-
-                            <hr>
-
-                        {/if}
-
-                        {* End Custom Requirements Section *}
-
 
 
 
@@ -113,27 +64,6 @@
                                 </select>
                             </div>
                         </div>
-
-                        {if $config['edition'] eq 'iqm'}
-
-
-                            <div class="form-group">
-                                <label for="sub_type" class="col-sm-3 control-label">Type</label>
-                                <div class="col-sm-9">
-                                    <select id="sub_type" name="sub_type" class="form-control">
-
-                                        {foreach $expense_types as $expense_type}
-                                            <option value="{$expense_type->name}">{$expense_type->name}</option>
-                                        {/foreach}
-
-
-
-                                    </select>
-                                </div>
-                            </div>
-
-                        {/if}
-
 
 
 
@@ -215,7 +145,7 @@
 
                         {foreach $tr as $trs}
                             <tr>
-                                <td><a href="{$_url}transactions/manage/{$trs['id']}">
+                                <td><a href="{$_url}transactions/manage/{$trs['uuid']}">
                                         {if $trs['attachments'] neq ''}
                                             <i class="fa fa-paperclip"></i>
                                         {/if}
@@ -280,6 +210,8 @@
 
     <script>
 
+        Dropzone.autoDiscover = false;
+
         jQuery(document).ready(function() {
 
 
@@ -305,81 +237,149 @@
 
             ib_autonumeric();
 
+            $("#account").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
+            $("#cats").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
+            $("#pmethod").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
+            $("#payee").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
 
-            {if $config['edition'] eq 'iqm'}
+            $('#tags').select2({
+                tags: true,
+                tokenSeparators: [','],
+                theme: "bootstrap",
+                language: {
+                    noResults: function () {
+                        return $("#_lan_no_results_found").val();
+                    }
+                }
+            });
 
 
-            var c2_amount = $("#c2_amount");
 
-            var c1_amount = $("#c1_amount");
+            $("#emsg").hide();
 
-            var c_rate = {$currency_rate};
+            var _url = $("#_url").val();
 
 
-            function total_c() {
 
-                if($amount.val() == ''){
-                    var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
 
-                    total_amount_c1 = parseFloat(total_amount_c1);
+            //  file attach
 
-                    var total_amount_c2 = isNaN(parseInt(c2_amount.val()/ c_rate)) ? 0 :(c2_amount.val()/ c_rate);
+            var upload_resp;
 
-                    total_amount_c2 = parseFloat(total_amount_c2);
+            var $ib_form_submit = $("#submit");
 
-                    var total_amount_c = total_amount_c1 + total_amount_c2;
 
-                    $amount.val(total_amount_c);
+            var ib_file = new Dropzone("#upload_container",
+                {
+                    url: _url + "transactions/handle_attachment/",
+                    maxFiles: 1,
+                    acceptedFiles: "image/*,application/pdf"
+                }
+            );
+
+
+            ib_file.on("sending", function() {
+
+                $ib_form_submit.prop('disabled', true);
+
+            });
+
+            ib_file.on("success", function(file,response) {
+
+                $ib_form_submit.prop('disabled', false);
+
+                upload_resp = response;
+
+                if(upload_resp.success == 'Yes'){
+
+                    toastr.success(upload_resp.msg);
+                    // $file_link.val(upload_resp.file);
+                    // files.push(upload_resp.file);
+                    //
+                    // console.log(files);
+
+                    $('#attachments').val(function(i,val) {
+                        return val + (!val ? '' : ',') + upload_resp.file;
+                    });
+
+
                 }
                 else{
-                    var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
-
-
-                    total_amount_c1 = parseFloat(total_amount_c1);
-
-                    //  console.log(total_amount_c1);
-                    var tr_amount = $amount.val();
-                    tr_amount = tr_amount.replace("$ ","");
-                    tr_amount = tr_amount.replace(" ","");
-                    tr_amount = tr_amount.replace(",","");
-                    tr_amount = parseFloat(tr_amount);
-                    //  console.log(tr_amount);
-                    var rest_amount = tr_amount - total_amount_c1;
-                    var rest_amount_in_iqd = rest_amount*c_rate;
-
-
-                    //  console.log(c_rate);
-                    //   console.log(rest_amount);
-
-
-                    // console.log(rest_amount_in_iqd);
-                    c2_amount.val(rest_amount_in_iqd);
+                    toastr.error(upload_resp.msg);
                 }
-            }
-
-            c2_amount.keyup(function(){
-
-                total_c();
 
 
-            });
 
 
-            c1_amount.keyup(function(){
 
-                total_c();
 
 
             });
 
 
+            $ib_form_submit.click(function (e) {
+                e.preventDefault();
+                $('#ibox_form').block({ message: null });
+                var _url = $("#_url").val();
+                $.post(_url + 'transactions/expense-post/', {
 
-            {/if}
 
+                    account: $('#account').val(),
+                    date: $('#date').val(),
 
+                    amount: $('#amount').val(),
+                    sub_type: $('#sub_type').val(),
+                    cats: $('#cats').val(),
+                    description: $('#description').val(),
+                    attachments: $('#attachments').val(),
+                    tags: $('#tags').val(),
+                    payee: $('#payee').val(),
+                    pmethod: $('#pmethod').val(),
+                    ref: $('#ref').val()
 
-
-
+                })
+                    .done(function (data) {
+                        location.reload();
+                    }).fail(function(data) {
+                    $('#ibox_form').unblock();
+                    var body = $("html, body");
+                    body.animate({ scrollTop:0 }, '1000', 'swing');
+                    $("#emsgbody").html(data.responseText);
+                    $("#emsg").show("slow");
+                });
+            });
 
 
         });

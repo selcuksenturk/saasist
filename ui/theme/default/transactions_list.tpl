@@ -82,18 +82,17 @@
                                 <table class="table table-bordered table-hover display" id="ib_dt">
                                     <thead>
                                     <tr class="heading">
-                                        <th>{$_L['ID']}</th>
+
                                         <th>{$_L['Date']}</th>
                                         <th>{$_L['Account']}</th>
                                         <th>{$_L['Type']}</th>
 
+                                        <th>{$_L['Description']}</th>
+
                                         <th class="text-right">{$_L['Amount']}</th>
 
-                                        <th>{$_L['Description']}</th>
-                                        <th class="text-right">{$_L['Dr']}</th>
-                                        <th class="text-right">{$_L['Cr']}</th>
-                                        <th class="text-right">{$_L['Balance']}</th>
-                                        <th>{$_L['Manage']}</th>
+
+
                                     </tr>
                                     </thead>
 
@@ -204,7 +203,8 @@
                         }
                     },
                     "pageLength": 10,
-                    responsive: true,
+                     responsive: true,
+                    "autoWidth": false,
                     dom: "<'row'<'col-sm-6'i><'col-sm-6'B>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-5'><'col-sm-7'p>>",
@@ -253,7 +253,7 @@
                         }
                     ],
                     "columnDefs": [
-                        { "orderable": false, "targets": 9 }
+                        // { "orderable": false, "targets": 9 }
                     ],
                     "order": [[ 0, 'desc' ]],
                     "scrollX": true,

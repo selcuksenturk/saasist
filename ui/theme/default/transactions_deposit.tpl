@@ -43,21 +43,6 @@
                         </div>
 
 
-                        {*<div class="form-group">*}
-                        {*<label for="currency" class="col-sm-3 control-label">{$_L['Currency']}</label>*}
-                        {*<div class="col-sm-9">*}
-                        {*<select id="currency" name="currency" class="form-control">*}
-
-                        {*{foreach $currencies as $currency}*}
-                        {*<option value="{$currency['id']}" {if $config['home_currency'] eq $currency['iso_code']}selected{/if}>{$currency['iso_code']}</option>*}
-                        {*{/foreach}*}
-
-
-                        {*</select>*}
-                        {*</div>*}
-                        {*</div>*}
-
-
                         <div class="form-group">
                             <label for="amount" class="col-sm-3 control-label">{$_L['Amount']}</label>
                             <div class="col-sm-9">
@@ -197,7 +182,7 @@
 
                                 <td>{$trs['account']}</td>
 
-                                <td><a href="{$_url}transactions/manage/{$trs['id']}/">
+                                <td><a href="{$_url}transactions/manage/{$trs['uuid']}/">
                                         {if $trs['attachments'] neq ''}
                                             <i class="fa fa-paperclip"></i>
                                         {/if}
@@ -263,8 +248,9 @@
 
 {block name="script"}
 
-
     <script>
+
+        Dropzone.autoDiscover = false;
 
         jQuery(document).ready(function() {
 
@@ -291,94 +277,179 @@
 
             ib_autonumeric();
 
+            $('[data-toggle="datepicker"]').datepicker();
 
-            {if $config['edition'] eq 'iqm'}
+            $("#account").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
+            $("#cats").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
+            $("#pmethod").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
+            $("#payer").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
+
+            $('#tags').select2({
+                tags: true,
+                tokenSeparators: [','],
+                theme: "bootstrap",
+                language: {
+                    noResults: function () {
+                        return $("#_lan_no_results_found").val();
+                    }
+                }
+            });
+
+            //$('.amount').autoNumeric('init');
+            // $("#a_hide").hide();
+            $("#emsg").hide();
+            // $("#a_toggle").click(function(e){
+            //     e.preventDefault();
+            //     $("#a_hide").toggle( "slow" );
+            // });
+            /*
+            * File upload
+            * */
+
+            //Dropzone.options.myAwesomeDropzone = {
+            //
+            //    autoProcessQueue: false,
+            //    uploadMultiple: true,
+            //    parallelUploads: 100,
+            //    maxFiles: 100,
+            //
+            //    // Dropzone settings
+            //    init: function() {
+            //        var myDropzone = this;
+            //
+            //        this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+            //            e.preventDefault();
+            //            e.stopPropagation();
+            //            myDropzone.processQueue();
+            //        });
+            //        this.on("sendingmultiple", function() {
+            //        });
+            //        this.on("successmultiple", function(files, response) {
+            //        });
+            //        this.on("errormultiple", function(files, response) {
+            //        });
+            //    }
+            //
+            //}
+
+            var _url = $("#_url").val();
 
 
-            var c2_amount = $("#c2_amount");
+            var upload_resp;
 
-            var c1_amount = $("#c1_amount");
-
-            var c_rate = {$currency_rate};
+            var $ib_form_submit = $("#submit");
 
 
-            function total_c() {
-
-//                var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
-//
-//                total_amount_c1 = parseFloat(total_amount_c1);
-//
-//                var total_amount_c2 = isNaN(parseInt(c2_amount.val()/ c_rate)) ? 0 :(c2_amount.val()/ c_rate);
-//
-//                total_amount_c2 = parseFloat(total_amount_c2);
-//
-//                var total_amount_c = total_amount_c1 + total_amount_c2;
-//
-//                $amount.val(total_amount_c);
+            var ib_file = new Dropzone("#upload_container",
+                {
+                    url: _url + "transactions/handle_attachment/",
+                    maxFiles: 1,
+                    acceptedFiles: "image/*,application/pdf"
+                }
+            );
 
 
+            ib_file.on("sending", function() {
 
-                if($amount.val() == ''){
-                    var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
+                $ib_form_submit.prop('disabled', true);
 
-                    total_amount_c1 = parseFloat(total_amount_c1);
+            });
 
-                    var total_amount_c2 = isNaN(parseInt(c2_amount.val()/ c_rate)) ? 0 :(c2_amount.val()/ c_rate);
+            ib_file.on("success", function(file,response) {
 
-                    total_amount_c2 = parseFloat(total_amount_c2);
+                $ib_form_submit.prop('disabled', false);
 
-                    var total_amount_c = total_amount_c1 + total_amount_c2;
+                upload_resp = response;
 
-                    $amount.val(total_amount_c);
+                if(upload_resp.success == 'Yes'){
+
+                    toastr.success(upload_resp.msg);
+                    // $file_link.val(upload_resp.file);
+                    // files.push(upload_resp.file);
+                    //
+                    // console.log(files);
+
+                    $('#attachments').val(function(i,val) {
+                        return val + (!val ? '' : ',') + upload_resp.file;
+                    });
+
+
                 }
                 else{
-                    var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
-
-
-                    total_amount_c1 = parseFloat(total_amount_c1);
-
-                    //  console.log(total_amount_c1);
-                    var tr_amount = $amount.val();
-                    tr_amount = tr_amount.replace("$ ","");
-                    tr_amount = tr_amount.replace(" ","");
-                    tr_amount = tr_amount.replace(",","");
-                    tr_amount = parseFloat(tr_amount);
-                    //  console.log(tr_amount);
-                    var rest_amount = tr_amount - total_amount_c1;
-                    var rest_amount_in_iqd = rest_amount*c_rate;
-
-
-                    //  console.log(c_rate);
-                    //   console.log(rest_amount);
-
-
-                    // console.log(rest_amount_in_iqd);
-                    c2_amount.val(rest_amount_in_iqd);
+                    toastr.error(upload_resp.msg);
                 }
-            }
 
-            c2_amount.keyup(function(){
 
-                total_c();
+
+
+
 
 
             });
 
 
-            c1_amount.keyup(function(){
+            $ib_form_submit.click(function (e) {
+                e.preventDefault();
+                $('#ibox_form').block({ message: null });
+                var _url = $("#_url").val();
+                $.post(_url + 'transactions/deposit-post/', {
 
-                total_c();
 
+                    account: $('#account').val(),
+                    date: $('#date').val(),
 
+                    amount: $('#amount').val(),
+                    cats: $('#cats').val(),
+                    description: $('#description').val(),
+                    attachments: $('#attachments').val(),
+                    tags: $('#tags').val(),
+                    payer: $('#payer').val(),
+                    pmethod: $('#pmethod').val(),
+                    ref: $('#ref').val()
+
+                })
+                    .done(function (data) {
+                        location.reload();
+                    }).fail(function(data) {
+                    $('#ibox_form').unblock();
+                    var body = $("html, body");
+                    body.animate({ scrollTop:0 }, '1000', 'swing');
+                    $("#emsgbody").html(data.responseText);
+                    $("#emsg").show("slow");
+                });
             });
-
-
-
-            {/if}
-
-
-
-
 
 
 

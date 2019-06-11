@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-05-03 05:36:19
+/* Smarty version 3.1.33, created on 2019-06-10 04:49:46
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/transactions_deposit.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5ccc0b93939e40_69675804',
+  'unifunc' => 'content_5cfe19aa447748_18329978',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a9efd2bbad4b5cbe245e202128f1fe17971b55a7' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/transactions_deposit.tpl',
-      1 => 1556695882,
+      1 => 1560156583,
       2 => 'file',
     ),
   ),
@@ -20,30 +20,30 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ccc0b93939e40_69675804 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cfe19aa447748_18329978 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_18121514565ccc0b93923716_68957350', "content");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1296939625cfe19aa432ff8_55790078', "content");
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_7000536025ccc0b939360e9_74635415', "script");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_16247394575cfe19aa443d07_45778189', "script");
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild($_smarty_tpl, ((string)$_smarty_tpl->tpl_vars['layouts_admin']->value));
 }
 /* {block "content"} */
-class Block_18121514565ccc0b93923716_68957350 extends Smarty_Internal_Block
+class Block_1296939625cfe19aa432ff8_55790078 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'content' => 
   array (
-    0 => 'Block_18121514565ccc0b93923716_68957350',
+    0 => 'Block_1296939625cfe19aa432ff8_55790078',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -106,11 +106,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                             </div>
                         </div>
 
-
-                                                                                                
-                                                                        
-
-                                                                        
 
                         <div class="form-group">
                             <label for="amount" class="col-sm-3 control-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Amount'];?>
@@ -306,7 +301,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['trs']->value) {
 </td>
 
                                 <td><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-transactions/manage/<?php echo $_smarty_tpl->tpl_vars['trs']->value['id'];?>
+transactions/manage/<?php echo $_smarty_tpl->tpl_vars['trs']->value['uuid'];?>
 /">
                                         <?php if ($_smarty_tpl->tpl_vars['trs']->value['attachments'] != '') {?>
                                             <i class="fa fa-paperclip"></i>
@@ -383,21 +378,22 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 }
 /* {/block "content"} */
 /* {block "script"} */
-class Block_7000536025ccc0b939360e9_74635415 extends Smarty_Internal_Block
+class Block_16247394575cfe19aa443d07_45778189 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'script' => 
   array (
-    0 => 'Block_7000536025ccc0b939360e9_74635415',
+    0 => 'Block_16247394575cfe19aa443d07_45778189',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 
-
     <?php echo '<script'; ?>
 >
+
+        Dropzone.autoDiscover = false;
 
         jQuery(document).ready(function() {
 
@@ -430,95 +426,179 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
             ib_autonumeric();
 
+            $('[data-toggle="datepicker"]').datepicker();
 
-            <?php if ($_smarty_tpl->tpl_vars['config']->value['edition'] == 'iqm') {?>
+            $("#account").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
+            $("#cats").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
+            $("#pmethod").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
+            $("#payer").select2({
+                    theme: "bootstrap",
+                    language: {
+                        noResults: function () {
+                            return $("#_lan_no_results_found").val();
+                        }
+                    }
+                }
+            );
+
+            $('#tags').select2({
+                tags: true,
+                tokenSeparators: [','],
+                theme: "bootstrap",
+                language: {
+                    noResults: function () {
+                        return $("#_lan_no_results_found").val();
+                    }
+                }
+            });
+
+            //$('.amount').autoNumeric('init');
+            // $("#a_hide").hide();
+            $("#emsg").hide();
+            // $("#a_toggle").click(function(e){
+            //     e.preventDefault();
+            //     $("#a_hide").toggle( "slow" );
+            // });
+            /*
+            * File upload
+            * */
+
+            //Dropzone.options.myAwesomeDropzone = {
+            //
+            //    autoProcessQueue: false,
+            //    uploadMultiple: true,
+            //    parallelUploads: 100,
+            //    maxFiles: 100,
+            //
+            //    // Dropzone settings
+            //    init: function() {
+            //        var myDropzone = this;
+            //
+            //        this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+            //            e.preventDefault();
+            //            e.stopPropagation();
+            //            myDropzone.processQueue();
+            //        });
+            //        this.on("sendingmultiple", function() {
+            //        });
+            //        this.on("successmultiple", function(files, response) {
+            //        });
+            //        this.on("errormultiple", function(files, response) {
+            //        });
+            //    }
+            //
+            //}
+
+            var _url = $("#_url").val();
 
 
-            var c2_amount = $("#c2_amount");
+            var upload_resp;
 
-            var c1_amount = $("#c1_amount");
-
-            var c_rate = <?php echo $_smarty_tpl->tpl_vars['currency_rate']->value;?>
-;
+            var $ib_form_submit = $("#submit");
 
 
-            function total_c() {
-
-//                var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
-//
-//                total_amount_c1 = parseFloat(total_amount_c1);
-//
-//                var total_amount_c2 = isNaN(parseInt(c2_amount.val()/ c_rate)) ? 0 :(c2_amount.val()/ c_rate);
-//
-//                total_amount_c2 = parseFloat(total_amount_c2);
-//
-//                var total_amount_c = total_amount_c1 + total_amount_c2;
-//
-//                $amount.val(total_amount_c);
+            var ib_file = new Dropzone("#upload_container",
+                {
+                    url: _url + "transactions/handle_attachment/",
+                    maxFiles: 1,
+                    acceptedFiles: "image/*,application/pdf"
+                }
+            );
 
 
+            ib_file.on("sending", function() {
 
-                if($amount.val() == ''){
-                    var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
+                $ib_form_submit.prop('disabled', true);
 
-                    total_amount_c1 = parseFloat(total_amount_c1);
+            });
 
-                    var total_amount_c2 = isNaN(parseInt(c2_amount.val()/ c_rate)) ? 0 :(c2_amount.val()/ c_rate);
+            ib_file.on("success", function(file,response) {
 
-                    total_amount_c2 = parseFloat(total_amount_c2);
+                $ib_form_submit.prop('disabled', false);
 
-                    var total_amount_c = total_amount_c1 + total_amount_c2;
+                upload_resp = response;
 
-                    $amount.val(total_amount_c);
+                if(upload_resp.success == 'Yes'){
+
+                    toastr.success(upload_resp.msg);
+                    // $file_link.val(upload_resp.file);
+                    // files.push(upload_resp.file);
+                    //
+                    // console.log(files);
+
+                    $('#attachments').val(function(i,val) {
+                        return val + (!val ? '' : ',') + upload_resp.file;
+                    });
+
+
                 }
                 else{
-                    var total_amount_c1 = isNaN(parseInt(c1_amount.val())) ? 0 :(c1_amount.val());
-
-
-                    total_amount_c1 = parseFloat(total_amount_c1);
-
-                    //  console.log(total_amount_c1);
-                    var tr_amount = $amount.val();
-                    tr_amount = tr_amount.replace("$ ","");
-                    tr_amount = tr_amount.replace(" ","");
-                    tr_amount = tr_amount.replace(",","");
-                    tr_amount = parseFloat(tr_amount);
-                    //  console.log(tr_amount);
-                    var rest_amount = tr_amount - total_amount_c1;
-                    var rest_amount_in_iqd = rest_amount*c_rate;
-
-
-                    //  console.log(c_rate);
-                    //   console.log(rest_amount);
-
-
-                    // console.log(rest_amount_in_iqd);
-                    c2_amount.val(rest_amount_in_iqd);
+                    toastr.error(upload_resp.msg);
                 }
-            }
 
-            c2_amount.keyup(function(){
 
-                total_c();
+
+
+
 
 
             });
 
 
-            c1_amount.keyup(function(){
+            $ib_form_submit.click(function (e) {
+                e.preventDefault();
+                $('#ibox_form').block({ message: null });
+                var _url = $("#_url").val();
+                $.post(_url + 'transactions/deposit-post/', {
 
-                total_c();
 
+                    account: $('#account').val(),
+                    date: $('#date').val(),
 
+                    amount: $('#amount').val(),
+                    cats: $('#cats').val(),
+                    description: $('#description').val(),
+                    attachments: $('#attachments').val(),
+                    tags: $('#tags').val(),
+                    payer: $('#payer').val(),
+                    pmethod: $('#pmethod').val(),
+                    ref: $('#ref').val()
+
+                })
+                    .done(function (data) {
+                        location.reload();
+                    }).fail(function(data) {
+                    $('#ibox_form').unblock();
+                    var body = $("html, body");
+                    body.animate({ scrollTop:0 }, '1000', 'swing');
+                    $("#emsgbody").html(data.responseText);
+                    $("#emsg").show("slow");
+                });
             });
-
-
-
-            <?php }?>
-
-
-
-
 
 
 

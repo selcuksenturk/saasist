@@ -34,6 +34,10 @@ Class Admin{
                 }
 
                 $_SESSION['uid'] = $d['id'];
+
+                $_SESSION['language'] = $d->language;
+                $_SESSION['workspace_id'] = $d->workspace_id;
+
                 $d->last_login = date('Y-m-d H:i:s');
                 $d->save();
                 _log($_L['Login Successful'].' '.$d->username,'Admin',$d->id);

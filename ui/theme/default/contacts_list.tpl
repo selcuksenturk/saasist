@@ -44,7 +44,7 @@
                             <thead>
                             <tr class="heading">
                                 <th><input id="d_select_all" type="checkbox" value="" name=""  class="i-checks"/></th>
-                                <th>#</th>
+
                                 <th>{$_L['Image']}</th>
                                 <th>{$_L['Name']}</th>
                                 <th>{$_L['Company Name']}</th>
@@ -55,7 +55,6 @@
                             </tr>
 
                             <tr class="heading">
-                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td><input type="text" id="account" name="account" class="form-control"></td>
@@ -184,7 +183,7 @@
                         "render": function ( data, type, row ) {
                             return '<a href="' + base_url +'contacts/view/'+ row[9] +'">'+ data +'</a>';
                         },
-                        "targets": 3
+                        "targets": 2
                     },
                     // {
                     //     "render": function (data) {
@@ -196,12 +195,11 @@
                     //     "targets": 7
                     // },
                     { "orderable": false, "targets": 0 },
-                    { "orderable": false, "targets": 8 },
-                    { "orderable": false, "targets": 2 },
+                    { "orderable": false, "targets": 7 },
+                    { "orderable": false, "targets": 1 },
                     { className: "text-center", "targets": [ 1 ] },
-                    { "type": "html-num", "targets": 1 }
                 ],
-                "order": [[ 1, 'desc' ]],
+                "order": [[ 2, 'desc' ]],
                 "scrollX": true,
                 "initComplete": function () {
                     $ib_data_panel.unblock();

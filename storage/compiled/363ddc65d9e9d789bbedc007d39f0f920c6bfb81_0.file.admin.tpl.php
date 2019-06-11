@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-05-07 08:05:44
+/* Smarty version 3.1.33, created on 2019-06-10 18:39:02
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/layouts/admin.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5cd174987a47b5_50226363',
+  'unifunc' => 'content_5cfedc060a2af2_86975904',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '363ddc65d9e9d789bbedc007d39f0f920c6bfb81' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/layouts/admin.tpl',
-      1 => 1557230719,
+      1 => 1560206332,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5cd174987a47b5_50226363 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cfedc060a2af2_86975904 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -56,7 +56,7 @@ default/css/app.css?v=3" rel="stylesheet">
                                                         
     <link href="<?php echo $_smarty_tpl->tpl_vars['theme']->value;?>
 default/css/<?php echo $_smarty_tpl->tpl_vars['config']->value['nstyle'];?>
-.css" rel="stylesheet">
+.css?v=2xx" rel="stylesheet">
 
     <?php echo '<script'; ?>
 >
@@ -100,7 +100,7 @@ default/css/style-rtl.min.css" rel="stylesheet">
     <?php }?>
 
     <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19296456985cd1749873e0e5_93264970', 'style');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_3892136415cfedc0603b0f5_57139214', 'style');
 ?>
 
 
@@ -121,9 +121,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
             font-size: 16px;
 
         }
-        .nav>li.active>a {
-            padding-left: 19px;
-        }
+
     </style>
 
 </head>
@@ -142,6 +140,49 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
             <div class="sidebar-collapse">
 
                 <ul class="nav nav-highlight" id="side-menu">
+
+
+                    <li class="nav-header" style="background: url(<?php echo $_smarty_tpl->tpl_vars['app_url']->value;?>
+ui/theme/default/img/user-info.jpg) no-repeat;">
+
+
+                        <div class="dropdown profile-element"> <span>
+
+                                <?php if ($_smarty_tpl->tpl_vars['user']->value['img'] == '') {?>
+                                    <img src="<?php echo $_smarty_tpl->tpl_vars['app_url']->value;?>
+ui/lib/imgs/default-user-avatar.png"  class="profile-img img-circle" style="max-width: 64px;" alt="">
+                                <?php } else { ?>
+                                    <img src="<?php echo $_smarty_tpl->tpl_vars['app_url']->value;
+echo $_smarty_tpl->tpl_vars['user']->value['img'];?>
+" class="profile-img img-circle" style="max-width: 64px;" alt="<?php echo $_smarty_tpl->tpl_vars['user']->value['fullname'];?>
+">
+                                <?php }?>
+
+
+                             </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false">
+                            <span class="clear profile-text"> <span class="block m-t-xs"> <strong class="font-bold"><?php echo $_smarty_tpl->tpl_vars['user']->value['fullname'];?>
+</strong>
+                             </span> <span class="text-muted text-xs block"><?php echo $_smarty_tpl->tpl_vars['_L']->value['My Account'];?>
+ <b class="caret"></b></span> </span> </a>
+
+                            <ul class="dropdown-menu animated fadeIn m-t-xs">
+                                <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+settings/users-edit/<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
+/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Edit Profile'];?>
+</a></li>
+                                <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+settings/change-password"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Change Password'];?>
+</a></li>
+
+                                <li class="divider"></li>
+                                <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+logout/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Logout'];?>
+</a></li>
+                            </ul>
+
+                        </div>
+                    </li>
 
 
                     <?php if (isset($_smarty_tpl->tpl_vars['workspace']->value) && $_smarty_tpl->tpl_vars['workspace']->value->is_active == 0) {?>
@@ -258,7 +299,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                         <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'transactions')) {?>
                             <?php if ($_smarty_tpl->tpl_vars['config']->value['accounting'] == '1') {?>
                                 <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'transactions') {?>active<?php }?>">
-                                    <a href="#"><i class="fa fa-calculator"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Transactions'];?>
+                                    <a href="#"><i class="fa fa-calculator"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Accounting'];?>
 </span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
@@ -272,11 +313,36 @@ transactions/transfer/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Transfer
 </a></li>
 
                                         <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+transactions/bills"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Bills'];?>
+</a></li>
+
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 transactions/list/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['View Transactions'];?>
 </a></li>
+
+
                                         <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-accounts/balances/transactions"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Balance Sheet'];?>
+assets/list"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Assets'];?>
 </a></li>
+
+                                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'bank_n_cash')) {?>
+
+                                            
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+accounts/list"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Accounts'];?>
+</a></li>
+
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+accounts/add"><?php echo $_smarty_tpl->tpl_vars['_L']->value['New Account'];?>
+</a></li>
+
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+accounts/balances/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Account_Balances'];?>
+</a></li>
+
+
+                                        <?php }?>
+
                                     </ul>
                                 </li>
                             <?php }?>
@@ -573,28 +639,9 @@ password_manager"><i class="fa fa-list-ul"></i> <span class="nav-label"><?php ec
                         <?php echo $_smarty_tpl->tpl_vars['admin_extra_nav']->value[4];?>
 
 
-                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'bank_n_cash')) {?>
-                            <?php if ($_smarty_tpl->tpl_vars['config']->value['accounting'] == '1') {?>
-                                <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'accounts') {?>active<?php }?>">
-                                    <a href="#"><i class="fa fa-university"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Bank n Cash'];?>
-</span><span class="fa arrow"></span></a>
-                                    <ul class="nav nav-second-level">
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-accounts/add/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['New Account'];?>
-</a></li>
 
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-accounts/list/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['List Accounts'];?>
-</a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-accounts/balances/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Account_Balances'];?>
-</a></li>
 
-                                    </ul>
-                                </li>
-                            <?php }?>
 
-                        <?php }?>
 
 
                         <?php echo $_smarty_tpl->tpl_vars['admin_extra_nav']->value[5];?>
@@ -1038,7 +1085,7 @@ settings/billing"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Upgrade'];?>
 
 
                 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19227201625cd174987966a8_76442834', "content");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13035988935cfedc060952a5_92635120', "content");
 ?>
 
 
@@ -1259,8 +1306,7 @@ ui/lib/moment/moment.min.js"><?php echo '</script'; ?>
 
 <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['app_url']->value;?>
-ui/assets/js/app.js?v=<?php echo $_smarty_tpl->tpl_vars['file_build']->value;?>
-"><?php echo '</script'; ?>
+ui/assets/js/app.js?v=200"><?php echo '</script'; ?>
 >
 
 
@@ -1278,7 +1324,7 @@ ui/assets/js/app.js?v=<?php echo $_smarty_tpl->tpl_vars['file_build']->value;?>
 <?php }?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12820944465cd174987a1851_90915347', 'script');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_3293705815cfedc0609fdb5_61624998', 'script');
 ?>
 
 
@@ -1309,12 +1355,12 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12820944465cd17498
 </html>
 <?php }
 /* {block 'style'} */
-class Block_19296456985cd1749873e0e5_93264970 extends Smarty_Internal_Block
+class Block_3892136415cfedc0603b0f5_57139214 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'style' => 
   array (
-    0 => 'Block_19296456985cd1749873e0e5_93264970',
+    0 => 'Block_3892136415cfedc0603b0f5_57139214',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -1322,12 +1368,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'style'} */
 /* {block "content"} */
-class Block_19227201625cd174987966a8_76442834 extends Smarty_Internal_Block
+class Block_13035988935cfedc060952a5_92635120 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'content' => 
   array (
-    0 => 'Block_19227201625cd174987966a8_76442834',
+    0 => 'Block_13035988935cfedc060952a5_92635120',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -1335,12 +1381,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block "content"} */
 /* {block 'script'} */
-class Block_12820944465cd174987a1851_90915347 extends Smarty_Internal_Block
+class Block_3293705815cfedc0609fdb5_61624998 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'script' => 
   array (
-    0 => 'Block_12820944465cd174987a1851_90915347',
+    0 => 'Block_3293705815cfedc0609fdb5_61624998',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

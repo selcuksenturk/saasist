@@ -5,7 +5,7 @@
         <div class="col-md-4">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>{$_L['Edit Transaction']} - [#{ib_lan_get_line($t['type'])}-{$t['id']}]</h5>
+                    <h5>{$_L['Edit Transaction']}</h5>
 
                 </div>
                 <div class="ibox-content" id="ibox_form">
@@ -193,11 +193,7 @@
                     <p>{$_L['tr_delete_warning']}</p>
                     <form role="form" method="post" action="{$_url}transactions/delete-post/">
 
-
-
-
-
-                        <input type="hidden" name="id" value="{$t['id']}">
+                        <input type="hidden" name="id" value="{$t['uuid']}">
 
                         <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> {$_L['Delete']}</button>
                     </form>
@@ -211,4 +207,92 @@
     </div>
 
     <input type="hidden" id="_lan_no_results_found" value="{$_L['No results found']}">
+{/block}
+
+{block name="script"}
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('.amount').autoNumeric('init');
+
+
+
+            $("#pmethod").select2({
+                theme: "bootstrap",
+                language: {
+                    noResults: function () {
+                        return $("#_lan_no_results_found").val();
+                    }
+                }
+            });
+
+
+            $('#tags').select2({
+                tags: true,
+                tokenSeparators: [','],
+                theme: "bootstrap",
+                language: {
+                    noResults: function () {
+                        return $("#_lan_no_results_found").val();
+                    }
+                }
+            });
+
+            $("#a_hide").hide();
+            $("#emsg").hide();
+            $("#a_toggle").click(function(e){
+                e.preventDefault();
+                $("#a_hide").toggle( "slow" );
+            });
+
+
+            var trtype =  $('#trtype').val();
+            trtype = trtype.toLowerCase();
+
+            var _url = $("#_url").val();
+
+            $("#submit").click(function (e) {
+                e.preventDefault();
+                $('#ibox_form').block({ message: null });
+                var _url = $("#_url").val();
+                $.post(_url + 'transactions/edit-post/', {
+
+
+
+                    date: $('#date').val(),
+
+                    id: $('#trid').val(),
+                    cats: $('#cats').val(),
+                    description: $('#description').val(),
+                    tags: $('#tags').val(),
+
+                    pmethod: $('#pmethod').val(),
+                    payee: $('#payee').val(),
+                    payer: $('#payer').val(),
+                    ref: $('#ref').val()
+
+                })
+                    .done(function (data) {
+
+                        var sbutton = $("#submit");
+                        var _url = $("#_url").val();
+                        if ($.isNumeric(data)) {
+
+                            location.reload();
+                        }
+                        else {
+                            $('#ibox_form').unblock();
+                            var body = $("html, body");
+                            body.animate({ scrollTop:0 }, '1000', 'swing');
+                            $("#emsgbody").html(data);
+                            $("#emsg").show("slow");
+                        }
+                    });
+            });
+        });
+
+    </script>
+
 {/block}
