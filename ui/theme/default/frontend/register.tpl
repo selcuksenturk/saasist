@@ -55,7 +55,7 @@
                         {/if}
 
                         <div class="form-group mb-30px">
-                            * By clicking "Register" you agree to the <a href="#0">Terms  of Use</a> & <a href="#0">Privacy Policy</a>.
+                            * By clicking "Register" you will agree <a href="#0">Terms  of Use</a> & <a href="#0">Privacy Policy</a>.
                         </div>
                         <button role="button" class="main-btn btn-3 before-gray">Register</button>
                     </form>

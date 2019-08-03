@@ -90,9 +90,9 @@ body .redactor-box-fullscreen {
   min-height: 80px;
   outline: none;
   white-space: normal;
-  border: 1px solid #eee;
+  border: 3px solid #eee;
   font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif !important;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.6em;
 }
 .redactor-editor:focus {
@@ -124,7 +124,7 @@ body .redactor-box-fullscreen {
   margin: 0 !important;
   padding: 0 !important;
   list-style: none !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
   line-height: 1 !important;
   background: #fff;
   border: none;
@@ -143,7 +143,7 @@ body .redactor-box-fullscreen {
 .redactor-toolbar.redactor-toolbar-external {
   z-index: 999;
   box-shadow: none;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 3px solid rgba(0, 0, 0, 0.1);
 }
 .redactor-toolbar li {
   vertical-align: top;
@@ -232,7 +232,7 @@ body .redactor-box-fullscreen {
 }
 .re-icon i:before {
   position: relative;
-  font-size: 14px;
+  font-size: 13px;
 }
 .re-video:before {
   content: "\e600";
@@ -361,7 +361,7 @@ body .redactor-box-fullscreen {
   overflow: auto;
   background-color: #fff;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.25);
-  font-size: 14px;
+  font-size: 13px;
   font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif !important;
   line-height: 1.6em;
 }
@@ -370,7 +370,7 @@ body .redactor-box-fullscreen {
   padding: 10px 15px;
   color: #000;
   text-decoration: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.07);
 }
 .redactor-dropdown a:last-child {
   border-bottom: none;
@@ -405,7 +405,7 @@ body .redactor-box-fullscreen {
   max-width: 100%;
   display: inline-block;
   line-height: 0;
-  outline: 1px dashed rgba(0, 0, 0, 0.6);
+  outline: 3px dashed rgba(0, 0, 0, 0.6);
 }
 #redactor-image-editter {
   position: absolute;
@@ -428,7 +428,7 @@ body .redactor-box-fullscreen {
   cursor: nw-resize;
   bottom: -4px;
   right: -5px;
-  border: 1px solid #fff;
+  border: 3px solid #fff;
   background-color: #000;
   width: 8px;
   height: 8px;
@@ -559,7 +559,7 @@ body .redactor-box-fullscreen {
   padding: 0;
   background: #fff;
   color: #000;
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif !important;
   box-shadow: 0 1px 70px rgba(0, 0, 0, 0.5);
 }
@@ -595,13 +595,13 @@ body .redactor-box-fullscreen {
   margin: 0;
   padding: 5px 4px;
   height: 28px;
-  border: 1px solid #ccc;
+  border: 3px solid #ccc;
   border-radius: 1px;
   background-color: white;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset;
   color: #333;
   width: 100%;
-  font-size: 14px;
+  font-size: 13px;
   font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif !important;
   -moz-transition: border 0.3s ease-in;
   transition: border 0.3s ease-in;
@@ -636,7 +636,7 @@ body .redactor-box-fullscreen {
   font-size: 12px;
 }
 #redactor-modal-tabber a {
-  border: 1px solid #ddd;
+  border: 3px solid #ddd;
   line-height: 1;
   padding: 8px 15px;
   margin-right: -1px;
@@ -665,7 +665,7 @@ body .redactor-box-fullscreen {
   overflow-x: auto;
 }
 #redactor-modal #redactor-modal-list li {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 3px solid #ddd;
 }
 #redactor-modal #redactor-modal-list li:last-child {
   border-bottom: none;
@@ -801,7 +801,7 @@ body .redactor-box-fullscreen {
 .redactor-editor dl,
 .redactor-editor blockquote,
 .redactor-editor pre {
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.6em;
 }
 .redactor-editor a {
@@ -883,7 +883,7 @@ body .redactor-box-fullscreen {
 .redactor-editor table td,
 .redactor-editor table th {
   padding: 5px;
-  border: 1px solid #ddd;
+  border: 3px solid #ddd;
   vertical-align: top;
 }
 .redactor-editor table thead td,
@@ -896,7 +896,7 @@ body .redactor-box-fullscreen {
 }
 .redactor-editor pre {
   padding: 1em;
-  border: 1px solid #ddd;
+  border: 3px solid #ddd;
   border-radius: 3px;
   background: #f8f8f8;
   font-size: 90%;
@@ -905,7 +905,7 @@ body .redactor-box-fullscreen {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #ccc;
+  border-top: 3px solid #ccc;
 }
 .redactor-editor h1,
 .redactor-editor h2,

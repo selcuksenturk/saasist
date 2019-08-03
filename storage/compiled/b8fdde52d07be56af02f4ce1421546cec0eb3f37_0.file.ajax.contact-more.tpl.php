@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-03-07 07:50:22
+/* Smarty version 3.1.33, created on 2019-08-02 17:44:27
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/ajax.contact-more.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c81138e71b5d8_90034595',
+  'unifunc' => 'content_5d44aebb7fb8a4_88951617',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b8fdde52d07be56af02f4ce1421546cec0eb3f37' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/ajax.contact-more.tpl',
-      1 => 1433216080,
+      1 => 1556695881,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5c81138e71b5d8_90034595 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d44aebb7fb8a4_88951617 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div id="croppic"></div>
 
 <button type="button" id="cropContainerHeaderButton" class="btn btn-info"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Upload Picture'];?>

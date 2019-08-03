@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-06-10 18:39:02
+/* Smarty version 3.1.33, created on 2019-07-23 05:25:46
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/layouts/admin.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5cfedc060a2af2_86975904',
+  'unifunc' => 'content_5d36d29a9b0df0_24528085',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '363ddc65d9e9d789bbedc007d39f0f920c6bfb81' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/layouts/admin.tpl',
-      1 => 1560206332,
+      1 => 1563873014,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5cfedc060a2af2_86975904 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d36d29a9b0df0_24528085 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -100,7 +100,7 @@ default/css/style-rtl.min.css" rel="stylesheet">
     <?php }?>
 
     <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_3892136415cfedc0603b0f5_57139214', 'style');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_4117057195d36d29a945c23_30059526', 'style');
 ?>
 
 
@@ -246,55 +246,64 @@ super_admin/settings"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Settings']
                         <?php echo $_smarty_tpl->tpl_vars['admin_extra_nav']->value[1];?>
 
 
-                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'customers')) {?>
-                            <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'contacts') {?>active<?php }?>">
-                                <a href="#"><i class="icon-users"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Customers'];?>
-</span><span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
+                        <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['accounting'])) {?>
 
-                                    <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'customers','create')) {?>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                            <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'customers')) {?>
+                                <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'contacts') {?>active<?php }?>">
+                                    <a href="#"><i class="icon-users"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Customers'];?>
+</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+
+                                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'customers','create')) {?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 contacts/add/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Add Customer'];?>
 </a></li>
-                                    <?php }?>
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <?php }?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 contacts/list/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['List Customers'];?>
 </a></li>
 
-                                    <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'companies','view') && ($_smarty_tpl->tpl_vars['config']->value['companies'])) {?>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'companies','view') && ($_smarty_tpl->tpl_vars['config']->value['companies'])) {?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 contacts/companies/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Companies'];?>
 </a></li>
-                                    <?php }?>
+                                        <?php }?>
 
 
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 contacts/groups/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Groups'];?>
 </a></li>
 
 
 
-                                    <?php
+                                        <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['sub_menu_admin']->value['crm'], 'sm_crm');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['sm_crm']->value) {
 ?>
 
-                                        <?php echo $_smarty_tpl->tpl_vars['sm_crm']->value;?>
+                                            <?php echo $_smarty_tpl->tpl_vars['sm_crm']->value;?>
 
 
 
-                                    <?php
+                                        <?php
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-                                </ul>
-                            </li>
+                                    </ul>
+                                </li>
+                            <?php }?>
+
                         <?php }?>
 
 
 
+
+
                         <?php echo $_smarty_tpl->tpl_vars['admin_extra_nav']->value[2];?>
+
+
+                    <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['accounting'])) {?>
 
                         <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'transactions')) {?>
                             <?php if ($_smarty_tpl->tpl_vars['config']->value['accounting'] == '1') {?>
@@ -319,7 +328,7 @@ transactions/bills"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Bills'];?>
                                         <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 transactions/list/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['View Transactions'];?>
 </a></li>
-
+                                        
 
                                         <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 assets/list"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Assets'];?>
@@ -348,12 +357,18 @@ accounts/balances/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Account_Bala
                             <?php }?>
                         <?php }?>
 
+                    <?php }?>
+
+
 
                         <?php echo $_smarty_tpl->tpl_vars['admin_extra_nav']->value[3];?>
 
 
 
+
                         <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'sales')) {?>
+
+
 
                             <?php if (($_smarty_tpl->tpl_vars['config']->value['invoicing'] == '1') || ($_smarty_tpl->tpl_vars['config']->value['quotes'] == '1')) {?>
 
@@ -365,34 +380,45 @@ accounts/balances/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Account_Bala
                                     <ul class="nav nav-second-level">
 
                                         <?php if ($_smarty_tpl->tpl_vars['config']->value['invoicing'] == '1') {?>
-                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+
+                                            <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['invoicing'])) {?>
+                                                <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 invoices/list/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Invoices'];?>
 </a></li>
-                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                                <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 invoices/add/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['New Invoice'];?>
 </a></li>
 
 
-                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                                <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 invoices/add/1/0/pos"><?php echo $_smarty_tpl->tpl_vars['_L']->value['POS'];?>
 </a></li>
 
 
-                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                                <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 invoices/list-recurring/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Recurring Invoices'];?>
 </a></li>
-                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                                <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 invoices/add/recurring/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['New Recurring Invoice'];?>
 </a></li>
+
+                                            <?php }?>
+
                                         <?php }?>
 
                                         <?php if ($_smarty_tpl->tpl_vars['config']->value['quotes'] == '1') {?>
-                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+
+                                            <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['quotes'])) {?>
+
+                                                <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 quotes/list/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Quotes'];?>
 </a></li>
-                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                                <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 quotes/new/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Create New Quote'];?>
 </a></li>
+
+                                            <?php }?>
+
                                         <?php }?>
                                         <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 invoices/payments/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Payments'];?>
@@ -421,261 +447,290 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                         <?php }?>
 
 
-                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'suppliers') && ($_smarty_tpl->tpl_vars['config']->value['suppliers'])) {?>
+                        <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['suppliers'])) {?>
 
-                            <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'suppliers') {?>active<?php }?>">
-                                <a href="#"><i class="fa fa-cube"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Suppliers'];?>
+                            <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'suppliers') && ($_smarty_tpl->tpl_vars['config']->value['suppliers'])) {?>
+
+                                <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'suppliers') {?>active<?php }?>">
+                                    <a href="#"><i class="fa fa-cube"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Suppliers'];?>
 </span><span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
+                                    <ul class="nav nav-second-level">
 
-                                    <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'suppliers','create')) {?>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'suppliers','create')) {?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 contacts/add/supplier"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Add Supplier'];?>
 </a></li>
-                                    <?php }?>
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <?php }?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 contacts/list/supplier"><?php echo $_smarty_tpl->tpl_vars['_L']->value['List Suppliers'];?>
 </a></li>
 
-                                                                                                            
 
-                                    
 
-                                </ul>
-                            </li>
+                                    </ul>
+                                </li>
+
+                            <?php }?>
 
                         <?php }?>
 
 
 
-                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'purchase') && ($_smarty_tpl->tpl_vars['config']->value['purchase'])) {?>
+                        <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['purchase'])) {?>
+
+                            <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'purchase') && ($_smarty_tpl->tpl_vars['config']->value['purchase'])) {?>
 
 
 
 
-                            <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'purchase') {?>active<?php }?>">
-                                <a href="#"><i class="fa fa-cubes"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Purchase'];?>
+                                <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'purchase') {?>active<?php }?>">
+                                    <a href="#"><i class="fa fa-cubes"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Purchase'];?>
 </span><span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
+                                    <ul class="nav nav-second-level">
 
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 purchases/list/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Purchase Orders'];?>
 </a></li>
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 purchases/add/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['New Purchase Order'];?>
 </a></li>
 
 
-                                </ul>
-                            </li>
+                                    </ul>
+                                </li>
 
 
+
+                            <?php }?>
 
                         <?php }?>
 
-                        
-                                                                        
-                                                                                                
-                                                                        
 
-                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'leads','view') && ($_smarty_tpl->tpl_vars['config']->value['leads'])) {?>
-                            <li <?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'leads') {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                        <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['leads'])) {?>
+
+                            <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'leads','view') && ($_smarty_tpl->tpl_vars['config']->value['leads'])) {?>
+                                <li <?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'leads') {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 leads/"><i class="fa fa-address-card-o"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Leads'];?>
 </span></a></li>
+                            <?php }?>
+
                         <?php }?>
 
 
-                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'sms') && ($_smarty_tpl->tpl_vars['config']->value['sms'])) {?>
 
-                            <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'sms') {?>active<?php }?>">
-                                <a href="#"><i class="fa fa-envelope-o"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['SMS'];?>
+                        <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['sms'])) {?>
+
+                            <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'sms') && ($_smarty_tpl->tpl_vars['config']->value['sms'])) {?>
+
+                                <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'sms') {?>active<?php }?>">
+                                    <a href="#"><i class="fa fa-envelope-o"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['SMS'];?>
 </span><span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
+                                    <ul class="nav nav-second-level">
 
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 sms/init/send/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Send Single SMS'];?>
 </a></li>
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 sms/init/bulk/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Send Bulk SMS'];?>
 </a></li>
-                                                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 sms/init/sent/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Sent'];?>
 </a></li>
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 sms/init/templates/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['SMS Templates'];?>
 </a></li>
-                                                                                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 sms/init/settings/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Settings'];?>
 </a></li>
 
 
-                                </ul>
-                            </li>
+                                    </ul>
+                                </li>
 
 
+
+                            <?php }?>
 
                         <?php }?>
 
 
-                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'support') && ($_smarty_tpl->tpl_vars['config']->value['support'])) {?>
 
-                            <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'support') {?>active<?php }?>">
-                                <a href="#"><i class="fa fa-life-ring"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Support'];?>
+                        <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['support'])) {?>
+
+                            <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'support') && ($_smarty_tpl->tpl_vars['config']->value['support'])) {?>
+
+                                <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'support') {?>active<?php }?>">
+                                    <a href="#"><i class="fa fa-life-ring"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Support'];?>
 </span><span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
+                                    <ul class="nav nav-second-level">
 
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 tickets/admin/create/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Open New Ticket'];?>
 </a></li>
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 tickets/admin/list/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Tickets'];?>
 </a></li>
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 tickets/admin/predefined_replies/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Predefined Replies'];?>
 </a></li>
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 tickets/admin/departments/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Departments'];?>
 </a></li>
 
 
-                                </ul>
-                            </li>
+                                    </ul>
+                                </li>
 
 
+
+                            <?php }?>
 
                         <?php }?>
 
 
+                        <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['kb'])) {?>
 
-                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'kb') && ($_smarty_tpl->tpl_vars['config']->value['kb'])) {?>
+                            <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'kb') && ($_smarty_tpl->tpl_vars['config']->value['kb'])) {?>
 
-                            <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'kb') {?>active<?php }?>">
-                                <a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Knowledgebase'];?>
+                                <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'kb') {?>active<?php }?>">
+                                    <a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Knowledgebase'];?>
 </span><span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
+                                    <ul class="nav nav-second-level">
 
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 kb/a/edit/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['New Article'];?>
 </a></li>
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 kb/a/all/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['All Articles'];?>
 </a></li>
 
 
 
-                                </ul>
-                            </li>
-
-
-
-                        <?php }?>
-
-
-
-
-
-
-                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'orders') && ($_smarty_tpl->tpl_vars['config']->value['orders'])) {?>
-
-                            <?php if (($_smarty_tpl->tpl_vars['config']->value['orders'] == '1')) {?>
-
-
-
-                                <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'orders') {?>active<?php }?>">
-                                    <a href="#"><i class="fa fa-server"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Orders'];?>
-</span><span class="fa arrow"></span></a>
-                                    <ul class="nav nav-second-level">
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-orders/list/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['List All Orders'];?>
-</a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-orders/add/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Add New Order'];?>
-</a></li>
-
                                     </ul>
                                 </li>
+
+
 
                             <?php }?>
 
                         <?php }?>
 
 
-                                                                                                                                                
-                                                                        
+
+                        <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['orders'])) {?>
+
+                            <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'orders') && ($_smarty_tpl->tpl_vars['config']->value['orders'])) {?>
+
+                                <?php if (($_smarty_tpl->tpl_vars['config']->value['orders'] == '1')) {?>
 
 
-                                                                                                                                                
-                                                                        
 
-                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'documents') && ($_smarty_tpl->tpl_vars['config']->value['documents'])) {?>
-                            <li <?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'documents') {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                    <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'orders') {?>active<?php }?>">
+                                        <a href="#"><i class="fa fa-server"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Orders'];?>
+</span><span class="fa arrow"></span></a>
+                                        <ul class="nav nav-second-level">
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+orders/list/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['List All Orders'];?>
+</a></li>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+orders/add/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Add New Order'];?>
+</a></li>
+
+                                        </ul>
+                                    </li>
+
+                                <?php }?>
+
+                            <?php }?>
+
+                        <?php }?>
+
+
+
+                        <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['documents'])) {?>
+
+                            <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'documents') && ($_smarty_tpl->tpl_vars['config']->value['documents'])) {?>
+                                <li <?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'documents') {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 documents/"><i class="fa fa-file-o"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Documents'];?>
 </span></a></li>
+                            <?php }?>
+
                         <?php }?>
 
 
+                        <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['tasks'])) {?>
 
-                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'tasks') && ($_smarty_tpl->tpl_vars['config']->value['tasks'])) {?>
-                            <li <?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'tasks') {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                            <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'tasks') && ($_smarty_tpl->tpl_vars['config']->value['tasks'])) {?>
+                                <li <?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'tasks') {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 tasks"><i class="fa fa-tasks"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Tasks'];?>
 </span></a></li>
+                            <?php }?>
+
                         <?php }?>
 
 
+                        <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['calendar'])) {?>
 
-                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'calendar') && ($_smarty_tpl->tpl_vars['config']->value['calendar'])) {?>
-                            <li <?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'calendar') {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                            <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'calendar') && ($_smarty_tpl->tpl_vars['config']->value['calendar'])) {?>
+                                <li <?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'calendar') {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 calendar/events/"><i class="fa fa-calendar"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Calendar'];?>
 </span></a></li>
+                            <?php }?>
+
                         <?php }?>
 
-                        <?php if (($_smarty_tpl->tpl_vars['config']->value['password_manager']) && has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'password_manager')) {?>
-                            <li <?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'password_manager') {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                        <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['password_manager'])) {?>
+
+                            <?php if (($_smarty_tpl->tpl_vars['config']->value['password_manager']) && has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'password_manager')) {?>
+                                <li <?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'password_manager') {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 password_manager"><i class="fa fa-list-ul"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Password Manager'];?>
 </span></a></li>
+                            <?php }?>
+
                         <?php }?>
+
 
 
                         <?php echo $_smarty_tpl->tpl_vars['admin_extra_nav']->value[4];?>
 
 
-
-
-
-
-
                         <?php echo $_smarty_tpl->tpl_vars['admin_extra_nav']->value[5];?>
 
 
-                        <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'products_n_services')) {?>
 
-                            <?php if (($_smarty_tpl->tpl_vars['config']->value['invoicing'] == '1') || ($_smarty_tpl->tpl_vars['config']->value['quotes'] == '1')) {?>
-                                <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'ps') {?>active<?php }?>">
-                                    <a href="#"><i class="fa fa-cube"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Products n Services'];?>
+                        <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['invoicing'])) {?>
+
+
+                            <?php if (has_access($_smarty_tpl->tpl_vars['user']->value->roleid,'products_n_services')) {?>
+
+                                <?php if (($_smarty_tpl->tpl_vars['config']->value['invoicing'] == '1') || ($_smarty_tpl->tpl_vars['config']->value['quotes'] == '1')) {?>
+                                    <li class="<?php if ($_smarty_tpl->tpl_vars['_application_menu']->value == 'ps') {?>active<?php }?>">
+                                        <a href="#"><i class="fa fa-cube"></i> <span class="nav-label"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Products n Services'];?>
 </span><span class="fa arrow"></span></a>
-                                    <ul class="nav nav-second-level">
-                                        <?php if ($_smarty_tpl->tpl_vars['config']->value['inventory'] == '1') {?>
-                                                                                    <?php }?>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <ul class="nav nav-second-level">
+                                            <?php if ($_smarty_tpl->tpl_vars['config']->value['inventory'] == '1') {?>
+                                                                                            <?php }?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 ps/p-list/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Products'];?>
 </a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 ps/p-new/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['New Product'];?>
 </a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 ps/s-list/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Services'];?>
 </a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 ps/s-new/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['New Service'];?>
 </a></li>
 
 
-                                    </ul>
-                                </li>
+                                        </ul>
+                                    </li>
+                                <?php }?>
+
                             <?php }?>
 
                         <?php }?>
-
 
 
 
@@ -691,51 +746,54 @@ ps/s-new/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['New Service'];?>
  </span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
 
+                                    <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['accounting'])) {?>
 
-
-                                    <?php if ($_smarty_tpl->tpl_vars['config']->value['accounting'] == '1') {?>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                        <?php if ($_smarty_tpl->tpl_vars['config']->value['accounting'] == '1') {?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 reports/statement/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Account Statement'];?>
 </a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 reports/income/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Income Reports'];?>
 </a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 reports/expense/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Expense Reports'];?>
 </a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 reports/income-vs-expense/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Income Vs Expense'];?>
 </a></li>
 
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 reports/by-date/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Reports by Date'];?>
 </a></li>
-                                                                                <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                                                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 transactions/list/0/income/reports"><?php echo $_smarty_tpl->tpl_vars['_L']->value['All Income'];?>
 </a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 transactions/list/0/expense/reports"><?php echo $_smarty_tpl->tpl_vars['_L']->value['All Expense'];?>
 </a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 transactions/list/0/0/reports"><?php echo $_smarty_tpl->tpl_vars['_L']->value['All Transactions'];?>
+</a></li>
+
+                                        <?php }?>
+
+                                    <?php }?>
+
+                                    <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['invoicing'])) {?>
+
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+reports/invoices/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Invoices'];?>
+</a></li>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+reports/sales/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Sales'];?>
+</a></li>
+                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+reports/invoices_expense/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Invoices Vs Expense'];?>
 </a></li>
 
                                     <?php }?>
 
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-reports/invoices/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Invoices'];?>
-</a></li>
 
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-reports/sales/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Sales'];?>
-</a></li>
-
-
-                                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-reports/invoices_expense/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Invoices Vs Expense'];?>
-</a></li>
-
-                                    
                                     <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['sub_menu_admin']->value['reports'], 'sm_report');
 if ($_from !== null) {
@@ -845,29 +903,34 @@ settings/currencies/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Currencies
 settings/pg/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Payment Gateways'];?>
 </a></li>
 
-                                    <?php if ($_smarty_tpl->tpl_vars['config']->value['accounting'] == '1') {?>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                    <?php if ($_smarty_tpl->tpl_vars['all_modules']->value || isset($_smarty_tpl->tpl_vars['enabled_modules']->value['accounting'])) {?>
+
+                                        <?php if ($_smarty_tpl->tpl_vars['config']->value['accounting'] == '1') {?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 settings/expense-categories/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Expense Categories'];?>
 </a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 settings/expense-types/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Expense Types'];?>
 </a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 settings/income-categories/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Income Categories'];?>
 </a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 settings/units/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Units'];?>
 </a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 settings/tags/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Manage Tags'];?>
 </a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 settings/pmethods/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Payment Methods'];?>
 </a></li>
-                                        <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+                                            <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 tax/list/"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Sales Taxes'];?>
 </a></li>
+                                        <?php }?>
+
                                     <?php }?>
+
 
 
                                     <li><a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
@@ -1085,7 +1148,7 @@ settings/billing"><?php echo $_smarty_tpl->tpl_vars['_L']->value['Upgrade'];?>
 
 
                 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13035988935cfedc060952a5_92635120', "content");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19942291725d36d29a9a45c5_62800883', "content");
 ?>
 
 
@@ -1324,7 +1387,7 @@ ui/assets/js/app.js?v=200"><?php echo '</script'; ?>
 <?php }?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_3293705815cfedc0609fdb5_61624998', 'script');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_3474646025d36d29a9ae2d5_97415837', 'script');
 ?>
 
 
@@ -1355,12 +1418,12 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_3293705815cfedc060
 </html>
 <?php }
 /* {block 'style'} */
-class Block_3892136415cfedc0603b0f5_57139214 extends Smarty_Internal_Block
+class Block_4117057195d36d29a945c23_30059526 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'style' => 
   array (
-    0 => 'Block_3892136415cfedc0603b0f5_57139214',
+    0 => 'Block_4117057195d36d29a945c23_30059526',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -1368,12 +1431,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'style'} */
 /* {block "content"} */
-class Block_13035988935cfedc060952a5_92635120 extends Smarty_Internal_Block
+class Block_19942291725d36d29a9a45c5_62800883 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'content' => 
   array (
-    0 => 'Block_13035988935cfedc060952a5_92635120',
+    0 => 'Block_19942291725d36d29a9a45c5_62800883',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -1381,12 +1444,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block "content"} */
 /* {block 'script'} */
-class Block_3293705815cfedc0609fdb5_61624998 extends Smarty_Internal_Block
+class Block_3474646025d36d29a9ae2d5_97415837 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'script' => 
   array (
-    0 => 'Block_3293705815cfedc0609fdb5_61624998',
+    0 => 'Block_3474646025d36d29a9ae2d5_97415837',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

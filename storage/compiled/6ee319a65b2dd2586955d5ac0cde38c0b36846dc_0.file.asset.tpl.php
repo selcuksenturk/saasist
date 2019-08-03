@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-06-10 18:13:12
+/* Smarty version 3.1.33, created on 2019-07-18 05:36:30
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/asset.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5cfed5f87e0ef8_25894668',
+  'unifunc' => 'content_5d303d9e248b03_58866094',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6ee319a65b2dd2586955d5ac0cde38c0b36846dc' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/asset.tpl',
-      1 => 1560204789,
+      1 => 1560205881,
       2 => 'file',
     ),
   ),
@@ -20,31 +20,31 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5cfed5f87e0ef8_25894668 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d303d9e248b03_58866094 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19568878105cfed5f87d33a1_71528960', "style");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10950967845d303d9e229674_69399481', "style");
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19468421035cfed5f87d4452_42932569', "content");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13472746855d303d9e230143_84366172', "content");
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_16449764015cfed5f87de661_09081873', 'script');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_15018610045d303d9e2463a4_39097898', 'script');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, ((string)$_smarty_tpl->tpl_vars['layouts_admin']->value));
 }
 /* {block "style"} */
-class Block_19568878105cfed5f87d33a1_71528960 extends Smarty_Internal_Block
+class Block_10950967845d303d9e229674_69399481 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'style' => 
   array (
-    0 => 'Block_19568878105cfed5f87d33a1_71528960',
+    0 => 'Block_10950967845d303d9e229674_69399481',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -57,12 +57,12 @@ ui/lib/dp/dist/datepicker.min.css" />
 }
 /* {/block "style"} */
 /* {block "content"} */
-class Block_19468421035cfed5f87d4452_42932569 extends Smarty_Internal_Block
+class Block_13472746855d303d9e230143_84366172 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'content' => 
   array (
-    0 => 'Block_19468421035cfed5f87d4452_42932569',
+    0 => 'Block_13472746855d303d9e230143_84366172',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -134,7 +134,7 @@ echo $_smarty_tpl->tpl_vars['asset']->value->notes;
                         </div>
                         <div class="form-group">
                             <?php if ($_smarty_tpl->tpl_vars['asset']->value) {?>
-                            <input type="hidden" name="asset_id" value="<?php echo $_smarty_tpl->tpl_vars['asset']->value->id;?>
+                            <input type="hidden" name="asset_id" value="<?php echo $_smarty_tpl->tpl_vars['asset']->value->uuid;?>
 ">
                             <?php }?>
                             <button class="btn btn-primary" id="btnSubmit" type="submit">Save</button>
@@ -170,12 +170,12 @@ echo $_smarty_tpl->tpl_vars['asset']->value->notes;
 }
 /* {/block "content"} */
 /* {block 'script'} */
-class Block_16449764015cfed5f87de661_09081873 extends Smarty_Internal_Block
+class Block_15018610045d303d9e2463a4_39097898 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'script' => 
   array (
-    0 => 'Block_16449764015cfed5f87de661_09081873',
+    0 => 'Block_15018610045d303d9e2463a4_39097898',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

@@ -280,8 +280,8 @@ s.parentNode.insertBefore(r,s);})
 
                 {else}
                     <div class="footer">
-                        <div>
-                            <strong>{$_L['Copyright']}</strong> &copy; {$config['CompanyName']}
+                        <div align="center">
+                            All rights reserved | <strong>{$config['CompanyName']}</strong> &copy; {date(Y)}
                         </div>
                     </div>
                 {/if}

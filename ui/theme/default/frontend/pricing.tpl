@@ -20,18 +20,19 @@
         <div class="container">
             <h1 class="color-blue">Pricing</h1>
             <br>
-                <div class="col-md-8 text-center">
+                <div align="center">
                     <img alt="img" src="{$app_url}storage/pages/credit-card.png" class="ml-auto mr-auto">
                 </div>
             <br>
-            <p class="title-p"></p>
             <ul class="tabs list-unstyled  text-center">
                 <li id="tab1" class="active pl-25px pr-25px pt-10px pb-10px bg-fff color-blue mb-10px d-inline-block">Free | ∞</li>
                 <li id="tab2" class="pl-25px pr-25px pt-10px pb-10px bg-fff color-blue mb-10px d-inline-block">* * * * *</li>
-            </ul>            
+            </ul>
             <div class="tabs-content">
                 <div id="tab1-content">
                     <div class="row">
+                        <div class="col-md-4">
+                        </div>					
                         <div class="col-md-4">
                             <div class="price-table bg-fff mt-25px mb-25px">
                                 <h3 class="fw-500">Free * Forever</h3>
@@ -41,16 +42,16 @@
                                 <p><i class="fa fa-check color-blue"></i> Billing</p>
                                 <p><i class="fa fa-check color-blue"></i> Supply</p>
                                 <p><i class="fa fa-check color-blue"></i> Clients</p>
-                                <p><i class="fa fa-check color-blue"></i> Plans</p>
+                                <p><i class="fa fa-check color-blue"></i> Planning</p>
                                 <p><i class="fa fa-check color-blue"></i> Reports</p>
                                 <p><i class="fa fa-check color-blue"></i> Orders</p>
                                 <p><i class="fa fa-check color-blue"></i> Support</p>
             </ul>
-                                <p class="ml-10px mr-10x mb-20px">We have announcement to make: Promote us!</p>
+                                <p class="ml-10px mr-10x mb-20px">No trials, limitations or hidden fees! Use many features as you want.</p>
             </ul>
-                                <p class="ml-10px mr-10x mb-20px">No trials, limitations or hidden fees! Use many features as you want freely.</p>
+                                <p class="ml-10px mr-10x mb-20px">Announce, suggest, recommend us!</p>
             </ul>
-                                <p class="ml-10px mr-10x mb-20px">All these features will be always free when you announce or promote us!</p>
+                                <p class="ml-10px mr-10x mb-20px">Always use freely!</p>
                                 <a class="main-btn btn-3 mt-20px" href="{$_url}register">Sign up</a>
                             </div>
                         </div>
@@ -58,6 +59,8 @@
                 </div>
                 <div id="tab2-content">
                     <div class="row">
+                        <div class="col-md-4">
+                        </div>					
                         <div class="col-md-4">
                             <div class="price-table bg-fff mt-25px mb-25px">
                                 <h3 class="fw-500">* * * * *</h3>
@@ -83,9 +86,7 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
-            
         </div>
     </section>
 

@@ -18,6 +18,31 @@ $ui->assign('user', $user);
 
 Event::trigger('orders');
 
+// Check which modules are enabled in this workspace
+$all_modules = true;
+$enabled_modules = false;
+
+if(isset($config['plan']))
+{
+    $workspace_plan = Plan::find($config['plan']);
+
+    if($workspace_plan)
+    {
+        $all_modules = false;
+        $enabled_modules = json_decode($workspace_plan->modules, true);
+
+        if(!isset($enabled_modules['orders']))
+        {
+            permissionDenied();
+        }
+
+    }
+
+}
+
+$ui->assign('all_modules', $all_modules);
+$ui->assign('enabled_modules', $enabled_modules);
+
 switch ($action) {
 
     case 'list':

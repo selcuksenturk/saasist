@@ -104,7 +104,7 @@
 
                                     <div class='col-sm-4'>
                                         <div class='form-group'>
-                                            <label for="user_title">{$_L['Customer']}</label>
+                                            <label for="user_title">{$_L['Supplier']}</label>
 
                                             <select id="cid" name="cid" class="form-control">
                                                 <option value="">{$_L['Select Contact']}...</option>

@@ -8,7 +8,7 @@
             <div class="row welcome-text sec-padding flex-center">
                 <div class="col-md-6 mb-50px z-index-1">
                     <h2 class="mb-20px">Need asist?</h2>
-                    <p>If it is a yes! We provide you all in one business solutions which includes a beautiful dashboard with accounting, crm, leads, sales, purchase, suppliers, orders, quotes, reports, tasks and more. Improve efficiency in your entire business which enables you to make more accurete decisions.</p>
+                    <p>If it is a yes! We provide you all in one business solutions which includes a beautiful dashboard with accounting, crm, leads, sales, purchase, suppliers, orders, quotes, reports, tasks and more. Improve efficiency in your entire business which enables you to make more accurate decisions.</p>
                     <a class="main-btn btn-3 mt-30px" href="{$_url}register">Try for free</a>
                 </div>
                 <div class="col-md-6 text-center">
@@ -24,11 +24,11 @@
     <section class="services-area-5 text-center p-relative" data-scroll-index="3">
         <div class="container">
             <h1 class="title-h">Assisted business & All in one place</h1>
-            <p class="title-p">All in one business management application, integrated, connected each modules, you were waiting for is here also cloud-weighted!</p>
+            <p class="title-p">All in one business management application, integrated and  connected with each modules which you were waiting for is here also cloud-weighted!</p>
             <div class="row">
                 <div class="col-md-4">
                     <div class="services-text pl-30px pr-30px mt-25px mb-25px wow fadeInUp">
-                        <i class="im im-bank p-absolute color-blue fs-35 bg-gray text-center radius-50 mb-25px transition-2"></i>
+                        <i class="im im-calculator p-absolute color-blue fs-35 bg-gray text-center radius-50 mb-25px transition-2"></i>
                         <div class="pl-">
                             <h4 class="mb-5px">Finance Management</h4>
                             <span class="color-blue bg-gray pl-15px pr-15px pt-5px pb-5px radius-50px fw-400 fs-14">Less effort more results</span>
@@ -42,7 +42,7 @@
                         <div class="pl-">
                             <h4 class="mb-5px">Supply & Sales</h4>
                             <span class="color-blue bg-gray pl-15px pr-15px pt-5px pb-5px radius-50px fw-400 fs-14">From order to invoicing</span>
-                            <p class="mt-15px">Start with the order, continue supply, sale and invoicing in seconds. As what-whenever you wish.</p>
+                            <p class="mt-15px">Start with the order, continue supply, sales and invoicing in seconds. As what-whenever you wish.</p>
                         </div>
                     </div>
                 </div>

@@ -27,7 +27,10 @@ class Fsubmit
 
         $append = '';
 
+
+
         foreach ($params as $param) {
+
             $append .= '<input type="hidden" name="' . $param['name'] . '" value="' . $param['value'] . '">';
         }
 

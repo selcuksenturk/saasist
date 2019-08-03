@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html>
+
 {literal}
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3895722-26"></script>
@@ -12,6 +13,8 @@
   gtag('config', 'UA-3895722-26');
 </script>
 {/literal}
+
+<html>
 
 <head>
 
@@ -45,7 +48,7 @@
     {*<link href="{$app_url}ui/lib/notify/pnotify.min.css" rel="stylesheet">*}
     {*<link href="{$app_url}ui/lib/fancybox/fancybox.min.css" rel="stylesheet">*}
 
-    <link href="{$theme}default/css/{$config['nstyle']}.css" rel="stylesheet">
+    <link href="{$theme}default/css/{$config['nstyle']}.css?v=2xx" rel="stylesheet">
 
     <script>
         window.clx = {
@@ -82,9 +85,7 @@
             font-size: 16px;
 
         }
-        .nav>li.active>a {
-            padding-left: 19px;
-        }
+
     </style>
 
 </head>
@@ -103,6 +104,35 @@
             <div class="sidebar-collapse">
 
                 <ul class="nav nav-highlight" id="side-menu">
+
+
+                    <li class="nav-header" style="background: url({$app_url}ui/theme/default/img/user-info.jpg) no-repeat;">
+
+
+                        <div class="dropdown profile-element"> <span>
+
+                                {if $user['img'] eq ''}
+                                    <img src="{$app_url}ui/lib/imgs/default-user-avatar.png"  class="profile-img img-circle" style="max-width: 64px;" alt="">
+                                {else}
+                                    <img src="{$app_url}{$user['img']}" class="profile-img img-circle" style="max-width: 64px;" alt="{$user['fullname']}">
+                                {/if}
+
+
+                             </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false">
+                            <span class="clear profile-text"> <span class="block m-t-xs"> <strong class="font-bold">{$user['fullname']}</strong>
+                             </span> <span class="text-muted text-xs block">{$_L['My Account']} <b class="caret"></b></span> </span> </a>
+
+                            <ul class="dropdown-menu animated fadeIn m-t-xs">
+                                <li><a href="{$_url}settings/users-edit/{$user['id']}/">{$_L['Edit Profile']}</a></li>
+                                <li><a href="{$_url}settings/change-password">{$_L['Change Password']}</a></li>
+
+                                <li class="divider"></li>
+                                <li><a href="{$_url}logout/">{$_L['Logout']}</a></li>
+                            </ul>
+
+                        </div>
+                    </li>
 
 
                     {if isset($workspace) && $workspace->is_active == 0}
@@ -184,14 +214,33 @@
                         {if has_access($user->roleid,'transactions')}
                             {if $config['accounting'] eq '1'}
                                 <li class="{if $_application_menu eq 'transactions'}active{/if}">
-                                    <a href="#"><i class="fa fa-calculator"></i> <span class="nav-label">{$_L['Transactions']}</span><span class="fa arrow"></span></a>
+                                    <a href="#"><i class="fa fa-calculator"></i> <span class="nav-label">{$_L['Accounting']}</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li><a href="{$_url}transactions/deposit/">{$_L['New Deposit']}</a></li>
                                         <li><a href="{$_url}transactions/expense/">{$_L['New Expense']}</a></li>
                                         <li><a href="{$_url}transactions/transfer/">{$_L['Transfer']}</a></li>
 
+                                        <li><a href="{$_url}transactions/bills">{$_L['Bills']}</a></li>
+
                                         <li><a href="{$_url}transactions/list/">{$_L['View Transactions']}</a></li>
-                                        <li><a href="{$_url}accounts/balances/transactions">{$_L['Balance Sheet']}</a></li>
+{*                                        <li><a href="{$_url}accounts/balances/transactions">{$_L['Balance Sheet']}</a></li>*}
+
+
+                                        <li><a href="{$_url}assets/list">{$_L['Assets']}</a></li>
+
+                                        {if has_access($user->roleid,'bank_n_cash')}
+
+                                            {*                                            <li><a href="{$_url}transactions/uncleared">{$_L['Uncleared Transactions']}</a></li>*}
+
+                                            <li><a href="{$_url}accounts/list">{$_L['Accounts']}</a></li>
+
+                                            <li><a href="{$_url}accounts/add">{$_L['New Account']}</a></li>
+
+                                            <li><a href="{$_url}accounts/balances/">{$_L['Account_Balances']}</a></li>
+
+
+                                        {/if}
+
                                     </ul>
                                 </li>
                             {/if}
@@ -447,21 +496,21 @@
 
                         {$admin_extra_nav[4]}
 
-                        {if has_access($user->roleid,'bank_n_cash')}
-                            {if $config['accounting'] eq '1'}
-                                <li class="{if $_application_menu eq 'accounts'}active{/if}">
-                                    <a href="#"><i class="fa fa-university"></i> <span class="nav-label">{$_L['Bank n Cash']}</span><span class="fa arrow"></span></a>
-                                    <ul class="nav nav-second-level">
-                                        <li><a href="{$_url}accounts/add/">{$_L['New Account']}</a></li>
+{*                        {if has_access($user->roleid,'bank_n_cash')}*}
+{*                            {if $config['accounting'] eq '1'}*}
+{*                                <li class="{if $_application_menu eq 'accounts'}active{/if}">*}
+{*                                    <a href="#"><i class="fa fa-university"></i> <span class="nav-label">{$_L['Bank n Cash']}</span><span class="fa arrow"></span></a>*}
+{*                                    <ul class="nav nav-second-level">*}
+{*                                        <li><a href="{$_url}accounts/add/">{$_L['New Account']}</a></li>*}
 
-                                        <li><a href="{$_url}accounts/list/">{$_L['List Accounts']}</a></li>
-                                        <li><a href="{$_url}accounts/balances/">{$_L['Account_Balances']}</a></li>
+{*                                        <li><a href="{$_url}accounts/list/">{$_L['List Accounts']}</a></li>*}
+{*                                        <li><a href="{$_url}accounts/balances/">{$_L['Account_Balances']}</a></li>*}
 
-                                    </ul>
-                                </li>
-                            {/if}
+{*                                    </ul>*}
+{*                                </li>*}
+{*                            {/if}*}
 
-                        {/if}
+{*                        {/if}*}
 
 
                         {$admin_extra_nav[5]}
@@ -497,4 +546,525 @@
 
 
                             <li class="{if $_application_menu eq 'reports'}active{/if}">
-                                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">{$_L['Reports']} </span><span class="fa arrow"></span></
+                                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">{$_L['Reports']} </span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+
+
+
+                                    {if $config['accounting'] eq '1'}
+                                        <li><a href="{$_url}reports/statement/">{$_L['Account Statement']}</a></li>
+                                        <li><a href="{$_url}reports/income/">{$_L['Income Reports']}</a></li>
+                                        <li><a href="{$_url}reports/expense/">{$_L['Expense Reports']}</a></li>
+                                        <li><a href="{$_url}reports/income-vs-expense/">{$_L['Income Vs Expense']}</a></li>
+
+                                        <li><a href="{$_url}reports/by-date/">{$_L['Reports by Date']}</a></li>
+                                        {*<li><a href="{$_url}reports/cats/">{$_L['Reports by Category']}</a></li>*}
+                                        <li><a href="{$_url}transactions/list/0/income/reports">{$_L['All Income']}</a></li>
+                                        <li><a href="{$_url}transactions/list/0/expense/reports">{$_L['All Expense']}</a></li>
+                                        <li><a href="{$_url}transactions/list/0/0/reports">{$_L['All Transactions']}</a></li>
+
+                                    {/if}
+
+                                    <li><a href="{$_url}reports/invoices/">{$_L['Invoices']}</a></li>
+
+                                    <li><a href="{$_url}reports/sales/">{$_L['Sales']}</a></li>
+
+
+                                    <li><a href="{$_url}reports/invoices_expense/">{$_L['Invoices Vs Expense']}</a></li>
+
+                                    {*<li><a href="{$_url}reports/tax/">{$_L['Tax']}</a></li>*}
+
+                                    {foreach $sub_menu_admin['reports'] as $sm_report}
+
+                                        {$sm_report}
+
+
+                                    {/foreach}
+
+
+                                </ul>
+                            </li>
+
+                        {/if}
+
+                        {if has_access($user->roleid,'utilities')}
+
+                            <li class="{if $_application_menu eq 'util'}active{/if}">
+                                <a href="#"><i class="icon-article"></i> <span class="nav-label">{$_L['Utilities']} </span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li><a href="{$_url}util/activity/">{$_L['Activity Log']}</a></li>
+                                    <li><a href="{$_url}util/sent-emails/">{$_L['Email Message Log']}</a></li>
+                                    <li><a href="{$_url}util/invoice_access_log/">{$_L['Invoice Access Log']}</a></li>
+                                </ul>
+                            </li>
+
+                        {/if}
+
+
+
+                        {if has_access($user->roleid,'appearance')}
+
+                            <li class="{if $_application_menu eq 'appearance'}active{/if}" id="li_appearance">
+                                <a href="#"><i class="icon-params"></i> <span class="nav-label">{$_L['Appearance']} </span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+
+                                    <li><a href="{$_url}appearance/ui/">{$_L['User Interface']}</a></li>
+                                    <li><a href="{$_url}appearance/customize/">{$_L['Customize']}</a></li>
+
+                                    {foreach $sub_menu_admin['appearance'] as $sm_appearance}
+
+                                        {$sm_appearance}
+
+
+                                    {/foreach}
+
+                                    {*<li><a href="{$_url}appearance/editor/">{$_L['Editor']}</a></li>*}
+
+                                    <li><a href="{$_url}appearance/themes/">{$_L['Themes']}</a></li>
+
+                                </ul>
+                            </li>
+
+                        {/if}
+
+                        {*{if has_access($user->roleid,'plugins') && ($config['plugins'])}*}
+                        {*<li {if $_application_menu eq 'plugins'}class="active"{/if}><a href="{$_url}settings/plugins/"><i class="fa fa-plug"></i> <span class="nav-label">{$_L['Plugins']}</span></a></li>*}
+                        {*{/if}*}
+
+
+                        {if has_access($user->roleid,'settings')}
+                            <li class="{if $_application_menu eq 'settings'}active{/if}" id="li_settings">
+                                <a href="#"><i class="fa fa-cogs"></i> <span class="nav-label">{$_L['Settings']} </span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li><a href="{$_url}settings/app/">{$_L['General Settings']}</a></li>
+                                    <li><a href="{$_url}settings/users/">{$_L['Staff']}</a></li>
+                                    <li><a href="{$_url}settings/roles/">{$_L['Roles']}</a></li>
+                                    {*<li><a href="{$_url}settings/plugins/">{$_L['Plugins']}</a></li>*}
+                                    <li><a href="{$_url}settings/localisation/">{$_L['Localisation']}</a></li>
+                                    <li><a href="{$_url}settings/currencies/">{$_L['Currencies']}</a></li>
+
+                                    <li><a href="{$_url}settings/pg/">{$_L['Payment Gateways']}</a></li>
+
+                                    {if $config['accounting'] eq '1'}
+                                        <li><a href="{$_url}settings/expense-categories/">{$_L['Expense Categories']}</a></li>
+                                        <li><a href="{$_url}settings/expense-types/">{$_L['Expense Types']}</a></li>
+                                        <li><a href="{$_url}settings/income-categories/">{$_L['Income Categories']}</a></li>
+                                        <li><a href="{$_url}settings/units/">{$_L['Units']}</a></li>
+                                        <li><a href="{$_url}settings/tags/">{$_L['Manage Tags']}</a></li>
+                                        <li><a href="{$_url}settings/pmethods/">{$_L['Payment Methods']}</a></li>
+                                        <li><a href="{$_url}tax/list/">{$_L['Sales Taxes']}</a></li>
+                                    {/if}
+
+
+                                    <li><a href="{$_url}settings/emls/">{$_L['Email Settings']}</a></li>
+                                    <li><a href="{$_url}settings/email-templates/">{$_L['Email Templates']}</a></li>
+                                    <li><a href="{$_url}settings/customfields/">{$_L['Custom Contact Fields']}</a></li>
+                                    <li><a href="{$_url}settings/api/">{$_L['API Access']}</a></li>
+                                    {foreach $sub_menu_admin['settings'] as $sm_settings}
+
+                                        {$sm_settings}
+
+
+                                    {/foreach}
+                                    <li><a href="{$_url}settings/features/">{$_L['Choose Features']}</a></li>
+
+
+                                    {*{if APP_MODE neq 'wl' }*}
+                                    {*<li><a href="{$_url}settings/about/">{$_L['About']}</a></li>*}
+                                    {*{/if}*}
+
+
+
+
+
+                                </ul>
+                            </li>
+                        {/if}
+
+                    {/if}
+
+
+
+
+                </ul>
+
+            </div>
+        </nav>
+
+
+        <div id="page-wrapper" class="page-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-fixed-top white-bg" role="navigation" style="margin-bottom: 0">
+
+                    {*{if ($config['top_bar_is_dark'])}*}
+
+                    {*<a href="{$_url}dashboard"><img class="logo hidden-xs" style="max-height: 40px; width: auto;" src="{$app_url}storage/system/{$config['logo_inverse']}" alt="Logo"></a>*}
+
+                    {*{else}*}
+
+                    {*<a href="{$_url}dashboard"><img class="logo hidden-xs" style="max-height: 40px; width: auto;" src="{$app_url}storage/system/{$config['logo_default']}" alt="Logo"></a>*}
+
+                    {*{/if}*}
+
+                    <a href="{$_url}dashboard"><img class="logo hidden-xs" style="max-height: 40px; width: auto;" src="{$app_url}storage/system/{$config['logo_inverse']}" alt="Logo"></a>
+
+
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2" href="#"><i class="fa fa-dedent"></i> </a>
+
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right pull-right">
+
+
+
+                        <li class="hidden-xs">
+                            <form class="navbar-form full-width" method="post" action="{$_url}contacts/list/">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="name" placeholder="{$_L['Search Customers']}...">
+                                    <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
+                        </li>
+
+
+                        {if has_access($user->roleid,'reports')}
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle count-info" data-toggle="dropdown" id="get_activity" href="#" aria-expanded="true">
+                                    <i class="fa fa-bell"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-alerts" id="activity_loaded">
+
+
+
+                                    <li style="text-align: center;">
+                                        <div class="md-preloader text-center"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="32" width="32" viewbox="0 0 75 75"><circle cx="37.5" cy="37.5" r="33.5" stroke-width="6"/></svg></div>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        {/if}
+
+
+
+                        {*{if $config['drive'] eq '1'}*}
+                        {*<li>*}
+                        {*<a class="dropdown-toggle count-info" data-toggle="dropdown" id="app_media" href="#"  data-src="{$_url}mediabox" style="color: #ffffff">*}
+                        {*<i class="fa fa-hdd-o"></i>*}
+                        {*</a>*}
+
+                        {*</li>*}
+                        {*{/if}*}
+
+                        {if $config['show_country_flag'] eq '1'}
+                            <li class="dropdown">
+
+                                <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" id="set_language" aria-expanded="true">
+
+                                    <span class="flag-icon flag-icon-{$config['country_flag_code']}"></span>
+
+                                </a>
+                                <ul class="dropdown-menu animated fadeIn" id="show_available_lan">
+                                    <li style="text-align: center;">
+                                        <div class="md-preloader text-center"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="32" width="32" viewbox="0 0 75 75"><circle cx="37.5" cy="37.5" r="33.5" stroke-width="6"/></svg></div>
+                                    </li>
+
+
+                                </ul>
+                            </li>
+                        {/if}
+
+                        <li class="dropdown navbar-user">
+
+                            <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+
+
+                                {if $user['img'] eq ''}
+                                    <img src="{$app_url}storage/system/user-avatar-placeholder.png" alt="{$user['fullname']}">
+                                {else}
+                                    <img src="{$app_url}{$user['img']}" class="img-circle" alt="{$user['fullname']}">
+                                {/if}
+
+                                <span class="hidden-xs">{$_L['Welcome']} {$user['fullname']}</span> <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu animated fadeIn">
+                                <li class="arrow"></li>
+                                <li><a href="{$_url}settings/users-edit/{$user['id']}/">{$_L['Edit Profile']}</a></li>
+
+                                {if $user->workspace_id != 1}
+                                    <li><a href="{$_url}settings/billing">{$_L['Billing']}</a></li>
+                                {/if}
+
+                                <li><a href="{$_url}settings/change-password/">{$_L['Change Password']}</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{$_url}logout/">{$_L['Logout']}</a></li>
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a class="right-sidebar-toggle">
+                                <i class="fa fa-tasks"></i>
+                            </a>
+                        </li>
+
+
+
+
+                    </ul>
+
+                </nav>
+            </div>
+
+
+
+            <div class="wrapper wrapper-content {$config['contentAnimation']}">
+
+
+                {if isset($notify)}{$notify}{/if}
+
+
+                {if $user->workspace_id != 1}
+
+                    {if !isset($config['subscribed'])}
+
+                        <div class="alert alert-warning" style="color: #856404;">
+                            {$_L['Trial expires soon']}. <a class="alert-link" href="{$_url}settings/billing">{$_L['Upgrade']}</a>.
+                        </div>
+
+
+                    {/if}
+
+                {/if}
+
+
+                {block name="content"}{/block}
+
+
+
+
+
+                <div id="ajax-modal" class="modal container fade-scale" tabindex="-1" style="display: none;"></div>
+            </div>
+
+            {if $tpl_footer}
+                {if $config['hide_footer']}
+
+                {else}
+                    <div class="footer">
+                        <div align="center">
+                            All rights reserved | <strong>{$config['CompanyName']}</strong> &copy; {date(Y)}
+                        </div>
+                    </div>
+                {/if}
+            {/if}
+
+        </div>
+
+        <div id="right-sidebar">
+            <div class="sidebar-container">
+
+                <ul class="nav nav-tabs navs-3">
+
+                    <li class="active"><a data-toggle="tab" href="#tab-1">
+                            {$_L['Notes']}
+                        </a></li>
+                    {*<li><a data-toggle="tab" href="#tab-2">*}
+                    {*{$_L['Team']}*}
+                    {*</a></li>*}
+                    <li class=""><a data-toggle="tab" href="#tab-3">
+                            <i class="fa fa-gear"></i>
+                        </a></li>
+                </ul>
+
+                <div class="tab-content">
+
+
+                    <div id="tab-1" class="tab-pane active">
+
+                        <div class="sidebar-title">
+                            <h3> <i class="fa fa-file-text-o"></i> {$_L['Quick Notes']}</h3>
+
+                        </div>
+
+                        <div style="padding: 10px">
+
+                            <form class="form-horizontal push-10-t push-10" method="post" onsubmit="return false;">
+
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <div class="form-material floating">
+                                            <textarea class="form-control" id="ib_admin_notes" name="ib_admin_notes" rows="10">{$user->notes}</textarea>
+                                            <label for="ib_admin_notes">{$_L['Whats on your mind']}</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-sm btn-success" type="submit" id="ib_admin_notes_save"><i class="fa fa-check"></i> {$_L['Save']}</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+                    <div id="tab-3" class="tab-pane">
+
+                        <div class="sidebar-title">
+                            <h3><i class="fa fa-gears"></i> {$_L['Settings']}</h3>
+
+                        </div>
+
+                        <div class="setings-item">
+                            <h4>{$_L['Theme_Color']}</h4>
+
+                            <ul id="ib_theme_color" class="ib_theme_color">
+
+                                {*<li><a href="{$_url}settings/set_color/light/"><span class="light"></span></a></li>*}
+                                {*<li><a href="{$_url}settings/set_color/blue/"><span class="blue"></span></a></li>*}
+                                <li><a href="{$_url}settings/set_color/light_blue/"><span class="light_blue"></span></a></li>
+                                {*<li><a href="{$_url}settings/set_color/dark/"><span class="dark"></span></a></li>*}
+                                <li><a href="{$_url}settings/set_color/purple/"><span class="purple"></span></a></li>
+                                <li><a href="{$_url}settings/set_color/indigo_blue/"><span class="purple"></span></a></li>
+                            </ul>
+
+
+                        </div>
+                        <div class="setings-item">
+                    <span>
+                        {$_L['Fold Sidebar Default']}
+                    </span>
+                            <div class="switch">
+                                <div class="onoffswitch">
+                                    <input type="checkbox" name="r_fold_sidebar" {if get_option('mininav') eq '1'}checked{/if} class="onoffswitch-checkbox" id="r_fold_sidebar">
+                                    <label class="onoffswitch-label" for="r_fold_sidebar">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+</section>
+
+<input type="hidden" id="_url" name="_url" value="{$_url}">
+<input type="hidden" id="_df" name="_df" value="{$config['df']}">
+<input type="hidden" id="_lan" name="_lan" value="{$config['language']}">
+<!-- END PRELOADER -->
+<!-- Mainly scripts -->
+
+<script>
+
+    var _L = [];
+
+
+    _L['Save'] = '{$_L['Save']}';
+    _L['Submit'] = '{$_L['Submit']}';
+    _L['Loading'] = '{$_L['Loading']}';
+    _L['Media'] = '{$_L['Media']}';
+    _L['OK'] = '{$_L['OK']}';
+    _L['Cancel'] = '{$_L['Cancel']}';
+    _L['Close'] = '{$_L['Close']}';
+    _L['Close'] = '{$_L['Close']}';
+    _L['are_you_sure'] = '{$_L['are_you_sure']}';
+    _L['Saved Successfully'] = '{$_L['Saved Successfully']}';
+    _L['Empty'] = '{$_L['Empty']}';
+
+    var app_url = '{$app_url}';
+    var base_url = '{$base_url}';
+
+    {if ($config['animate']) eq '1'}
+    var config_animate = 'Yes';
+    {else}
+    var config_animate = 'No';
+    {/if}
+    {$jsvar}
+</script>
+
+
+
+{*<script src="{$app_url}ui/lib/cloudonex.js"></script>*}
+
+
+
+
+
+{if $user['language'] neq 'en' || $user['language'] neq ''}
+
+    <script src="{$app_url}ui/lib/moment/moment-with-locales.min.js"></script>
+
+    <script>
+        moment.locale('{getMomentLocale($user['language'])}');
+    </script>
+
+{else}
+
+    <script src="{$app_url}ui/lib/moment/moment.min.js"></script>
+
+{/if}
+
+<script src="{$app_url}ui/assets/js/app.js?v=200"></script>
+
+
+{*<script src="{$app_url}ui/lib/fancybox/fancybox.min.js?ver={$file_build}"></script>*}
+
+{*<script src="{$app_url}ui/lib/app.js?ver={$file_build}"></script>*}
+{*<script src="{$app_url}ui/lib/toggle/bootstrap-toggle.min.js"></script>*}
+{*<script type="text/javascript" src="{$app_url}ui/lib/notify/pnotify.min.js"></script>*}
+
+
+
+<!-- iCheck -->
+{*<script src="{$app_url}ui/lib/icheck/icheck.min.js"></script>*}
+{*<script src="{$theme}default/js/theme.js?ver={$file_build}"></script>*}
+{*<script src="{$app_url}ui/lib/admin.js?ver={$file_build}"></script>*}
+
+
+
+{if isset($xfooter)}
+    {$xfooter}
+{/if}
+
+{block name=script}{/block}
+
+<script>
+    jQuery(document).ready(function() {
+        // initiate layout and plugins
+
+
+        matForms();
+
+        {if isset($xjq)}
+        {$xjq}
+        {/if}
+
+
+
+    });
+
+</script>
+
+
+
+</body>
+
+</html>

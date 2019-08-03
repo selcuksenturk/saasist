@@ -19,12 +19,37 @@ $workspace = Workspace::find($workspace_id);
 $ui->assign('workspace', $workspace);
 $ui->assign('user',$user);
 
-$saas_current_build = 200;
+$saas_current_build = 201;
 
 if($user->workspace_id != 1)
 {
     exit;
 }
+
+// Check which modules are enabled in this workspace
+$all_modules = true;
+$enabled_modules = false;
+
+if(isset($config['plan']))
+{
+    $workspace_plan = Plan::find($config['plan']);
+
+    if($workspace_plan)
+    {
+        $all_modules = false;
+        $enabled_modules = json_decode($workspace_plan->modules, true);
+
+        if(!isset($enabled_modules['accounting']))
+        {
+            permissionDenied();
+        }
+
+    }
+
+}
+
+$ui->assign('all_modules', $all_modules);
+$ui->assign('enabled_modules', $enabled_modules);
 
 
 $action = route(1,'dashboard');

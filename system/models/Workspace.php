@@ -45,7 +45,7 @@ class Workspace extends Model
             {
                 return [
                     'success' => false,
-                    'errors' => 'User already exist'
+                    'errors' => 'User already exist!'
                 ];
             }
 
@@ -53,7 +53,7 @@ class Workspace extends Model
 
             $activation_key = mt_rand(100000, 999999);
             $username = (string) \Ramsey\Uuid\Uuid::uuid4();
-            $base_url = 'https://'.$username.'app.saas.ist';
+            $base_url = 'https://'.$username.'.app.saas.ist';
 
             $workspace = new Workspace;
             $workspace->username = $username;
@@ -383,7 +383,7 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'animate',
-                        'value' => '0'
+                        'value' => '1'
                     ],
                     [
                         'key' => 'pdf_font',

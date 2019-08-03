@@ -1,6 +1,6 @@
 .nav-highlight > li.active, .nav > li:focus {
     background: #ECEDF0;
-    border-left: 6px solid #00a2e5;
+    border-left: 6px solid #1EA1FC;
     outline: none;
 }
 
@@ -73,7 +73,7 @@
 
 
 .chart-statistic-box .chart-txt {
-    background: #00a2e5;
+    background: #1EA1FC;
 }
 
 .modal-header {
@@ -99,8 +99,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .btn-primary {
-    background-color: #00a2e5;
-    border-color: #00a2e5;
+    background-color: #1EA1FC;
+    border-color: #1EA1FC;
     color: #fff;
 }
 

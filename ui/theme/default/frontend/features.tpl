@@ -24,63 +24,63 @@
                     <div class="mt-25px mb-25px">
                         <i class="im im-calculator fs-35 color-blue bg-gray radius-50 mb-20px transition-3"></i>
                         <h4>Accounting</h4>
-                        <p>Make smart decisions.</p>
+                        <p>Make smart decisions</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mt-25px mb-25px">
-                        <i class="im im-database fs-35 color-blue bg-gray radius-50 mb-20px transition-3"></i>
+                        <i class="im im-credit-card fs-35 color-blue bg-gray radius-50 mb-20px transition-3"></i>
                         <h4>Sales</h4>
-                        <p>Focus only your sales.</p>
+                        <p>Focus only your sales</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mt-25px mb-25px">
-                        <i class="im im-data-validate fs-35 color-blue bg-gray radius-50 mb-20px transition-3"></i>
+                        <i class="im im-banknote fs-35 color-blue bg-gray radius-50 mb-20px transition-3"></i>
                         <h4>Billing</h4>
-                        <p>Edit, list, recur, remind.</p>
+                        <p>Edit, list, recur, remind</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mt-25px mb-25px">
                         <i class="im im-cube fs-35 color-blue bg-gray radius-50 mb-20px transition-3"></i>
                         <h4>Supply</h4>
-                        <p>Easy supply management.</p>
+                        <p>Easy supply management</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mt-25px mb-25px">
                         <i class="im im-support fs-35 color-blue bg-gray radius-50 mb-20px transition-3"></i>
                         <h4>Clients</h4>
-                        <p>Seamless customer tracking.</p>
+                        <p>Seamless customer tracking</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mt-25px mb-25px">
                         <i class="im im-task-o fs-35 color-blue bg-gray radius-50 mb-20px transition-3"></i>
-                        <h4>Plans</h4>
-                        <p>Calendar, reminder and tasks.</p>
+                        <h4>Planning</h4>
+                        <p>Calendar, reminder and tasks</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mt-25px mb-25px">
-                        <i class="im im-cube fs-35 color-blue bg-gray radius-50 mb-20px transition-3"></i>
+                        <i class="im im-data-validate fs-35 color-blue bg-gray radius-50 mb-20px transition-3"></i>
                         <h4>Reports</h4>
-                        <p>The devil is in the detail.</p>
+                        <p>The devil is in the details</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mt-25px mb-25px">
-                        <i class="im im-support fs-35 color-blue bg-gray radius-50 mb-20px transition-3"></i>
+                        <i class="im im-lifebuoy fs-35 color-blue bg-gray radius-50 mb-20px transition-3"></i>
                         <h4>Support</h4>
-                        <p>Solve problems precisely.</p>
+                        <p>Solve problems precisely</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mt-25px mb-25px">
-                        <i class="im im-task-o fs-35 color-blue bg-gray radius-50 mb-20px transition-3"></i>
+                        <i class="im im-shopping-cart fs-35 color-blue bg-gray radius-50 mb-20px transition-3"></i>
                         <h4>Orders</h4>
-                        <p>Efficient order mechanism.</p>
+                        <p>Efficient order mechanism</p>
                     </div>
                 </div>
             </div>

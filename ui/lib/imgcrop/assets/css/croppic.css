@@ -1,13 +1,13 @@
 			#croppic{
-				width: 462px;  /* MANDATORY */
-				height: 462px; /* MANDATORY */
-				position: relative;  /* MANDATORY */
+				width: 300px;
+				height: 300px;
+				position: relative;
 				
-				margin: 10px 0px 10px;
-				border: 3px  solid #FFF;
+				margin: 0px 0px 15px;
+				border: 3px solid #FFF;
 				box-sizing: content-box;
 				-moz-box-sizing: content-box;
-				border-radius: 2px;
+				border-radius: 5px;
 				background-image: url(../img/placeholder3.png);
 				background-repeat: no-repeat;
 				background-position: center;

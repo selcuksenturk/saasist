@@ -18,6 +18,26 @@ $ui->assign('user', $user);
 
 use Intervention\Image\ImageManager;
 
+// Check which modules are enabled in this workspace
+$all_modules = true;
+$enabled_modules = false;
+
+if(isset($config['plan']))
+{
+    $workspace_plan = Plan::find($config['plan']);
+
+    if($workspace_plan)
+    {
+        $all_modules = false;
+        $enabled_modules = json_decode($workspace_plan->modules, true);
+
+    }
+
+}
+
+$ui->assign('all_modules', $all_modules);
+$ui->assign('enabled_modules', $enabled_modules);
+
 switch ($action) {
 
     case 'activity':
