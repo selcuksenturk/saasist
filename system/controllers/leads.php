@@ -160,7 +160,7 @@ _L[\'are_you_sure\'] = \'' . $_L['are_you_sure'] . '\';
             'sources' => LeadSource::all()->toArray(),
             'industries' => Industry::all()->toArray(),
             'ls' => LeadStatus::all()->toArray(),
-            'companies' => Company::all()->toArray(),
+            'companies' => Company::where('workspace_id',$workspace_id)->get()->toArray(),
         ]);
 
         break;

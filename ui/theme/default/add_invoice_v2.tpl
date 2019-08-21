@@ -96,7 +96,7 @@
                                                 <option value="">{$_L['Select Contact']}...</option>
                                                 {foreach $c as $cs}
                                                     <option value="{$cs['id']}"
-                                                            {if $p_cid eq ($cs['id'])}selected="selected" {/if}>{$cs['account']} {if $cs['email'] neq ''}- {$cs['email']}{/if}</option>
+                                                            {if $p_cid eq ($cs['uuid'])}selected="selected" {/if}>{$cs['account']} {if $cs['email'] neq ''}- {$cs['email']}{/if}</option>
                                                 {/foreach}
 
                                             </select>
@@ -949,7 +949,7 @@
                     .done(function (data) {
 
                         var _url = $("#_url").val();
-                        if ($.isNumeric(data)) {
+                        if (data.length === 36) {
 
                             // location.reload();
                             var is_recurring = $('#is_recurring').val();

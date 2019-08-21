@@ -19,6 +19,12 @@ class Workspace extends Model
 
         $validator = new Validator;
 
+//        $validator->setMessages([
+//            'required' => ':attribute jest wymagany',
+//            'email' => ':email niepoprawny email',
+//            // etc
+//        ]);
+
         $validation = $validator->validate($data, [
             'full_name' => 'required',
             'company_name' => 'required',
@@ -383,7 +389,7 @@ class Workspace extends Model
                     ],
                     [
                         'key' => 'animate',
-                        'value' => '1'
+                        'value' => '0'
                     ],
                     [
                         'key' => 'pdf_font',

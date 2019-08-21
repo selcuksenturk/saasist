@@ -80,7 +80,8 @@ switch ($action) {
         $ui->assign('currencies', $currencies);
         if (isset($routes['3']) && ($routes['3'] != '') && ($routes['3'] != '0')) {
             $p_cid = $routes['3'];
-            $p_d = ORM::for_table('crm_accounts')->where('workspace_id',$workspace_id)->find_one($p_cid);
+          //  $p_d = ORM::for_table('crm_accounts')->where('workspace_id',$workspace_id)->find_one($p_cid);
+            $p_d = Contact::where('workspace_id',$workspace_id)->where('uuid',$p_cid)->first();
             if ($p_d) {
                 $ui->assign('p_cid', $p_cid);
             }
@@ -92,7 +93,7 @@ switch ($action) {
         $ui->assign('_st', $_L['Add Invoice']);
 
 
-        $c = ORM::for_table('crm_accounts')->where('workspace_id',$workspace_id)->select('id')->select('account')->select('company')->select('email')->order_by_desc('id')->where_like('type','%Customer%');
+        $c = ORM::for_table('crm_accounts')->where('workspace_id',$workspace_id)->select('id')->select('account')->select('company')->select('uuid')->select('email')->order_by_desc('id')->where_like('type','%Customer%');
 
         if(!$customers_all_data)
         {

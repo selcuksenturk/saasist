@@ -416,10 +416,19 @@ switch($action){
 		    $sparkpost_api_key = '';
 	    }
 
+	    $lead_status = LeadStatus::all();
+	    $lead_sources = LeadSource::all();
+	    $salutations = Salutation::all();
+	    $industries = Industry::all();
+
         view('super_admin_settings',[
 	        'mailgun_api_key' => $mailgun_api_key,
 	        'mailgun_domain' => $mailgun_domain,
-	        'sparkpost_api_key' => $sparkpost_api_key
+	        'sparkpost_api_key' => $sparkpost_api_key,
+            'lead_status' => $lead_status,
+            'lead_sources' => $lead_sources,
+            'salutations' => $salutations,
+            'industries' => $industries,
         ]);
 
         break;
@@ -596,6 +605,213 @@ switch($action){
             r2(U . 'super_admin/workspaces', 's', $_L['Deleted Successfully']);
 
         }
+
+        break;
+
+
+    case 'update-industry':
+
+        $industry_name = _post('industry');
+        $id = _post('id');
+
+        $industry = Industry::find($id);
+
+        if($industry)
+        {
+            $industry->industry = $industry_name;
+            $industry->save();
+            r2(U.'super_admin/settings','s',$_L['Data Updated']);
+        }
+
+
+        break;
+
+
+    case 'add-industry':
+        $industry_name = _post('industry');
+
+        if($industry_name !== '')
+        {
+            $industry = new Industry;
+            $industry->industry = $industry_name;
+            $industry->workspace_id = 1;
+            $industry->is_active = 1;
+            $industry->save();
+            r2(U.'super_admin/settings','s',$_L['Data Updated']);
+
+        }
+
+        break;
+
+
+    case 'delete-industry':
+
+
+
+        $id = route(2);
+
+        $industry = Industry::find($id);
+
+        if($industry)
+        {
+            $industry->delete();
+            r2(U.'super_admin/settings','s',$_L['Deleted Successfully']);
+        }
+
+
+        break;
+
+
+    case 'update-lead-status':
+
+        $status = _post('status');
+        $id = _post('id');
+
+        $lead_status = LeadStatus::find($id);
+
+
+        if($lead_status)
+        {
+            $lead_status->sname = $status;
+            $lead_status->save();
+            r2(U.'super_admin/settings','s',$_L['Data Updated']);
+        }
+
+
+        break;
+
+
+    case 'add-lead-status':
+
+        $status = _post('status');
+
+        if($status !== '')
+        {
+            $lead_status = new LeadStatus;
+            $lead_status->workspace_id = 1;
+            $lead_status->is_active = 1;
+            $lead_status->sname = $status;
+            $lead_status->save();
+            r2(U.'super_admin/settings','s',$_L['Data Updated']);
+        }
+
+        break;
+
+    case 'delete-lead-status':
+
+
+
+        $id = route(2);
+
+        $lead_status = LeadStatus::find($id);
+
+        if($lead_status)
+        {
+            $lead_status->delete();
+            r2(U.'super_admin/settings','s',$_L['Deleted Successfully']);
+        }
+
+
+        break;
+
+    case 'update-salutation':
+
+        $salutation = _post('salutation');
+        $id = _post('id');
+
+        $lead_salutation = Salutation::find($id);
+
+
+        if($lead_salutation)
+        {
+            $lead_salutation->sname = $salutation;
+            $lead_salutation->save();
+            r2(U.'super_admin/settings','s',$_L['Data Updated']);
+        }
+
+
+        break;
+
+
+    case 'add-salutation':
+
+        $salutation = _post('salutation');
+
+        if($salutation !== '')
+        {
+            $lead_salutation = new Salutation;
+            $lead_salutation->workspace_id = 1;
+            $lead_salutation->is_active = 1;
+            $lead_salutation->sname = $salutation;
+            $lead_salutation->save();
+            r2(U.'super_admin/settings','s',$_L['Data Updated']);
+        }
+
+        break;
+
+    case 'delete-salutation':
+
+        $id = route(2);
+
+        $lead_salutation = Salutation::find($id);
+
+        if($lead_salutation)
+        {
+            $lead_salutation->delete();
+            r2(U.'super_admin/settings','s',$_L['Deleted Successfully']);
+        }
+
+
+        break;
+
+
+    case 'update-lead-source':
+
+        $source = _post('source');
+        $id = _post('id');
+
+        $lead_source = LeadSource::find($id);
+
+
+        if($lead_source)
+        {
+            $lead_source->sname = $source;
+            $lead_source->save();
+            r2(U.'super_admin/settings','s',$_L['Data Updated']);
+        }
+
+
+        break;
+
+
+    case 'add-lead-source':
+
+        $source = _post('source');
+
+        if($source !== '')
+        {
+            $lead_source = new LeadSource;
+            $lead_source->workspace_id = 1;
+            $lead_source->is_active = 1;
+            $lead_source->sname = $source;
+            $lead_source->save();
+            r2(U.'super_admin/settings','s',$_L['Data Updated']);
+        }
+
+        break;
+
+    case 'delete-lead-source':
+
+        $id = route(2);
+
+        $lead_source = LeadSource::find($id);
+
+        if($lead_source)
+        {
+            $lead_source->delete();
+            r2(U.'super_admin/settings','s',$_L['Deleted Successfully']);
+        }
+
 
         break;
 

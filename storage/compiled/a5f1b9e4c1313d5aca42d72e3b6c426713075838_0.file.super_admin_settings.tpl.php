@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-05-05 05:33:16
+/* Smarty version 3.1.33, created on 2019-08-20 08:26:34
   from '/Users/razib/Documents/valet/stackb/ui/theme/default/super_admin_settings.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5cceaddc8e1e21_89672707',
+  'unifunc' => 'content_5d5be6faf20c54_01977990',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a5f1b9e4c1313d5aca42d72e3b6c426713075838' => 
     array (
       0 => '/Users/razib/Documents/valet/stackb/ui/theme/default/super_admin_settings.tpl',
-      1 => 1557048326,
+      1 => 1566303990,
       2 => 'file',
     ),
   ),
@@ -20,28 +20,28 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5cceaddc8e1e21_89672707 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d5be6faf20c54_01977990 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_172066655cceaddc8d5160_80573095', "content");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2764586185d5be6faf09107_35929656', "content");
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_18509671915cceaddc8e0c70_92608007', 'script');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_10870858895d5be6faf1fa65_09999233', 'script');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, ((string)$_smarty_tpl->tpl_vars['layouts_admin']->value));
 }
 /* {block "content"} */
-class Block_172066655cceaddc8d5160_80573095 extends Smarty_Internal_Block
+class Block_2764586185d5be6faf09107_35929656 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'content' => 
   array (
-    0 => 'Block_172066655cceaddc8d5160_80573095',
+    0 => 'Block_2764586185d5be6faf09107_35929656',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -215,6 +215,233 @@ super_admin/email_settings_post">
 
                 </div>
             </div>
+
+            <div class="panel">
+
+                <div class="panel-body">
+
+                    <h4><?php echo $_smarty_tpl->tpl_vars['_L']->value['CRM'];?>
+</h4>
+                    <div class="hr-line-dashed"></div>
+
+                    <p>
+                        <strong><?php echo $_smarty_tpl->tpl_vars['_L']->value['Industry'];?>
+</strong>
+                    </p>
+
+
+                        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['industries']->value, 'industry');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['industry']->value) {
+?>
+                            <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+super_admin/update-industry">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <input name="industry" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['industry']->value->industry;?>
+">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="hidden" name="id" value="<?php echo $_smarty_tpl->tpl_vars['industry']->value->id;?>
+">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+                                        <a class="btn btn-danger" href="javascript:;" onclick="confirmThenGoToUrl(event,'super_admin/delete-industry/<?php echo $_smarty_tpl->tpl_vars['industry']->value->id;?>
+')"><i class="fa fa-trash"></i> </a>
+                                    </div>
+                                </div>
+                            </form>
+                        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+
+                    <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+super_admin/add-industry">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <input name="industry" class="form-control" placeholder="<?php echo $_smarty_tpl->tpl_vars['_L']->value['Add New'];?>
+">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="hr-line-dashed"></div>
+
+                    <p>
+                        <strong><?php echo $_smarty_tpl->tpl_vars['_L']->value['Leads'];?>
+ - <?php echo $_smarty_tpl->tpl_vars['_L']->value['Status'];?>
+</strong>
+                    </p>
+
+
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['lead_status']->value, 'status');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['status']->value) {
+?>
+                        <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+super_admin/update-lead-status">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input name="status" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['status']->value->sname;?>
+">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="hidden" name="id" value="<?php echo $_smarty_tpl->tpl_vars['status']->value->id;?>
+">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+                                    <a class="btn btn-danger" href="javascript:;" onclick="confirmThenGoToUrl(event,'super_admin/delete-lead-status/<?php echo $_smarty_tpl->tpl_vars['status']->value->id;?>
+')"><i class="fa fa-trash"></i> </a>
+                                </div>
+                            </div>
+                        </form>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+
+                    <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+super_admin/add-lead-status">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <input name="status" class="form-control" placeholder="<?php echo $_smarty_tpl->tpl_vars['_L']->value['Add New'];?>
+">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <div class="hr-line-dashed"></div>
+
+                    <p>
+                        <strong><?php echo $_smarty_tpl->tpl_vars['_L']->value['Leads'];?>
+ - <?php echo $_smarty_tpl->tpl_vars['_L']->value['Salutation'];?>
+</strong>
+                    </p>
+
+
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['salutations']->value, 'salutation');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['salutation']->value) {
+?>
+                        <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+super_admin/update-salutation">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input name="salutation" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['salutation']->value->sname;?>
+">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="hidden" name="id" value="<?php echo $_smarty_tpl->tpl_vars['salutation']->value->id;?>
+">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+                                    <a class="btn btn-danger" href="javascript:;" onclick="confirmThenGoToUrl(event,'super_admin/delete-salutation/<?php echo $_smarty_tpl->tpl_vars['salutation']->value->id;?>
+')"><i class="fa fa-trash"></i> </a>
+                                </div>
+                            </div>
+                        </form>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+
+                    <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+super_admin/add-salutation">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <input name="salutation" class="form-control" placeholder="<?php echo $_smarty_tpl->tpl_vars['_L']->value['Add New'];?>
+">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <div class="hr-line-dashed"></div>
+
+                    <p>
+                        <strong><?php echo $_smarty_tpl->tpl_vars['_L']->value['Leads'];?>
+ - <?php echo $_smarty_tpl->tpl_vars['_L']->value['Source'];?>
+</strong>
+                    </p>
+
+
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['lead_sources']->value, 'lead_source');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['lead_source']->value) {
+?>
+                        <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+super_admin/update-lead-source">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input name="source" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['lead_source']->value->sname;?>
+">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="hidden" name="id" value="<?php echo $_smarty_tpl->tpl_vars['lead_source']->value->id;?>
+">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+                                    <a class="btn btn-danger" href="javascript:;" onclick="confirmThenGoToUrl(event,'super_admin/delete-lead-source/<?php echo $_smarty_tpl->tpl_vars['lead_source']->value->id;?>
+')"><i class="fa fa-trash"></i> </a>
+                                </div>
+                            </div>
+                        </form>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+
+                    <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+super_admin/add-lead-source">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <input name="source" class="form-control" placeholder="<?php echo $_smarty_tpl->tpl_vars['_L']->value['Add New'];?>
+">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
         </div>
 
 
@@ -227,12 +454,12 @@ super_admin/email_settings_post">
 }
 /* {/block "content"} */
 /* {block 'script'} */
-class Block_18509671915cceaddc8e0c70_92608007 extends Smarty_Internal_Block
+class Block_10870858895d5be6faf1fa65_09999233 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'script' => 
   array (
-    0 => 'Block_18509671915cceaddc8e0c70_92608007',
+    0 => 'Block_10870858895d5be6faf1fa65_09999233',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {

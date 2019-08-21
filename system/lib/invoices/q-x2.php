@@ -1,17 +1,5 @@
 <html>
 
-<!--
-Dynamically Auto Generated Page - Do Not Edit
-================================================================
-Software Name: iBilling - CRM, Accounting and Invoicing Software
-Version: 3.3.0
-Author: Sadia Sharmin
-Website: http://www.ibilling.io/
-Contact: sadiasharmin3139@gmail.com
-Purchase: http://codecanyon.net/item/ibilling-accounting-and-billing-software/11021678?ref=SadiaSharmin
-License: You must have a valid license purchased only from envato(the above link) in order to legally use this Software.
-========================================================================================================================
--->
 
 <head>
 

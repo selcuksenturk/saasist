@@ -138,6 +138,173 @@
 
                 </div>
             </div>
+
+            <div class="panel">
+
+                <div class="panel-body">
+
+                    <h4>{$_L['CRM']}</h4>
+                    <div class="hr-line-dashed"></div>
+
+                    <p>
+                        <strong>{$_L['Industry']}</strong>
+                    </p>
+
+
+                        {foreach $industries as $industry}
+                            <form method="post" action="{$_url}super_admin/update-industry">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <input name="industry" class="form-control" value="{$industry->industry}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="hidden" name="id" value="{$industry->id}">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+                                        <a class="btn btn-danger" href="javascript:;" onclick="confirmThenGoToUrl(event,'super_admin/delete-industry/{$industry->id}')"><i class="fa fa-trash"></i> </a>
+                                    </div>
+                                </div>
+                            </form>
+                        {/foreach}
+
+                    <form method="post" action="{$_url}super_admin/add-industry">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <input name="industry" class="form-control" placeholder="{$_L['Add New']}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="hr-line-dashed"></div>
+
+                    <p>
+                        <strong>{$_L['Leads']} - {$_L['Status']}</strong>
+                    </p>
+
+
+                    {foreach $lead_status as $status}
+                        <form method="post" action="{$_url}super_admin/update-lead-status">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input name="status" class="form-control" value="{$status->sname}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="hidden" name="id" value="{$status->id}">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+                                    <a class="btn btn-danger" href="javascript:;" onclick="confirmThenGoToUrl(event,'super_admin/delete-lead-status/{$status->id}')"><i class="fa fa-trash"></i> </a>
+                                </div>
+                            </div>
+                        </form>
+                    {/foreach}
+
+                    <form method="post" action="{$_url}super_admin/add-lead-status">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <input name="status" class="form-control" placeholder="{$_L['Add New']}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <div class="hr-line-dashed"></div>
+
+                    <p>
+                        <strong>{$_L['Leads']} - {$_L['Salutation']}</strong>
+                    </p>
+
+
+                    {foreach $salutations as $salutation}
+                        <form method="post" action="{$_url}super_admin/update-salutation">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input name="salutation" class="form-control" value="{$salutation->sname}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="hidden" name="id" value="{$salutation->id}">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+                                    <a class="btn btn-danger" href="javascript:;" onclick="confirmThenGoToUrl(event,'super_admin/delete-salutation/{$salutation->id}')"><i class="fa fa-trash"></i> </a>
+                                </div>
+                            </div>
+                        </form>
+                    {/foreach}
+
+                    <form method="post" action="{$_url}super_admin/add-salutation">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <input name="salutation" class="form-control" placeholder="{$_L['Add New']}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <div class="hr-line-dashed"></div>
+
+                    <p>
+                        <strong>{$_L['Leads']} - {$_L['Source']}</strong>
+                    </p>
+
+
+                    {foreach $lead_sources as $lead_source}
+                        <form method="post" action="{$_url}super_admin/update-lead-source">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input name="source" class="form-control" value="{$lead_source->sname}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="hidden" name="id" value="{$lead_source->id}">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+                                    <a class="btn btn-danger" href="javascript:;" onclick="confirmThenGoToUrl(event,'super_admin/delete-lead-source/{$lead_source->id}')"><i class="fa fa-trash"></i> </a>
+                                </div>
+                            </div>
+                        </form>
+                    {/foreach}
+
+                    <form method="post" action="{$_url}super_admin/add-lead-source">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <input name="source" class="form-control" placeholder="{$_L['Add New']}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> </button>
+
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
         </div>
 
 
