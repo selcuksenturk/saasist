@@ -151,12 +151,38 @@ class API_connect
      * 
      */
 
+    public function hook_has_loggedin($dataArray = array())
+    {
+
+        if ($dataArray[0]['success'] === 1) {
+            return false;
+        }
+
+        require_once(__DIR__ . '/../Astra.php');
+        $astra = new Astra();
+        ASTRA::$_db->log_hit(ASTRA::$_ip);
+
+        $dataArray[0]['blocking'] = (ASTRA::$_db->is_blocked_or_trusted(ASTRA::$_ip, false, ASTRA::$_config) == "blocked") ? 1 : 0;
+
+        return true;
+    }
+
     public function send_request($api = "", $dataArray = array(), $platform = "php")
     {
 
         if ($this->is_request_from_astra()) {
             return false;
         }
+
+        $callback = array($this, 'hook_' . $api);
+
+        if (is_callable($callback)) {
+            $hookResponse = call_user_func($callback, array($dataArray));
+            if (is_array($hookResponse)) {
+                $dataArray = $hookResponse;
+            }
+        }
+
 
         $dataArray['client_key'] = CZ_CLIENT_KEY;
         $dataArray['api'] = $api;
@@ -177,8 +203,10 @@ class API_connect
 
         $dataArray['ip'] = ASTRA::$_ip;
 
-        if ($dataArray['ip'] == "")
+        if ($dataArray['ip'] == "") {
             $dataArray['ip'] = "::1";
+            return false;
+        }
 
         $dataArray['browser'] = $browser_info;
         $dataArray['attack_url'] = htmlspecialchars($_SERVER['REQUEST_URI'], ENT_QUOTES, 'UTF-8');
@@ -198,7 +226,7 @@ class API_connect
             );
             $response = wp_remote_post($this->api_url, array(
                     'method' => 'POST',
-                    'timeout' => 45,
+                    'timeout' => 5,
                     'redirection' => 5,
                     'httpversion' => '1.0',
                     'blocking' => true,
@@ -207,6 +235,10 @@ class API_connect
                     'cookies' => array()
                 )
             );
+
+            if (is_wp_error($response) || (isset($response['body']) && is_wp_error($response['body']))) {
+                return true;
+            }
 
             $resp = $response['body'];
         } else {

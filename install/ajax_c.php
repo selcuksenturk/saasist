@@ -109,9 +109,9 @@ define(\'APP_STAGE\', \'Live\'); # Change Live to Dev to enable Debug
     {
         foreach ($files_to_rename as $key => $value)
         {
-            if(file_exists('system/config/'.$key))
+            if(file_exists('../system/config/'.$key))
             {
-                rename('system/config/'.$key,'system/config/'.$value);
+                rename('../system/config/'.$key,'../system/config/'.$value);
             }
         }
     }

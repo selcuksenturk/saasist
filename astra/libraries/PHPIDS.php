@@ -247,7 +247,10 @@ class PHPIDS
             'GET.utm_medium',
             'GET.utm_campaign',
             'POST.fl_builder_data.data.settings.content',
-            'POST.fl_builder_data.node_preview.items.7',
+            '/POST.fl_builder_data.node_preview.items.([0-999]*)$/',
+            'POST.fl_builder_data.settings.text',
+            '/POST.fl_builder_data.*/',
+
         );
 
 

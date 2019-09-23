@@ -106,9 +106,9 @@ switch($action){
 
         // check if an update is available
 
-        if($file_build != $config['build']){
-            r2(U.'updating/schema/');
-        }
+//        if($file_build != $config['build']){
+//            r2(U.'updating/schema/');
+//        }
 
         //
 
